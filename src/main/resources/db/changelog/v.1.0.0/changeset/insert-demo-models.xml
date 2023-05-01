@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <property name="now" value="now()" dbms="mysql"/>
+
+    <changeSet id="insert-demo-models" author="Katerina">
+        <insert tableName="model">
+            <column name="brand">Saeco</column>
+            <column name="name_model">Cristallo 600</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="model">
+            <column name="brand">Saeco</column>
+            <column name="name_model">Rubino 200</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="model">
+            <column name="brand">Saeco</column>
+            <column name="name_model">Rubino 400</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="model">
+            <column name="brand">Unicum</column>
+            <column name="name_model">Rosso Touch</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="model">
+            <column name="brand">Canto</column>
+            <column name="name_model">LB</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="model">
+            <column name="brand">OPERA</column>
+            <column name="name_model">TO GO</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="model">
+            <column name="brand">Kikko</column>
+            <column name="name_model">ES-6</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="model">
+            <column name="brand">Solista</column>
+            <column name="name_model">ES6</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

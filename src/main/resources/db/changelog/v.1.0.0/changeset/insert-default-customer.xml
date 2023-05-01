@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+        <property name="now" value="now()" dbms="mysql"/>
+
+        <changeSet id="insert-default-customers" author="Katerina">
+        <insert tableName="customer">
+            <column name="name">Katerina</column>
+            <column name="surname">Ya</column>
+            <column name="phone">123-45-67</column>
+            <column name="email">yk@gmail.com</column>
+            <column name="user_id">1</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="customer">
+            <column name="name">Aleksandr</column>
+            <column name="surname">K</column>
+            <column name="phone">321-54-76</column>
+            <column name="email">ak@gmail.com</column>
+            <column name="user_id">2</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+
+        <insert tableName="customer">
+            <column name="name">Nik</column>
+            <column name="surname">J</column>
+            <column name="phone">832-62-12</column>
+            <column name="email">nj@gmail.com</column>
+            <column name="user_id">3</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

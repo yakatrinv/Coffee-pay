@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <property name="now" value="now()" dbms="mysql"/>
+
+    <changeSet id="insert-demo-addresses" author="Katerina">
+        <insert tableName="address">
+            <column name="city">Минск</column>
+            <column name="street">Притыцкого, 15</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+
+        <insert tableName="address">
+            <column name="city">Минск</column>
+            <column name="street">Притыцкого, 50</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+
+        <insert tableName="address">
+            <column name="city">Минск</column>
+            <column name="street">Притыцкого, 73</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+
+        <insert tableName="address">
+            <column name="city">Минск</column>
+            <column name="street">Притыцкого, 102</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+
+        <insert tableName="address">
+            <column name="city">Минск</column>
+            <column name="street">Притыцкого, 138</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+
+        <insert tableName="address">
+            <column name="city">Минск</column>
+            <column name="street">Проспект Пушкина, 2</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+
+        <insert tableName="address">
+            <column name="city">Минск</column>
+            <column name="street">Проспект Пушкина, 31</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+
+        <insert tableName="address">
+            <column name="city">Минск</column>
+            <column name="street">Проспект Пушкина, 97</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+
+        <insert tableName="address">
+            <column name="city">Минск</column>
+            <column name="street">Независимости, 1</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+
+        <insert tableName="address">
+            <column name="city">Минск</column>
+            <column name="street">Независимости, 34</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+
+        <insert tableName="address">
+            <column name="city">Минск</column>
+            <column name="street">Независимости, 47</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+
+        <insert tableName="address">
+            <column name="city">Минск</column>
+            <column name="street">Независимости, 86</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+
+        <insert tableName="address">
+            <column name="city">Минск</column>
+            <column name="street">Независимости, 98</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+
+        <insert tableName="address">
+            <column name="city">Минск</column>
+            <column name="street">Независимости, 115</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+
+        <insert tableName="address">
+            <column name="city">Минск</column>
+            <column name="street">Независимости, 127</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+
+        <insert tableName="address">
+            <column name="city">Минск</column>
+            <column name="street">Независимости, 135</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+
+        <insert tableName="address">
+            <column name="city">Минск</column>
+            <column name="street">Кирова, 6</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+
+        <insert tableName="address">
+            <column name="city">Минск</column>
+            <column name="street">Сурганова, 61</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+
+        <insert tableName="address">
+            <column name="city">Минск</column>
+            <column name="street">Немига, 5</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+
+        <insert tableName="address">
+            <column name="city">Минск</column>
+            <column name="street">площадь Якуба Коласа, 64</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+
+        <insert tableName="address">
+            <column name="city">Минск</column>
+            <column name="street">Кальварийская, 71</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+
+        <insert tableName="address">
+            <column name="city">Гродно</column>
+            <column name="street">Советская, 32</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+
+        <insert tableName="address">
+            <column name="city">Гродно</column>
+            <column name="street">Советская, 1</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+
+        <insert tableName="address">
+            <column name="city">Гродно</column>
+            <column name="street">Советская, 56</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+
+        <insert tableName="address">
+            <column name="city">Гродно</column>
+            <column name="street">Ленина, 7</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+
+        <insert tableName="address">
+            <column name="city">Гродно</column>
+            <column name="street">Ленина, 29</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+
+        <insert tableName="address">
+            <column name="city">Брест</column>
+            <column name="street">Суворова, 12</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

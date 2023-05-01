@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <property name="now" value="now()" dbms="mysql"/>
+
+    <changeSet id="insert-demo-products" author="Katerina">
+        <insert tableName="product">
+            <column name="name">tea</column>
+            <column name="price">2</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="product">
+            <column name="name">espresso</column>
+            <column name="price">2.3</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="product">
+            <column name="name">americano</column>
+            <column name="price">2.5</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="product">
+            <column name="name">cappuccino</column>
+            <column name="price">3.2</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="product">
+            <column name="name">macchiato</column>
+            <column name="price">3.3</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="product">
+            <column name="name">latte</column>
+            <column name="price">3.3</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="product">
+            <column name="name">chocolate</column>
+            <column name="price">2.8</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

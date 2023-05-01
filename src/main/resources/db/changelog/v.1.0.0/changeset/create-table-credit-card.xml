@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <changeSet id="create-table-credit-card" author="Katerina">
+        <createTable tableName="credit_card">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="number" type="varchar(20)"/>
+            <column name="customer_id" type="int">
+                <constraints foreignKeyName="credit_card_customer_id_fk"
+                             references="customer (id)" nullable="false"/>
+            </column>
+            <column name="create_date" type="datetime"/>
+            <column name="update_date" type="datetime"/>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

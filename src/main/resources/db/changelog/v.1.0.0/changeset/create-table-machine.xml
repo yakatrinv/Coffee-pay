@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <changeSet id="create-table-machine" author="Katerina">
+        <createTable tableName="machine">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="serial_number" type="varchar(50)"/>
+            <column name="address_id" type="int">
+                <constraints foreignKeyName="machine_address_id_fk" references="address(id)"/>
+            </column>
+            <column name="model_id" type="int">
+                <constraints foreignKeyName="machine_model_id_fk" references="model(id)"/>
+            </column>
+            <column name="create_date" type="datetime"/>
+            <column name="update_date" type="datetime"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

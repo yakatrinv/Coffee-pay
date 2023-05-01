@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <property name="now" value="now()" dbms="mysql"/>
+
+    <changeSet id="insert-default-users" author="Katerina">
+        <insert tableName="users">
+            <column name="login">Administrator</column>
+            <column name="password">70dea293e996e328491f5fd703efd40b</column>
+            <column name="salt">a4e114068feac475017a4fb7eb1c55c9</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+
+        <insert tableName="users">
+            <column name="login">Manager</column>
+            <column name="password">243ca8363d6e64bc2a0a0b90bdcdc47c</column>
+            <column name="salt">8451b1c6efd3bcda81f8d20d93f86119</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+
+        <insert tableName="users">
+            <column name="login">Customer</column>
+            <column name="password">bbcae8b0f11a7c383862b307244fa822</column>
+            <column name="salt">7bd3dbf015bbdc7f49d60ea76912f0bc</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

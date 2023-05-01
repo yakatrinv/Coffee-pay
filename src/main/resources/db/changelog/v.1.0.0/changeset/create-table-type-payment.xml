@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <changeSet id="create-table-type-payment" author="Katerina">
+        <createTable tableName="type_payment">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(20)"/>
+            <column name="use_credit_card" type="boolean" defaultValueBoolean="false"/>
+            <column name="use_phone_number" type="boolean" defaultValueBoolean="false"/>
+            <column name="create_date" type="datetime"/>
+            <column name="update_date" type="datetime"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

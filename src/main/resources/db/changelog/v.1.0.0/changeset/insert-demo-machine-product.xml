@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <property name="now" value="now()" dbms="mysql"/>
+
+    <changeSet id="insert-demo-machine-product" author="Katerina">
+        <insert tableName="machine_product">
+            <column name="machine_id">1</column>
+            <column name="product_id">1</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="machine_product">
+            <column name="machine_id">1</column>
+            <column name="product_id">2</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="machine_product">
+            <column name="machine_id">1</column>
+            <column name="product_id">3</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="machine_product">
+            <column name="machine_id">1</column>
+            <column name="product_id">4</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="machine_product">
+            <column name="machine_id">1</column>
+            <column name="product_id">5</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="machine_product">
+            <column name="machine_id">1</column>
+            <column name="product_id">6</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="machine_product">
+            <column name="machine_id">1</column>
+            <column name="product_id">7</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+
+
+        <insert tableName="machine_product">
+            <column name="machine_id">2</column>
+            <column name="product_id">1</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="machine_product">
+            <column name="machine_id">2</column>
+            <column name="product_id">2</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="machine_product">
+            <column name="machine_id">2</column>
+            <column name="product_id">3</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="machine_product">
+            <column name="machine_id">2</column>
+            <column name="product_id">4</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="machine_product">
+            <column name="machine_id">2</column>
+            <column name="product_id">5</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="machine_product">
+            <column name="machine_id">2</column>
+            <column name="product_id">6</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="machine_product">
+            <column name="machine_id">2</column>
+            <column name="product_id">7</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+
+
+        <insert tableName="machine_product">
+            <column name="machine_id">3</column>
+            <column name="product_id">1</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="machine_product">
+            <column name="machine_id">3</column>
+            <column name="product_id">2</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="machine_product">
+            <column name="machine_id">3</column>
+            <column name="product_id">3</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="machine_product">
+            <column name="machine_id">3</column>
+            <column name="product_id">4</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="machine_product">
+            <column name="machine_id">3</column>
+            <column name="product_id">5</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="machine_product">
+            <column name="machine_id">3</column>
+            <column name="product_id">6</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="machine_product">
+            <column name="machine_id">3</column>
+            <column name="product_id">7</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+
+        <insert tableName="machine_product">
+            <column name="machine_id">4</column>
+            <column name="product_id">1</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="machine_product">
+            <column name="machine_id">4</column>
+            <column name="product_id">2</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="machine_product">
+            <column name="machine_id">4</column>
+            <column name="product_id">3</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="machine_product">
+            <column name="machine_id">4</column>
+            <column name="product_id">4</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="machine_product">
+            <column name="machine_id">4</column>
+            <column name="product_id">5</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="machine_product">
+            <column name="machine_id">4</column>
+            <column name="product_id">6</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="machine_product">
+            <column name="machine_id">4</column>
+            <column name="product_id">7</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+
+        <insert tableName="machine_product">
+            <column name="machine_id">5</column>
+            <column name="product_id">1</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="machine_product">
+            <column name="machine_id">5</column>
+            <column name="product_id">2</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="machine_product">
+            <column name="machine_id">5</column>
+            <column name="product_id">3</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="machine_product">
+            <column name="machine_id">5</column>
+            <column name="product_id">4</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="machine_product">
+            <column name="machine_id">5</column>
+            <column name="product_id">5</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="machine_product">
+            <column name="machine_id">5</column>
+            <column name="product_id">6</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="machine_product">
+            <column name="machine_id">5</column>
+            <column name="product_id">7</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+
+        <insert tableName="machine_product">
+            <column name="machine_id">6</column>
+            <column name="product_id">1</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="machine_product">
+            <column name="machine_id">6</column>
+            <column name="product_id">2</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="machine_product">
+            <column name="machine_id">6</column>
+            <column name="product_id">3</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="machine_product">
+            <column name="machine_id">6</column>
+            <column name="product_id">4</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="machine_product">
+            <column name="machine_id">6</column>
+            <column name="product_id">5</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="machine_product">
+            <column name="machine_id">6</column>
+            <column name="product_id">6</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="machine_product">
+            <column name="machine_id">6</column>
+            <column name="product_id">7</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+
+        <insert tableName="machine_product">
+            <column name="machine_id">7</column>
+            <column name="product_id">1</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="machine_product">
+            <column name="machine_id">7</column>
+            <column name="product_id">2</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="machine_product">
+            <column name="machine_id">7</column>
+            <column name="product_id">3</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="machine_product">
+            <column name="machine_id">7</column>
+            <column name="product_id">4</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="machine_product">
+            <column name="machine_id">7</column>
+            <column name="product_id">5</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="machine_product">
+            <column name="machine_id">7</column>
+            <column name="product_id">6</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="machine_product">
+            <column name="machine_id">7</column>
+            <column name="product_id">7</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+
+        <insert tableName="machine_product">
+            <column name="machine_id">8</column>
+            <column name="product_id">1</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="machine_product">
+            <column name="machine_id">8</column>
+            <column name="product_id">2</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="machine_product">
+            <column name="machine_id">8</column>
+            <column name="product_id">3</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="machine_product">
+            <column name="machine_id">8</column>
+            <column name="product_id">4</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="machine_product">
+            <column name="machine_id">8</column>
+            <column name="product_id">5</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="machine_product">
+            <column name="machine_id">8</column>
+            <column name="product_id">6</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="machine_product">
+            <column name="machine_id">8</column>
+            <column name="product_id">7</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

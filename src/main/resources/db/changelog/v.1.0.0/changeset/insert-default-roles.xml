@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <property name="now" value="now()" dbms="mysql"/>
+
+    <changeSet id="insert-default-roles" author="Katerina">
+        <insert tableName="role">
+            <column name="role_name">Administrator</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="role">
+            <column name="role_name">Manager</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="role">
+            <column name="role_name">Customer</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

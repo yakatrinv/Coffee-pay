@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <property name="now" value="now()" dbms="mysql"/>
+
+    <changeSet id="insert-demo-machines" author="Katerina">
+        <insert tableName="machine">
+            <column name="serial_number">1N123Y1</column>
+            <column name="address_id">1</column>
+            <column name="model_id">1</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="machine">
+            <column name="serial_number">1N123Y2</column>
+            <column name="address_id">2</column>
+            <column name="model_id">2</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="machine">
+            <column name="serial_number">1N123Y3</column>
+            <column name="address_id">3</column>
+            <column name="model_id">3</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="machine">
+            <column name="serial_number">1N123Y4</column>
+            <column name="address_id">4</column>
+            <column name="model_id">4</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="machine">
+            <column name="serial_number">1N123Y5</column>
+            <column name="address_id">5</column>
+            <column name="model_id">5</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="machine">
+            <column name="serial_number">1N123Y6</column>
+            <column name="address_id">6</column>
+            <column name="model_id">6</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="machine">
+            <column name="serial_number">1N123Y7</column>
+            <column name="address_id">7</column>
+            <column name="model_id">7</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+        <insert tableName="machine">
+            <column name="serial_number">1N123Y8</column>
+            <column name="address_id">8</column>
+            <column name="model_id">8</column>
+            <column name="create_date" valueDate="${now}"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
