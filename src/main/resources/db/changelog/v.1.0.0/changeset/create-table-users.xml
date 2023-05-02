@@ -12,7 +12,6 @@
             </column>
             <column name="login" type="varchar(30)"/>
             <column name="password" type="varchar(255)"/>
-            <column name="salt" type="varchar(255)"/>
             <column name="create_date" type="datetime"/>
             <column name="update_date" type="datetime"/>
         </createTable>
