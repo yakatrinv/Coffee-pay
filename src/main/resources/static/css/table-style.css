@@ -1,0 +1,42 @@
+.h1 {
+    color: #333;
+}
+
+.main-table {
+    width: 95%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    font-size: 15px;
+    font-family: arial;
+    color: #333;
+}
+
+.main-table td {
+    border: 1px solid #666;
+}
+
+.main-table tr:nth-child(odd) {
+    background: #E6EEEE;
+}
+
+.main-table tr:hover {
+    background: #999;
+    color: #fff;
+    text-shadow: 1px 1px 1px #333;
+}
+
+.buttonClass {
+    display: inline-block;
+    background: #E6EEEE;
+    padding: 2px 2px;
+    margin: 5px 5px;
+    text-decoration: none;
+    border-radius: 1px;
+    color: #333;
+}
+
+.buttonClass:hover {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(to bottom, #fcfff4, #e9e9ce);
+    color: #a00;
+}
