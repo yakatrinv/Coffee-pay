@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Coffee manage project</title>
+</head>
+<body>
+<div>
+    <div>
+        <span>Регистрация</span>
+
+        <form th:method="POST" th:action="@{/registration}" th:object="${user}">
+            <p>
+                <label for="username">Введите имя пользователя:</label>
+                <input th:field="*{username}" name="username" id="username" placeholder="имя пользователя">
+            </p>
+            <p>
+                <label for="password">Введите пароль:</label>
+                <input th:field="*{password}" type="password" name="password" id="password" placeholder="пароль">
+            </p>
+
+            <p>
+                <label for="confirmPassword">Повторите пароль:</label>
+                <input th:field="*{confirmPassword}" type="password" name="confirmPassword" id="confirmPassword" placeholder="пароль">
+            </p>
+
+            <p>
+                <button type="submit" class="buttonClass">РЕГИСТРАЦИЯ</button>
+            </p>
+        </form>
+
+    </div>
+</div>
+</body>
+</html>
