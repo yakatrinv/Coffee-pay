@@ -1,7 +1,7 @@
 package com.coffeepay.service;
 
-import com.coffeepay.model.User;
+import com.coffeepay.dto.UserDto;
 
 public interface IUserService {
-    void save(User user);
+    void save(UserDto user);
 }

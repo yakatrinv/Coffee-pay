@@ -1,6 +1,6 @@
 package com.coffeepay.security;
 
-import com.coffeepay.model.User;
+import com.coffeepay.dto.UserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -10,23 +10,23 @@ import java.util.Collection;
 
 @RequiredArgsConstructor
 public class CustomUserDetails implements UserDetails {
-    private final User user;
+    private final UserDto userDto;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return user.getRoles() == null ? null : user.getRoles().stream()
+        return userDto.getRoles() == null ? null : userDto.getRoles().stream()
                 .map(role -> new SimpleGrantedAuthority(role.getName()))
                 .toList();
     }
 
     @Override
     public String getPassword() {
-        return user.getPassword();
+        return userDto.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return user.getUsername();
+        return userDto.getUsername();
     }
 
     @Override

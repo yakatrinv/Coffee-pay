@@ -19,6 +19,7 @@ import static util.DataGeneral.LENGTH_ENCODER;
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserDetailsService userDetailsService;
+
     @Bean
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
@@ -43,15 +44,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers("/home/**")
 //                .hasRole(ADMIN)
                 //Доступ разрешен всем пользователей
-                .antMatchers("/","/registration").permitAll()
+                .antMatchers("/css/**").permitAll()
+                .antMatchers("/", "/registration").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/login")
                 .permitAll()
                 .defaultSuccessUrl("/api")
                 .and()
                 .logout()
+                .logoutSuccessUrl("/")
                 .permitAll();
     }
 }

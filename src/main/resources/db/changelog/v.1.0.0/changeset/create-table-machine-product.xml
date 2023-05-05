@@ -16,8 +16,6 @@
                              foreignKeyName="machine_product_machine_id_fk"
                 references="machine (id)"/>
             </column>
-            <column name="create_date" type="datetime"/>
-            <column name="update_date" type="datetime"/>
         </createTable>
     </changeSet>
 </databaseChangeLog>

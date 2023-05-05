@@ -1,35 +1,78 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{css/registration.css}"/>
     <title>Coffee manage project</title>
 </head>
 <body>
+
 <div>
-    <div>
-        <span>Регистрация</span>
+    <form class="loginForm" th:method="POST" th:action="@{/registration}" th:object="${customer}">
+        <div class="h2">
+            <h2>Регистрация</h2>
+        </div>
 
-        <form th:method="POST" th:action="@{/registration}" th:object="${user}">
-            <p>
-                <label for="username">Введите имя пользователя:</label>
-                <input th:field="*{username}" name="username" id="username" placeholder="имя пользователя">
-            </p>
-            <p>
-                <label for="password">Введите пароль:</label>
-                <input th:field="*{password}" type="password" name="password" id="password" placeholder="пароль">
-            </p>
+        <div class="field">
+            <label class="label" for="username">Логин:</label>
+            <div class="input-div">
+                <input class="input" th:field="*{user.username}" name="username" id="username">
+            </div>
+        </div>
 
-            <p>
-                <label for="confirmPassword">Повторите пароль:</label>
-                <input th:field="*{confirmPassword}" type="password" name="confirmPassword" id="confirmPassword" placeholder="пароль">
-            </p>
+        <div class="field">
+            <label class="label" for="password">Пароль:</label>
+            <div class="input-div">
+                <input class="input" th:field="*{user.password}" type="password" name="password" id="password">
+            </div>
+        </div>
 
-            <p>
-                <button type="submit" class="buttonClass">РЕГИСТРАЦИЯ</button>
-            </p>
-        </form>
+        <div class="field">
+            <label class="label" for="confirmPassword">Повторите пароль:</label>
+            <div class="input-div">
+                <input class="input" th:field="*{user.confirmPassword}" type="password" name="confirmPassword"
+                       id="confirmPassword">
+            </div>
+        </div>
 
-    </div>
+        <hr class="hr-line">
+
+        <div class="field">
+            <label class="label" for="name">Имя:</label>
+            <div class="input-div">
+                <input class="input" th:field="*{name}" name="name" id="name">
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label" for="surname">Фамилия:</label>
+            <div class="input-div">
+                <input class="input" th:field="*{surname}" name="surname" id="surname">
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label" for="email">email:</label>
+            <div class="input-div">
+                <input class="input" th:field="*{email}" name="email" id="email">
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label" for="phone">Телефон:</label>
+            <div class="input-div">
+                <input class="input" th:field="*{phone}" name="phone" id="phone">
+            </div>
+        </div>
+
+        <div class="submit-div">
+            <button th:class="button" type="submit">РЕГИСТРАЦИЯ</button>
+            <a class="button" th:href="@{/}">ОТМЕНА</a>
+        </div>
+
+    </form>
+
 </div>
+
 </body>
 </html>

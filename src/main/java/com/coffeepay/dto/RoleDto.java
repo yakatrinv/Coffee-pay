@@ -19,7 +19,7 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 @AllArgsConstructor
-public class RoleDto extends DataEntity implements Serializable {
+public class RoleDto implements Serializable {
     private Integer id;
     private String name;
 }

@@ -46,8 +46,13 @@ public class User extends DataEntity implements Serializable {
 
     @Column
     private String password;
+
     @Transient
     private String confirmPassword;
+
+    @Transient
+    @ToString.Exclude
+    private Customer customer;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = TABLE_DB_USER_ROLE,

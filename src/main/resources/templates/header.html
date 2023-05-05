@@ -1,33 +1,63 @@
-<div th:fragment="header" style="display: inline-flex;">
-    <div>
-        <a th:href="@{/api}">Главная</a>
-    </div>
-    <div>
-        <span style="margin: auto 20px auto 20px;"></span>
-    </div>
-    <div>
-        <form method="post" th:action="@{/login}">
-            <div sec:authorize="!isAuthenticated()">
-                <button class="btn logout" type="submit">Авторизоваться</button>
-            </div>
-        </form>
-    </div>
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.springframework.org/schema/security">
+<head>
+    <meta charset="UTF-8">
+    <title>Coffee manage project</title>
+    <link rel="stylesheet" th:href="@{css/navbar.css}"/>
+</head>
+<body>
 
-    <div>
-        <form th:method="GET" th:action="@{/registration}">
-            <div sec:authorize="!isAuthenticated()">
-                <button type="submit" class="buttonClass">Зарегистрироваться</button>
-            </div>
-        </form>
-    </div>
+<header th:fragment="header">
 
-    <div sec:authorize="isAuthenticated()" style="display: inline-flex;">
-        <span th:text="${#authentication.getPrincipal().getUsername()}" style="margin: auto 20px auto 20px;"></span>
-        <form method="post" th:action="@{/logout}">
-            <div>
-                <button class="btn logout" type="submit">Выйти</button>
-            </div>
-        </form>
-    </div>
+    <nav>
 
-</div>
+        <ul class="topmenu">
+            <li class="item">
+                <a class="item-point" th:href="@{/api}">
+                    Главная
+                </a>
+            </li>
+
+            <li class="item" sec:authorize="!isAuthenticated()">
+                <a class="item-point" th:href="@{/registration}">
+                    Регистрация
+                </a>
+            </li>
+
+            <li class="item" sec:authorize="!isAuthenticated()">
+                <a class="item-point" th:href="@{/login}">
+                    Авторизация
+                </a>
+            </li>
+
+            <li class="item-right" sec:authorize="isAuthenticated()">
+                <a class="item-point" th:href="@{/logout}">
+                    Выйти
+                </a>
+            </li>
+
+            <li class="item-right" sec:authorize="isAuthenticated()">
+                <a class="item-point" href="" th:text="${#authentication.getPrincipal().getUsername()}">
+                    Hi
+                </a>
+                <ul class="submenu-right">
+                    <li>
+                        <a class="item-point" th:href="@{/logout}">
+                            Профиль
+                        </a>
+                    </li>
+                    <li>
+                        <a class="item-point" th:href="@{/logout}">
+                            Сменить пароль
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+
+    </nav>
+</header>
+
+</body>
+</html>

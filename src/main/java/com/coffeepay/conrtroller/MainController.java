@@ -1,12 +1,10 @@
 package com.coffeepay.conrtroller;
 
+import com.coffeepay.dto.CustomerDto;
 import com.coffeepay.dto.UserDto;
-import com.coffeepay.model.User;
 import com.coffeepay.security.SecurityService;
-import com.coffeepay.service.IUserService;
+import com.coffeepay.service.ICustomerService;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,45 +12,49 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import static util.DataViews.MODEL_CUSTOMER;
+import static util.DataViews.PAGE_INDEX;
+import static util.DataViews.PAGE_MAIN;
+import static util.DataViews.PAGE_REDIRECT_APP;
+import static util.DataViews.PAGE_REGISTRATION;
+import static util.DataViews.URL_APP;
+import static util.DataViews.URL_REGISTRATION;
+
 @Controller
 @RequiredArgsConstructor
 public class MainController {
-    private final IUserService userService;
+    private final ICustomerService customerService;
     private final SecurityService securityService;
-    private final ModelMapper modelMapper;
 
     @GetMapping
     public String getIndexPage() {
-        return "/index";
+        return PAGE_INDEX;
     }
 
-    @GetMapping("/api")
+    @GetMapping(URL_APP)
     public String getHomePage() {
-        return "/views/index";
+        return PAGE_MAIN;
     }
 
-    @GetMapping("/login")
-    public String getLoginPage() {
-        return "/login";
-    }
-
-    @GetMapping("/registration")
+    @GetMapping(URL_REGISTRATION)
     public String registration(Model model) {
-        model.addAttribute("user", new UserDto());
-//        model.addAttribute("customer", new CustomerDto());
-        return "registration";
+        model.addAttribute(MODEL_CUSTOMER, CustomerDto.builder()
+                .user(new UserDto())
+                .build());
+
+        return PAGE_REGISTRATION;
     }
 
-    @PostMapping("/registration")
-    public String registration(@ModelAttribute("user") UserDto userDto,
-                               BindingResult bindingResult) {
+    @PostMapping(URL_REGISTRATION)
+    public String registration(
+            @ModelAttribute(MODEL_CUSTOMER) CustomerDto customerDto,
+            BindingResult bindingResult) {
         //добавить валидацию
-        if (!userDto.getConfirmPassword().equals(userDto.getPassword())) {
-            return "registration";
-        }
-        userService.save(modelMapper.map(userDto, User.class));
-        securityService.autoLogin(userDto.getUsername(), userDto.getConfirmPassword());
-        return "redirect:/api";
-    }
+        CustomerDto newCustomer = customerService.save(customerDto);
+        securityService.autoLogin(
+                newCustomer.getUser().getUsername(),
+                newCustomer.getUser().getConfirmPassword());
 
+        return PAGE_REDIRECT_APP;
+    }
 }
