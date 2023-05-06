@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import static util.DataGeneral.USER_CLASS;
+import static util.DataGeneral.USER_DTO_CLASS;
 
 @Service
 @Transactional
@@ -20,6 +21,24 @@ public class UserService implements IUserService {
 
     @Override
     public void save(UserDto userDto) {
+        userDto.setPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
+        userRepository.save(modelMapper.map(userDto, USER_CLASS));
+    }
+
+    @Override
+    public UserDto findByUserName(String username) {
+        return modelMapper.map(
+                userRepository.findByUsername(username),
+                USER_DTO_CLASS);
+    }
+
+    @Override
+    public boolean isPasswordValid(UserDto userDto, String currentPassword) {
+        return bCryptPasswordEncoder.matches(currentPassword, userDto.getPassword());
+    }
+
+    @Override
+    public void update(UserDto userDto) {
         userDto.setPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
         userRepository.save(modelMapper.map(userDto, USER_CLASS));
     }

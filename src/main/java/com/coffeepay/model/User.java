@@ -36,6 +36,7 @@ import static util.DataModels.TABLE_DB_USER_ROLE;
 @EqualsAndHashCode(callSuper = false)
 @Table(name = TABLE_DB_USERS)
 public class User extends DataEntity implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

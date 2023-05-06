@@ -1,6 +1,7 @@
 package com.coffeepay.security;
 
 import com.coffeepay.model.User;
+import com.coffeepay.repository.CustomerRepository;
 import com.coffeepay.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -16,6 +17,7 @@ import static util.DataMessages.MESSAGE_USER_DOES_NOT_EXISTS;
 @RequiredArgsConstructor
 public class CustomUserDetailService implements UserDetailsService {
     private final UserRepository userRepository;
+    private final CustomerRepository customerRepository;
     private final ModelMapper modelMapper;
 
     @Override
@@ -24,6 +26,9 @@ public class CustomUserDetailService implements UserDetailsService {
                 .orElseThrow(() ->
                         new UsernameNotFoundException(MESSAGE_USER_DOES_NOT_EXISTS)
                 );
+
+        user.setCustomer(customerRepository.findByUser(user).orElse(null));
+
         return new CustomUserDetails(modelMapper.map(user, USER_DTO_CLASS));
     }
 }

@@ -81,3 +81,8 @@ a:link, a:visited {
 .hr-line {
     color: #8CBFD9;
 }
+
+.error{
+    font: 12px/14px Arial, Tahoma, sans-serif;
+    color: red;
+}

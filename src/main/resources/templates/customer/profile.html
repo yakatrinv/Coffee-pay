@@ -2,47 +2,16 @@
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" th:href="@{css/registration.css}"/>
+    <link rel="stylesheet" th:href="@{/css/registration.css}"/>
     <title>Coffee manage project</title>
 </head>
 <body>
 
 <div>
-    <form class="loginForm" th:method="POST" th:action="@{/}" th:object="${customer}">
+    <form class="loginForm" th:method="POST" th:action="@{/profile/{id}(id=${customer.id})}" th:object="${customer}">
         <div class="h2">
-            <h2>Регистрация</h2>
+            <h2>Профиль</h2>
         </div>
-
-        <div class="field">
-            <label class="label" for="username">Логин:</label>
-            <div class="input-div">
-                <input class="input" th:field="*{user.username}" name="username" id="username">
-                <div class="error" th:if="${#fields.hasErrors('user.username')}" th:errors="*{user.username}">error
-                </div>
-            </div>
-        </div>
-
-        <div class="field">
-            <label class="label" for="password">Пароль:</label>
-            <div class="input-div">
-                <input class="input" th:field="*{user.password}" type="password" name="password" id="password">
-                <div class="error" th:if="${#fields.hasErrors('user.password')}" th:errors="*{user.password}">error
-                </div>
-            </div>
-        </div>
-
-        <div class="field">
-            <label class="label" for="confirmPassword">Повторите пароль:</label>
-            <div class="input-div">
-                <input class="input" th:field="*{user.confirmPassword}" type="password" name="confirmPassword"
-                       id="confirmPassword">
-                <div class="error" th:if="${#fields.hasErrors('user.confirmPassword')}"
-                     th:errors="*{user.confirmPassword}">error
-                </div>
-            </div>
-        </div>
-
-        <hr class="hr-line">
 
         <div class="field">
             <label class="label" for="name">Имя:</label>
@@ -76,7 +45,7 @@
         </div>
 
         <div class="submit-div">
-            <button th:class="button" type="submit">РЕГИСТРАЦИЯ</button>
+            <button th:class="button" type="submit">ОБНОВИТЬ</button>
             <a class="button" th:href="@{/}">ОТМЕНА</a>
         </div>
 

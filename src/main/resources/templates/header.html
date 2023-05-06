@@ -43,12 +43,13 @@
                 </a>
                 <ul class="submenu-right">
                     <li>
-                        <a class="item-point" th:href="@{/logout}">
+                        <a class="item-point"
+                           th:href="@{/profile/{username}/edit(username=${#authentication.getPrincipal().getUsername()})}">
                             Профиль
                         </a>
                     </li>
                     <li>
-                        <a class="item-point" th:href="@{/logout}">
+                        <a class="item-point" th:href="@{/changePassword}">
                             Сменить пароль
                         </a>
                     </li>
