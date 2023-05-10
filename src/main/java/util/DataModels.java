@@ -13,9 +13,10 @@ public class DataModels {
 
     public static final String TABLE_DB_USER_ROLE = "user_role";
 
+    public static final String TABLE_DB_CREDIT_CARD = "credit_card";
+
     public static final String ATTR_DB_CUSTOMER_ID = "customer_id";
 
-    public static final String TABLE_DB_CREDIT_CARD = "credit_card";
 
     public static final String ATTR_DB_SERIAL_NUMBER="serial_number";
 

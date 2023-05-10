@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Coffee manage project</title>
-    <link rel="stylesheet" th:href="@{css/navbar.css}"/>
+    <link rel="stylesheet" th:href="@{/css/navbar.css}"/>
 </head>
 <body>
 
@@ -20,7 +20,7 @@
             </li>
 
             <li class="item" sec:authorize="!isAuthenticated()">
-                <a class="item-point" th:href="@{/registration}">
+                <a class="item-point" th:href="@{/customer/new}">
                     Регистрация
                 </a>
             </li>
@@ -44,13 +44,20 @@
                 <ul class="submenu-right">
                     <li>
                         <a class="item-point"
-                           th:href="@{/profile/{username}/edit(username=${#authentication.getPrincipal().getUsername()})}">
+                           th:href="@{/customer/{username}/edit(username=${#authentication.getPrincipal().getUsername()})}">
                             Профиль
                         </a>
                     </li>
                     <li>
-                        <a class="item-point" th:href="@{/changePassword}">
+                        <a class="item-point"
+                           th:href="@{/user/{username}/editPass(username=${#authentication.getPrincipal().getUsername()})}">
                             Сменить пароль
+                        </a>
+                    </li>
+                    <li>
+                        <a class="item-point"
+                           th:href="@{/customer/{username}/creditCards(username=${#authentication.getPrincipal().getUsername()})}">
+                            Банковские карты
                         </a>
                     </li>
                 </ul>

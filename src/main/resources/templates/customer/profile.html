@@ -8,7 +8,7 @@
 <body>
 
 <div>
-    <form class="loginForm" th:method="POST" th:action="@{/profile/{id}(id=${customer.id})}" th:object="${customer}">
+    <form class="loginForm" th:method="PATCH" th:action="@{/customer/{id}(id=${customer.id})}" th:object="${customer}">
         <div class="h2">
             <h2>Профиль</h2>
         </div>
@@ -46,7 +46,7 @@
 
         <div class="submit-div">
             <button th:class="button" type="submit">ОБНОВИТЬ</button>
-            <a class="button" th:href="@{/}">ОТМЕНА</a>
+            <a class="button" th:href="@{${prevURl}}">ОТМЕНА</a>
         </div>
 
     </form>

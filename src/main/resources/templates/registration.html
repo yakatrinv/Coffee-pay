@@ -2,13 +2,13 @@
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" th:href="@{css/registration.css}"/>
+    <link rel="stylesheet" th:href="@{/css/registration.css}"/>
     <title>Coffee manage project</title>
 </head>
 <body>
 
 <div>
-    <form class="loginForm" th:method="POST" th:action="@{/}" th:object="${customer}">
+    <form class="loginForm" th:method="POST" th:action="@{/customer}" th:object="${customer}">
         <div class="h2">
             <h2>Регистрация</h2>
         </div>
@@ -77,7 +77,7 @@
 
         <div class="submit-div">
             <button th:class="button" type="submit">РЕГИСТРАЦИЯ</button>
-            <a class="button" th:href="@{/}">ОТМЕНА</a>
+            <a class="button" th:href="@{${prevURl}}">ОТМЕНА</a>
         </div>
 
     </form>

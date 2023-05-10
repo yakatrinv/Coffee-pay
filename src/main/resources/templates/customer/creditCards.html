@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Coffee manage project</title>
+    <link rel="stylesheet" th:href="@{/css/simple-table.css}"/>
+    <link rel="stylesheet" th:href="@{/css/navbar.css}"/>
+</head>
+<head>
+    <title>Coffee manage project</title>
+</head>
+<body>
+
+<div th:insert="header::header"></div>
+
+<header>
+    <h3 class="h3">Список карт</h3>
+</header>
+<br>
+
+<form th:method="GET" th:action="@{/customer/{username}/creditCards/new(username=${customer.getUser().username})}">
+    <button class="button" type="submit">
+        ДОБАВИТЬ КАРТУ
+    </button>
+</form>
+
+<div th:switch="${creditCards}">
+    <div th:case="null">
+        <h2>Список пуст</h2>
+    </div>
+
+    <div th:case="*">
+        <div th:if="${creditCards.size() == 0}">
+            <h2>Список пуст</h2>
+        </div>
+
+        <div th:if="${creditCards.size() != 0}">
+
+            <table class="table">
+                <tr>
+                    <th class="th">№</th>
+                    <th class="th">НОМЕР КАРТЫ</th>
+                    <th class="th" colspan="2">ДЕЙСТВИЕ</th>
+                </tr>
+
+
+                <tr class="tr" th:each="creditCard,creditCardStat : ${creditCards}">
+                    <td class="td" th:text="${creditCardStat.count}"></td>
+                    <td class="td" th:text="${creditCard.number}"></td>
+                    <td class="td">
+                        <form th:method="GET" th:action="@{/customer/{username}/creditCards/{id}/edit(username=${customer.getUser().username},id=${creditCard.id})}">
+                            <button class="button"  type="submit">
+                                РЕДАКТИРОВАТЬ
+                            </button>
+                        </form>
+                    </td>
+                    <td class="td">
+                        <form th:method="DELETE" th:action="@{/customer/{username}/creditCards/{id}(username=${customer.getUser().username},id=${creditCard.id})}">
+                            <button class="button"  type="submit">
+                                УДАЛИТЬ
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+
+    </div>
+</div>
+<br>
+
+</body>
+</html>
