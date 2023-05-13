@@ -15,10 +15,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.util.Set;
 
+import static util.DataModels.ATTR_DB_CUSTOMER;
+import static util.DataModels.ATTR_DB_CUSTOMER_ID;
 import static util.DataModels.ATTR_DB_USER_ID;
 
 @Builder
@@ -54,4 +58,9 @@ public class Customer extends DataEntity implements Serializable {
     @JoinColumn(name = ATTR_DB_USER_ID)
     @ToString.Exclude
     private User user;
+
+    @OneToMany(mappedBy = ATTR_DB_CUSTOMER)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private Set<CreditCard> creditCards;
 }

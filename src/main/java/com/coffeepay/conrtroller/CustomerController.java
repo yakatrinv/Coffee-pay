@@ -1,15 +1,14 @@
 package com.coffeepay.conrtroller;
 
 import com.coffeepay.dto.CustomerDto;
-import com.coffeepay.dto.RoleDto;
 import com.coffeepay.dto.UserDto;
 import com.coffeepay.security.SecurityService;
 import com.coffeepay.service.ICustomerService;
-import com.coffeepay.service.IRoleService;
 import com.coffeepay.service.IUserService;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.http.HttpHeaders;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,26 +18,24 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 
 import static util.DataGeneral.CUSTOMER;
 import static util.DataMessages.MESSAGE_PASSWORD_NOT_EQUALS;
 import static util.DataMessages.MESSAGE_USER_EXISTS;
-import static util.DataMessages.MESSAGE_USER_EXISTS_ADD_ROLE;
 import static util.DataMessages.VALID_CUSTOMER;
 import static util.DataMessages.VALID_EQUALS_CONFIRM_PASSWORD;
 import static util.DataMessages.VALID_USERNAME;
-import static util.DataViews.ATTR_ID;
 import static util.DataViews.ATTR_USERNAME;
 import static util.DataViews.MODEL_CUSTOMER;
 import static util.DataViews.PAGE_PREV_URL;
 import static util.DataViews.PAGE_PROFILE;
 import static util.DataViews.PAGE_REDIRECT_APP;
 import static util.DataViews.PAGE_REGISTRATION;
+import static util.DataViews.URL_APP;
 import static util.DataViews.URL_CUSTOMER;
-import static util.DataViews.URL_MAIN;
 import static util.DataViews.URL_NEW_CUSTOMER;
 import static util.DataViews.URL_PROFILE;
 import static util.DataViews.URL_UPDATE_PROFILE;
@@ -48,37 +45,39 @@ import static util.DataViews.URL_UPDATE_PROFILE;
 public class CustomerController {
     private final ICustomerService customerService;
     private final IUserService userService;
-    private final IRoleService roleService;
     private final SecurityService securityService;
+    private final MessageSource messageSource;
 
     @GetMapping(URL_NEW_CUSTOMER)
     public String getRegistrationPage(Model model,
-                                      @RequestHeader(HttpHeaders.REFERER) String prevURL) {
+                                      @RequestParam(value = PAGE_PREV_URL, defaultValue = "") String prevURL) {
+
         model.addAttribute(MODEL_CUSTOMER, CustomerDto.builder()
                 .user(new UserDto())
                 .build());
-        model.addAttribute(PAGE_PREV_URL, StringUtils.isBlank(prevURL) ? URL_MAIN : prevURL);
+        model.addAttribute(PAGE_PREV_URL, StringUtils.isBlank(prevURL) ? URL_APP : prevURL);
 
         return PAGE_REGISTRATION;
     }
 
     @PostMapping(URL_CUSTOMER)
-    public String registration(
-            @ModelAttribute(MODEL_CUSTOMER) @Valid CustomerDto customerDto,
-            BindingResult bindingResult) {
+    public String registration(Model model,
+                               @ModelAttribute(MODEL_CUSTOMER) @Valid CustomerDto customerDto,
+                               BindingResult bindingResult,
+                               @RequestParam(value = PAGE_PREV_URL, defaultValue = "") String prevURL) {
 
         validateCustomer(customerDto, bindingResult);
 
         if (bindingResult.hasErrors()) {
+            model.addAttribute(PAGE_PREV_URL, prevURL);
             return PAGE_REGISTRATION;
         }
 
-        CustomerDto newCustomer = customerService.save(customerDto);
-        if (newCustomer.getUser() != null) {
+        customerService.save(customerDto);
+        if (customerDto.getUser() != null) {
             securityService.autoLogin(
-                    newCustomer.getUser().getUsername(),
-                    newCustomer.getUser().getConfirmPassword());
-
+                    customerDto.getUser().getUsername(),
+                    customerDto.getUser().getConfirmPassword());
         }
         return PAGE_REDIRECT_APP;
     }
@@ -86,31 +85,24 @@ public class CustomerController {
     @GetMapping(URL_PROFILE)
     public String getProfilePage(Model model,
                                  @PathVariable(ATTR_USERNAME) String username,
-                                 @RequestHeader(HttpHeaders.REFERER) String prevURL) {
+                                 @RequestParam(value = PAGE_PREV_URL, defaultValue = "") String prevURL) {
         model.addAttribute(MODEL_CUSTOMER, customerService.findByUsername(username));
-        model.addAttribute(PAGE_PREV_URL, StringUtils.isBlank(prevURL) ? URL_MAIN : prevURL);
+        model.addAttribute(PAGE_PREV_URL, StringUtils.isBlank(prevURL) ? URL_APP : prevURL);
 
         return PAGE_PROFILE;
     }
 
     @PatchMapping(URL_UPDATE_PROFILE)
-    public String updateProfile(@PathVariable(ATTR_ID) Long id,
-                                @ModelAttribute(MODEL_CUSTOMER) @Valid CustomerDto customerDto,
-                                BindingResult bindingResult) {
+    public String updateProfile(@ModelAttribute(MODEL_CUSTOMER) @Valid CustomerDto customerDto,
+                                BindingResult bindingResult,
+                                Model model,
+                                @RequestParam(value = PAGE_PREV_URL, defaultValue = "") String prevURL) {
 
         if (bindingResult.hasErrors()) {
+            model.addAttribute(PAGE_PREV_URL, prevURL);
             return PAGE_PROFILE;
         }
-
-        CustomerDto findCustomer = customerService.findById(id);
-        if (findCustomer != null) {
-            findCustomer.setName(customerDto.getName());
-            findCustomer.setSurname(customerDto.getSurname());
-            findCustomer.setPhone(customerDto.getPhone());
-            findCustomer.setEmail(customerDto.getEmail());
-
-            customerService.update(findCustomer);
-        }
+        customerService.update(customerDto);
 
         return PAGE_REDIRECT_APP;
 
@@ -122,28 +114,34 @@ public class CustomerController {
             String confirmPassword = customerDto.getUser().getConfirmPassword();
             if (StringUtils.isNotBlank(password) && StringUtils.isNotBlank(confirmPassword)) {
                 if (!password.equals(confirmPassword)) {
+
+                    String errorMessage = messageSource
+                            .getMessage(MESSAGE_PASSWORD_NOT_EQUALS,
+                                    new Object[]{},
+                                    LocaleContextHolder.getLocale());
+
                     bindingResult.addError(new FieldError(VALID_CUSTOMER, VALID_EQUALS_CONFIRM_PASSWORD,
-                            MESSAGE_PASSWORD_NOT_EQUALS));
+                            errorMessage));
                 }
             }
         }
 
-
-        if (customerDto.getUser() != null
-                && StringUtils.isNotBlank(customerDto.getUser().getUsername())) {
-            UserDto userDto = userService.findByUserName(customerDto.getUser().getUsername());
+        if (customerDto.getUser() != null) {
+            UserDto userDto = userService
+                    .findByUsernameAndRolesIs(customerDto
+                                    .getUser()
+                                    .getUsername(),
+                            CUSTOMER);
 
             if (userDto != null) {
-                RoleDto roleDto = roleService.findByName(CUSTOMER);
-                if (userDto.getRoles().contains(roleDto)) {
-                    //пользователь с такой ролью уже создан
-                    bindingResult.addError(new FieldError(VALID_CUSTOMER, VALID_USERNAME,
-                            MESSAGE_USER_EXISTS));
-                } else {
-                    //есть пользователь, добавлена роль, данные корректировать нельзя
-                    bindingResult.addError(new FieldError(VALID_CUSTOMER, VALID_USERNAME,
-                            MESSAGE_USER_EXISTS_ADD_ROLE));
-                }
+                //пользователь с такой ролью уже создан
+                String errorMessage = messageSource
+                        .getMessage(MESSAGE_USER_EXISTS,
+                                new Object[]{},
+                                LocaleContextHolder.getLocale());
+
+                bindingResult.addError(new FieldError(VALID_CUSTOMER, VALID_USERNAME,
+                        errorMessage));
             }
         }
     }

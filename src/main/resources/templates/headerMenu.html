@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.springframework.org/schema/security">
+<head>
+    <meta charset="UTF-8">
+    <title data-th-text="#{title}">Coffee manage project</title>
+    <link rel="stylesheet" th:href="@{/css/navbar-menu.css}"/>
+</head>
+<body>
+
+    <nav th:fragment="header-menu">
+        <div class="div">
+            <ul class="menu">
+                <li>
+                    <span class="item-point-v"></span>
+                </li>
+                <li>
+                    <a class="item-point-v" th:href="@{/addresses}" data-th-text="#{panel.addresses}"></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+</body>
+</html>

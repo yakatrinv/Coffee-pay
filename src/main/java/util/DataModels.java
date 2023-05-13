@@ -15,6 +15,7 @@ public class DataModels {
 
     public static final String TABLE_DB_CREDIT_CARD = "credit_card";
 
+    public static final String ATTR_DB_CUSTOMER = "customer";
     public static final String ATTR_DB_CUSTOMER_ID = "customer_id";
 
 

@@ -8,14 +8,14 @@
 <body>
 
 <div>
-    <form class="loginForm" th:method="POST" th:action="@{/customer/{username}/creditCards(username=${customer.getUser().username})}"
+    <form class="loginForm" th:method="POST" th:action="@{/customer/{username}/creditCards(username=${#authentication.principal.username})}"
           th:object="${creditCard}">
         <div class="h2">
-            <h2>Добавление банковской карты</h2>
+            <h2 data-th-text="#{credit-card.add.label}">Добавление банковской карты</h2>
         </div>
 
         <div class="field">
-            <label class="label" for="number">Номер карты:</label>
+            <label class="label" for="number" data-th-text="#{credit-card.add.label.card-number}">Номер карты:</label>
             <div class="input-div">
                 <input class="input" th:field="*{number}" name="number" id="number">
                 <div class="error" th:if="${#fields.hasErrors('number')}" th:errors="*{number}">error</div>
@@ -23,8 +23,9 @@
         </div>
 
         <div class="submit-div">
-            <button th:class="button" type="submit">СОХРАНИТЬ</button>
-            <a class="button" th:href="@{${prevURl}}">ОТМЕНА</a>
+            <button th:class="double-border-button" type="submit" data-th-text="#{credit-card.add.button.save}">СОХРАНИТЬ</button>
+            <a class="double-border-button" th:href="@{${prevURl}}" data-th-text="#{credit-card.add.button.cancel}">ОТМЕНА</a>
+            <label th:text="${prevURl}"></label>
         </div>
 
     </form>

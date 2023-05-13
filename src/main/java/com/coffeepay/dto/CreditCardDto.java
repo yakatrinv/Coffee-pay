@@ -13,7 +13,7 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 import static util.DataMessages.LENGTH_CARD_NUMBER;
-import static util.DataMessages.MESSAGE_ERROR_CARD_NUMBER;
+import static util.DataMessages.MESSAGE_ERROR_LENGTH_CREDIT_CARD;
 
 @Builder
 @Getter
@@ -26,7 +26,7 @@ public class CreditCardDto implements Serializable {
 
     @ToString.Include
     @Size(min = LENGTH_CARD_NUMBER, max = LENGTH_CARD_NUMBER,
-            message = MESSAGE_ERROR_CARD_NUMBER)
+            message = MESSAGE_ERROR_LENGTH_CREDIT_CARD)
     private String number;
 
     private CustomerDto customer;

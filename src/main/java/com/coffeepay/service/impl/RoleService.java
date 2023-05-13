@@ -1,7 +1,8 @@
-package com.coffeepay.service;
+package com.coffeepay.service.impl;
 
 import com.coffeepay.dto.RoleDto;
 import com.coffeepay.repository.RoleRepository;
+import com.coffeepay.service.IRoleService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Coffee manage project</title>
+    <link rel="stylesheet" th:href="@{/css/input-form.css}"/>
+</head>
+<body>
+
+<div>
+    <form class="form" th:method="PATCH" th:action="@{/addresses/}" th:object="${address}">
+        <div class="h2">
+            <h2 data-th-text="#{addresses.edit.label}">Обновление адреса</h2>
+        </div>
+
+        <div class="field">
+            <label class="label" for="city" data-th-text="#{addresses.edit.label.city}">Город:</label>
+            <div class="input-div">
+                <input class="input" th:field="*{city}" name="city" id="city">
+                <div class="error" th:if="${#fields.hasErrors('city')}" th:errors="*{city}">error</div>
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label" for="street" data-th-text="#{addresses.edit.label.street}">Улица:</label>
+            <div class="input-div">
+                <input class="input" th:field="*{street}" name="street" id="street">
+                <div class="error" th:if="${#fields.hasErrors('street')}" th:errors="*{street}">error</div>
+            </div>
+        </div>
+
+        <div class="submit-div">
+            <button th:class="double-border-button" type="submit" data-th-text="#{addresses.edit.button.update}">
+                ОБНОВИТЬ
+            </button>
+            <a class="double-border-button" th:href="@{${prevURl}}"
+               data-th-text="#{addresses.edit.button.cancel}">ОТМЕНА</a>
+        </div>
+
+    </form>
+
+</div>
+</body>
+
+</html>

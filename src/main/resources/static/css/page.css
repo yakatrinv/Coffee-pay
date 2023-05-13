@@ -1,0 +1,36 @@
+.page {
+    list-style: none;
+    display: flex;
+}
+
+li {
+    display: inline-block;
+    color: #f1c40f;
+
+    float: left;
+    padding: 8px 16px;
+}
+
+li a {
+    display: inline-block;
+    color: #f1c40f;
+
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+}
+
+li a.active {
+    background-color: #252F48;
+    border: 1px solid #37B5A5;
+    color: #f1c40f;
+}
+
+li a:hover:not(.active) {
+    border-color: #f1c40f;
+    border: 1px solid #37B5A5;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(to bottom, #252F48C2, #252F48);
+    color: #f1c40f;
+}

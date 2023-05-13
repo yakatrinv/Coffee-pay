@@ -1,12 +1,14 @@
 package com.coffeepay.repository;
 
 import com.coffeepay.model.CreditCard;
-import com.coffeepay.model.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
+@Repository
 public interface CreditCardRepository extends JpaRepository<CreditCard, Long> {
-    List<CreditCard> getAllByCustomer (Customer customer);
+    @Query(value = "SELECT creditCard FROM CreditCard creditCard where creditCard.customer.user.username=?1")
+    List<CreditCard> getAllByUsername(String username);
 }

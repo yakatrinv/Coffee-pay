@@ -9,12 +9,11 @@
 
 <div>
     <form class="loginForm" th:method="POST" th:action="@{/customer}" th:object="${customer}">
-        <div class="h2">
-            <h2>Регистрация</h2>
-        </div>
+        <input type="hidden" th:name="prevURl" th:value="${prevURl}">
+        <h2 data-th-text="#{registration.label}">Регистрация</h2>
 
         <div class="field">
-            <label class="label" for="username">Логин:</label>
+            <label class="label" for="username" data-th-text="#{registration.label.login}">Логин:</label>
             <div class="input-div">
                 <input class="input" th:field="*{user.username}" name="username" id="username">
                 <div class="error" th:if="${#fields.hasErrors('user.username')}" th:errors="*{user.username}">error
@@ -23,7 +22,7 @@
         </div>
 
         <div class="field">
-            <label class="label" for="password">Пароль:</label>
+            <label class="label" for="password" data-th-text="#{registration.label.password}">Пароль:</label>
             <div class="input-div">
                 <input class="input" th:field="*{user.password}" type="password" name="password" id="password">
                 <div class="error" th:if="${#fields.hasErrors('user.password')}" th:errors="*{user.password}">error
@@ -32,7 +31,8 @@
         </div>
 
         <div class="field">
-            <label class="label" for="confirmPassword">Повторите пароль:</label>
+            <label class="label" for="confirmPassword" data-th-text="#{registration.label.confirmPassword}">Повторите
+                пароль:</label>
             <div class="input-div">
                 <input class="input" th:field="*{user.confirmPassword}" type="password" name="confirmPassword"
                        id="confirmPassword">
@@ -42,10 +42,8 @@
             </div>
         </div>
 
-        <hr class="hr-line">
-
         <div class="field">
-            <label class="label" for="name">Имя:</label>
+            <label class="label" for="name" data-th-text="#{registration.label.name}">Имя:</label>
             <div class="input-div">
                 <input class="input" th:field="*{name}" name="name" id="name">
                 <div class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">error</div>
@@ -53,7 +51,7 @@
         </div>
 
         <div class="field">
-            <label class="label" for="surname">Фамилия:</label>
+            <label class="label" for="surname" data-th-text="#{registration.label.surname}">Фамилия:</label>
             <div class="input-div">
                 <input class="input" th:field="*{surname}" name="surname" id="surname">
                 <div class="error" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}">error</div>
@@ -61,7 +59,7 @@
         </div>
 
         <div class="field">
-            <label class="label" for="email">email:</label>
+            <label class="label" for="email" data-th-text="#{registration.label.email}">email:</label>
             <div class="input-div">
                 <input class="input" th:field="*{email}" name="email" id="email">
                 <div class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">error</div>
@@ -69,16 +67,17 @@
         </div>
 
         <div class="field">
-            <label class="label" for="phone">Телефон:</label>
+            <label class="label" for="phone" data-th-text="#{registration.label.phone}">Телефон:</label>
             <div class="input-div">
                 <input class="input" th:field="*{phone}" name="phone" id="phone">
             </div>
         </div>
 
-        <div class="submit-div">
-            <button th:class="button" type="submit">РЕГИСТРАЦИЯ</button>
-            <a class="button" th:href="@{${prevURl}}">ОТМЕНА</a>
-        </div>
+            <button th:class="double-border-button" type="submit"
+                    data-th-text="#{registration.button.registration}">РЕГИСТРАЦИЯ
+            </button>
+            <a class="double-border-button" th:href="@{${prevURl}}"
+               data-th-text="#{registration.button.cancel}">ОТМЕНА</a>
 
     </form>
 </div>

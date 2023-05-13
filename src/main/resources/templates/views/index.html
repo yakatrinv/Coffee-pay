@@ -5,13 +5,13 @@
     <meta charset="UTF-8">
     <title>Coffee manage project</title>
     <link rel="stylesheet" th:href="@{css/navbar.css}"/>
+    <link rel="stylesheet" th:href="@{css/navbar-menu.css}"/>
 </head>
 <body>
 <div th:insert="header::header"></div>
-
-<h2 class="container">Welcome!</h2>
-<br>
-<h3>Coffee manage project</h3>
+<div style="display:flex;" sec:authorize="isAuthenticated()">
+    <div th:insert="headerMenu::header-menu"></div>
+</div>
 
 </body>
 </html>

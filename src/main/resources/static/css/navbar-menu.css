@@ -1,0 +1,27 @@
+.div {
+    position: fixed;
+    height: 100%;
+    width: 300px;
+    border: 1px solid #37B5A5;
+    background-color: #252F48;
+}
+.menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid #37B5A5;
+    background-color: #252F48;
+}
+
+.item-point-v {
+    display: block;
+    color: #EDB749;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.item-point-v:hover:not(.active) {
+    background-color: #2B3754;
+}
