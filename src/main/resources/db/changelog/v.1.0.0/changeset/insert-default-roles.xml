@@ -8,15 +8,15 @@
 
     <changeSet id="insert-default-roles" author="Katerina">
         <insert tableName="role">
-            <column name="role_name">Administrator</column>
+            <column name="name">Administrator</column>
             <column name="create_date" valueDate="${now}"/>
         </insert>
         <insert tableName="role">
-            <column name="role_name">Manager</column>
+            <column name="name">Manager</column>
             <column name="create_date" valueDate="${now}"/>
         </insert>
         <insert tableName="role">
-            <column name="role_name">Customer</column>
+            <column name="name">Customer</column>
             <column name="create_date" valueDate="${now}"/>
         </insert>
     </changeSet>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Coffee manage project</title>
+    <link rel="stylesheet" th:href="@{/css/input-form.css}"/>
+</head>
+<body>
+
+<div>
+    <form class="form" th:method="PATCH" th:action="@{/roles/{id}(id=${role.id})}" th:object="${role}">
+        <div class="h2">
+            <h2 data-th-text="#{roles.edit.label}">Обновление адреса</h2>
+        </div>
+
+        <div class="field">
+            <label class="label" for="name" data-th-text="#{roles.edit.label.name}">Наименование:</label>
+            <div class="input-div">
+                <input class="input" th:field="*{name}" name="name" id="name">
+                <div class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">error</div>
+            </div>
+        </div>
+
+        <div class="submit-div">
+            <button th:class="double-border-button" type="submit" data-th-text="#{roles.edit.button.update}">
+                ОБНОВИТЬ
+            </button>
+            <a class="double-border-button" th:href="@{/roles}"
+               data-th-text="#{roles.edit.button.cancel}">ОТМЕНА</a>
+        </div>
+
+    </form>
+
+</div>
+</body>
+
+</html>

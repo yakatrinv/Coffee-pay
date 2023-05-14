@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.springframework.org/schema/security">
+<head>
+    <meta charset="UTF-8">
+    <title>Coffee manage project</title>
+    <link rel="stylesheet" th:href="@{/css/navbar.css}"/>
+    <link rel="stylesheet" th:href="@{/css/navbar-menu.css}"/>
+    <link rel="stylesheet" th:href="@{/css/scroll-table.css}"/>
+</head>
+<head>
+    <title>Coffee manage project</title>
+</head>
+<body>
+
+<div th:insert="header::header"></div>
+<div style="display:flex;" sec:authorize="isAuthenticated()">
+    <div th:insert="headerMenu::header-menu"></div>
+    <div class="div-with-table">
+        <h3 class="title" data-th-text="#{customer.credit-card.label}">Список карт</h3>
+
+        <form th:method="GET"
+              th:action="@{/customer/{username}/creditCards/new(username=${#authentication.principal.username})}">
+            <button class="double-border-button" type="submit" data-th-text="#{customer.credit-card.button.add}">
+                ДОБАВИТЬ КАРТУ
+            </button>
+        </form>
+
+        <div th:switch="${creditCards}">
+            <div th:case="null">
+                <h2 data-th-text="#{customer.credit-card.label.empty-list}">Список пуст</h2>
+            </div>
+
+            <div th:case="*">
+                <div th:if="${creditCards.size() == 0}">
+                    <h2 data-th-text="#{customer.credit-card.label.empty-list}">Список пуст</h2>
+                </div>
+
+                <div
+                        th:if="${creditCards.size() != 0}">
+
+                    <table class="table-dark-fix">
+                        <thead>
+                        <tr>
+                            <th>№</th>
+                            <th data-th-text="#{customer.credit-card.label.card-number}">НОМЕР КАРТЫ</th>
+                            <th colspan="2" data-th-text="#{customer.credit-card.label.action}">ДЕЙСТВИЕ</th>
+                        </tr>
+                        </thead>
+                    </table>
+
+                    <div class="scroll-table-body">
+                        <table class="table-dark">
+                            <tbody>
+                            <tr th:each="creditCard,creditCardStat : ${creditCards}">
+                                <td th:text="${creditCardStat.count}"></td>
+                                <td th:text="${creditCard.number}"></td>
+
+                                <td>
+                                    <form th:method="GET"
+                                          th:action="@{/customer/{username}/creditCards/{id}/edit(username=${#authentication.principal.username},id=${creditCard.id})}">
+                                        <button class="double-border-button" type="submit"
+                                                data-th-text="#{customer.credit-card.button.edit}">
+                                            РЕДАКТИРОВАТЬ
+                                        </button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form th:method="DELETE"
+                                          th:action="@{/customer/{username}/creditCards/{id}(username=${#authentication.principal.username},id=${creditCard.id})}">
+                                        <button class="double-border-button" type="submit"
+                                                data-th-text="#{customer.credit-card.button.delete}">
+                                            УДАЛИТЬ
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

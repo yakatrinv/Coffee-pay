@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Coffee manage project</title>
+    <link rel="stylesheet" th:href="@{/css/input-form.css}"/>
+</head>
+<body>
+
+<div>
+    <form class="form" th:method="POST" th:action="@{/machines}" th:object="${machine}">
+        <div class="h2">
+            <h2 data-th-text="#{machines.add.label}">Новый адрес</h2>
+        </div>
+
+        <div class="field">
+            <label class="label" for="serialNumber" data-th-text="#{machines.add.label.serial-number}">Серийный номер:</label>
+            <div class="input-div">
+                <input class="input" th:field="*{serialNumber}" name="serialNumber" id="serialNumber">
+                <div class="error" th:if="${#fields.hasErrors('serialNumber')}" th:errors="*{serialNumber}">error</div>
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label" for="model" data-th-text="#{machines.add.label.model}">Модель:</label>
+            <select class="input" th:name="model_id" id="model">
+                <option th:value="NULL">не выбрано</option>
+                <option th:each="modelMachine: ${modelsMachine}"
+                        th:value="${modelMachine.id}"
+                        th:text="${modelMachine.brand +','+ modelMachine.nameModel}"></option>
+            </select>
+        </div>
+
+        <div class="field">
+            <label class="label" for="address" data-th-text="#{machines.add.label.address}">Адрес:</label>
+            <select class="input" th:name="address_id" id="address">
+                <option th:value="NULL">не выбрано</option>
+                <option th:each="address: ${addresses}"
+                        th:value="${address.id}"
+                        th:text="${address.city +','+ address.street}"></option>
+            </select>
+        </div>
+
+        <div class="submit-div">
+            <button th:class="double-border-button" type="submit" data-th-text="#{machines.add.button.save}">
+                СОХРАНИТЬ
+            </button>
+            <a class="double-border-button" th:href="@{/machines}"
+               data-th-text="#{machines.add.button.cancel}">ОТМЕНА</a>
+        </div>
+
+    </form>
+
+</div>
+</body>
+
+</html>
