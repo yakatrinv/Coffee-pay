@@ -85,4 +85,19 @@ public class DataViews {
     public static final String PAGE_REDIRECT_LIST_PRODUCTS = "redirect:/products";
     public static final String PAGE_ADD_PRODUCT = "products/add";
     public static final String PAGE_EDIT_PRODUCT = "products/edit";
+    //address model
+    public static final String ATTR_MACHINES_LIST = "machines";
+    public static final String ATTR_MACHINE = "machine";
+    public static final String ATTR_SEARCH_MACHINE_SERIAL_NUMBER = "searchSerialNumber";
+    public static final String ATTR_SEARCH_MACHINE_CITY = "searchCity";
+    public static final String ATTR_SEARCH_MACHINE_STREET = "searchStreet";
+    public static final String ATTR_SEARCH_MACHINE_MODEL = "searchModel";
+    public static final String ATTR_SEARCH_MACHINE_BRAND = "searchBrand";
+    public static final String ATTR_ADDRESS_ID = "address_id";
+    public static final String ATTR_MODEL_ID = "model_id";
+    public static final String ADD_AFTER_MACHINE_PAGE = "/machines";
+    public static final String PAGE_LIST_MACHINES = "machines/list";
+    public static final String PAGE_REDIRECT_LIST_MACHINES = "redirect:/machines";
+    public static final String PAGE_ADD_MACHINE = "machines/add";
+    public static final String PAGE_EDIT_MACHINES = "machines/edit";
 }

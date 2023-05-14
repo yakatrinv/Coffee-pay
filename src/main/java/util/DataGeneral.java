@@ -3,6 +3,7 @@ package util;
 import com.coffeepay.dto.AddressDto;
 import com.coffeepay.dto.CreditCardDto;
 import com.coffeepay.dto.CustomerDto;
+import com.coffeepay.dto.MachineDto;
 import com.coffeepay.dto.ModelMachineDto;
 import com.coffeepay.dto.ProductDto;
 import com.coffeepay.dto.RoleDto;
@@ -10,6 +11,7 @@ import com.coffeepay.dto.UserDto;
 import com.coffeepay.model.Address;
 import com.coffeepay.model.CreditCard;
 import com.coffeepay.model.Customer;
+import com.coffeepay.model.Machine;
 import com.coffeepay.model.ModelMachine;
 import com.coffeepay.model.Product;
 import com.coffeepay.model.Role;
@@ -35,6 +37,8 @@ public class DataGeneral {
     public static final Class<ModelMachineDto> MODEL_MACHINE_DTO_CLASS = ModelMachineDto.class;
     public static final Class<Product> PRODUCT_CLASS = Product.class;
     public static final Class<ProductDto> PRODUCT_DTO_CLASS = ProductDto.class;
+    public static final Class<Machine> MACHINE_CLASS = Machine.class;
+    public static final Class<MachineDto> MACHINE_DTO_CLASS = MachineDto.class;
     //specification
     public static final String PERCENT_STRING = "%";
     //locale

@@ -14,6 +14,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 import static util.DataGeneral.ADDRESS_CLASS;
@@ -27,7 +28,7 @@ public class AddressService implements IAddressService {
     private final ModelMapper modelMapper;
 
     @Override
-    public Page<AddressDto> findAll(String city, String street, Pageable pageable) {
+    public Page<AddressDto> findAllPage(String city, String street, Pageable pageable) {
         Specification<Address> likeCityAndStreet = Specification.where(AddressSpecification.likeCity(city)
                 .and(AddressSpecification.likeStreet(street)));
 
@@ -40,6 +41,14 @@ public class AddressService implements IAddressService {
                         .toList(),
                 pageable,
                 addressesPage.getTotalElements());
+    }
+
+    @Override
+    public List<AddressDto> getAllAddresses() {
+        return addressRepository.findAll()
+                .stream()
+                .map(address -> modelMapper.map(address, ADDRESS_DTO_CLASS))
+                .toList();
     }
 
     @Override

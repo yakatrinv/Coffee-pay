@@ -54,7 +54,7 @@ public class AddressController {
                                @RequestParam(required = false, defaultValue = DEFAULT_PAGE_SIZE) int size) {
 
         PageRequest pageRequest = PageRequest.of(page - 1, size);
-        Page<AddressDto> pageable = addressService.findAll(city, street, pageRequest);
+        Page<AddressDto> pageable = addressService.findAllPage(city, street, pageRequest);
 
         model.addAttribute(ATTR_PAGE_NAME_LIST, ADD_AFTER_ADDRESS_PAGE);
         model.addAttribute(ATTR_ADDRESSES_LIST, pageable.getContent());

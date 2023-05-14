@@ -18,6 +18,7 @@ public class DataMessages {
     public static final String MESSAGE_ERROR_LENGTH_BRAND = "{length.model.brand}";
     public static final String MESSAGE_ERROR_LENGTH_PRODUCT_NAME = "{length.product.name}";
     public static final String MESSAGE_ERROR_MIN_PRODUCT_PRICE = "{min.product.price}";
+    public static final String MESSAGE_ERROR_LENGTH_SERIAl_NUMBER = "{length.machine.serial-number}";
     public static final String REG_SYMBOL = "^[a-zA-Z][a-zA-Z0-9_]*";
     public static final int MIN_NUMBER = 0;
     public static final int MIN_USERNAME = 3;
@@ -32,6 +33,8 @@ public class DataMessages {
     public static final int MAX_LENGTH_MODEl = 30;
     public static final int MAX_LENGTH_BRAND = 30;
     public static final int MAX_LENGTH_STREET = 30;
+    public static final int MIN_LENGTH_SERIAL_NUMBER = 3;
+    public static final int MAX_LENGTH_SERIAL_NUMBER = 10;
     public static final String VALID_CUSTOMER = "customer";
     public static final String VALID_EQUALS_CONFIRM_PASSWORD = "user.confirmPassword";
     public static final String VALID_USERNAME = "user.username";

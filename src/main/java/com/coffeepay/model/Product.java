@@ -38,10 +38,4 @@ public class Product extends DataEntity implements Serializable {
     @Column
     @EqualsAndHashCode.Include
     private float price;
-
-//    @ManyToMany(fetch = FetchType.LAZY)
-//    @JoinTable(name = TABLE_DB_MACHINE_PRODUCT,
-//            joinColumns = {@JoinColumn(name = ATTR_DB_PRODUCT_ID)},
-//            inverseJoinColumns = {@JoinColumn(name = ATTR_DB_MACHINE_ID)})
-//    private Set<Machine> machines;
 }

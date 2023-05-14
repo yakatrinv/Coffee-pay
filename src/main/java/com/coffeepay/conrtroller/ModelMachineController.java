@@ -34,7 +34,6 @@ import static util.DataViews.DEFAULT_PAGE_SIZE;
 import static util.DataViews.PAGE_ADD_MODEL_MACHINE;
 import static util.DataViews.PAGE_EDIT_MODEL_MACHINE;
 import static util.DataViews.PAGE_LIST_MODELS_MACHINE;
-import static util.DataViews.PAGE_REDIRECT_LIST_ADDRESSES;
 import static util.DataViews.PAGE_REDIRECT_LIST_MODELS_MACHINE;
 import static util.DataViews.URL_DELETE;
 import static util.DataViews.URL_EDIT;
@@ -55,7 +54,7 @@ public class ModelMachineController {
                                   @RequestParam(required = false, defaultValue = DEFAULT_PAGE_SIZE) int size) {
 
         PageRequest pageRequest = PageRequest.of(page - 1, size);
-        Page<ModelMachineDto> pageable = modelMachineService.findAll(modelMachine, brand, pageRequest);
+        Page<ModelMachineDto> pageable = modelMachineService.findAllPage(modelMachine, brand, pageRequest);
 
         model.addAttribute(ATTR_PAGE_NAME_LIST, ADD_AFTER_MODELS_MACHINE_PAGE);
         model.addAttribute(ATTR_MODELS_MACHINE_LIST, pageable.getContent());

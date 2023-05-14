@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.springframework.org/schema/security">
+<head>
+    <meta charset="UTF-8">
+    <title>Coffee manage project</title>
+    <link rel="stylesheet" th:href="@{/css/navbar.css}"/>
+    <link rel="stylesheet" th:href="@{/css/navbar-menu.css}"/>
+    <link rel="stylesheet" th:href="@{/css/page.css}"/>
+    <link rel="stylesheet" th:href="@{/css/table.css}"/>
+</head>
+<head>
+    <title>Coffee manage project</title>
+</head>
+<body>
+
+<div th:insert="header::header"></div>
+<div style="display:flex;" sec:authorize="isAuthenticated()">
+    <div th:insert="headerMenu::header-menu"></div>
+    <div class="div-with-table">
+        <h3 class="h1" data-th-text="#{machines.list.label}">Список аппаратов</h3>
+
+        <form th:method="GET" th:action="@{/machines/new}">
+            <button class="double-border-button" type="submit" data-th-text="#{machines.list.button.add}">
+                ДОБАВИТЬ АППАРАТ
+            </button>
+        </form>
+
+        <form class="searchForm" th:method="GET" th:action="@{/machines}">
+            <div class="field">
+                <label class="label" for="searchSerialNumber" data-th-text="#{machines.list.label.search.serial-number}">Серийный номер:</label>
+                <div class="input-div">
+                    <input class="input" th:name="searchSerialNumber" th:value="${searchSerialNumber}" id="searchSerialNumber">
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label" for="searchBrand" data-th-text="#{machines.list.label.search.brand}">Бренд:</label>
+                <div class="input-div">
+                    <input class="input" th:name="searchBrand" th:value="${searchBrand}" id="searchBrand">
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label" for="searchModel" data-th-text="#{machines.list.label.search.model}">Модель:</label>
+                <div class="input-div">
+                    <input class="input" th:name="searchModel" th:value="${searchModel}" id="searchModel">
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label" for="searchCity" data-th-text="#{machines.list.label.search.city}">Город:</label>
+                <div class="input-div">
+                    <input class="input" th:name="searchCity" th:value="${searchCity}" id="searchCity">
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label" for="searchStreet" data-th-text="#{machines.list.label.search.street}">Улица:</label>
+                <div class="input-div">
+                    <input class="input" th:name="searchStreet" th:value="${searchStreet}" id="searchStreet">
+                </div>
+            </div>
+
+            <button class="double-border-button-search" type="submit" data-th-text="#{machines.list.button.search}">
+                ПОИСК
+            </button>
+        </form>
+
+        <div th:switch="${machines}">
+            <h2 th:case="null" data-th-text="#{machines.list.label.empty-list}">Список пуст</h2>
+
+            <div th:case="*">
+                <h2 th:if="${machines.size() == 0}" data-th-text="#{machines.list.label.empty-list}">Список пуст</h2>
+
+                <table class="table-dark" th:if="${machines.size() != 0}">
+                    <tr>
+                        <th>№</th>
+                        <th data-th-text="#{machines.list.column.serial-number}">СЕРИЙНЫЙ НОМЕР</th>
+                        <th data-th-text="#{machines.list.column.model}">МОДЕЛЬ</th>
+                        <th data-th-text="#{machines.list.column.address}">АДРЕС</th>
+                        <th colspan="2" data-th-text="#{machines.list.column.action}">ДЕЙСТВИЕ</th>
+                    </tr>
+
+
+                    <tr th:each="machine,machineStat : ${machines}">
+                        <td th:text="${machineStat.count}"></td>
+                        <td th:text="${machine.serialNumber}"></td>
+
+                        <td th:if="${machine.model ne null}">
+                            <div th:text="${machine.model.brand}"/>
+                            <div th:text="${machine.model.nameModel}"/>
+                        </td>
+                        <td th:if="${machine.model eq null}" th:text="'-'"></td>
+
+                        <td th:if="${machine.address ne null}">
+                            <div th:text="${machine.address.city}"/>
+                            <div th:text="${machine.address.street}"/>
+                        </td>
+                        <td th:if="${machine.address eq null}" th:text="'-'"></td>
+
+                        <td>
+                            <form th:method="GET" th:action="@{/machines/{id}/edit(id=${machine.id})}">
+                                <button class="double-border-button" type="submit" data-th-text="#{machines.list.button.edit}">
+                                    РЕДАКТИРОВАТЬ
+                                </button>
+                            </form>
+                        </td>
+                        <td>
+                            <form th:method="DELETE"
+                                  th:action="@{/machines/{id}(id=${machine.id},page=${page},size=${size},
+                                  searchSerialNumber=${searchSerialNumber},searchBrand=${searchBrand},searchModel=${searchModel},
+                                  searchCity=${searchCity},searchStreet=${searchStreet})}">
+                                <button class="double-border-button" type="submit" data-th-text="#{machines.list.button.delete}">
+                                    УДАЛИТЬ
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+
+                </table>
+
+                <div th:insert=" pagination :: pagination(${'&searchSerialNumber=' +searchSerialNumber
+                +'&searchBrand='+searchBrand+'&searchModel='+searchModel
+                +'&searchCity='+searchCity+'&searchStreet='+searchStreet})"></div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

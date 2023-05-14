@@ -4,8 +4,12 @@ import com.coffeepay.dto.AddressDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 public interface IAddressService {
-    Page<AddressDto> findAll(String city, String street,Pageable pageable);
+    Page<AddressDto> findAllPage(String city, String street, Pageable pageable);
+
+    List<AddressDto> getAllAddresses();
 
     void save(AddressDto addressDto);
 

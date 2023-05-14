@@ -14,6 +14,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 import static util.DataGeneral.MODEL_MACHINE_CLASS;
@@ -27,7 +28,7 @@ public class ModelMachineService implements IModelMachineService {
     private final ModelMapper modelMapper;
 
     @Override
-    public Page<ModelMachineDto> findAll(String brand, String model, Pageable pageable) {
+    public Page<ModelMachineDto> findAllPage(String brand, String model, Pageable pageable) {
         Specification<ModelMachine> likeBrandAndModel = Specification.where(ModelMachineSpecification.likeBrand(brand)
                 .and(ModelMachineSpecification.likeModel(model)));
 
@@ -40,6 +41,14 @@ public class ModelMachineService implements IModelMachineService {
                         .toList(),
                 pageable,
                 modelMachinePage.getTotalElements());
+    }
+
+    @Override
+    public List<ModelMachineDto> getAllModels() {
+        return modelMachineRepository.findAll()
+                .stream()
+                .map(modelMachine -> modelMapper.map(modelMachine, MODEL_MACHINE_DTO_CLASS))
+                .toList();
     }
 
     @Override

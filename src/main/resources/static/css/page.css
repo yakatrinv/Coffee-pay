@@ -14,10 +14,10 @@
     position: relative;
     border: 2px solid #f1c40f;
     color: #f1c40f;
-    font-family: 'Montserrat', sans-serif;
+    font: 14px Arial, Tahoma, sans-serif;
     transition: .4s;
     background: #252F48;
-
+    outline: none;
     height: min-content;
 
 }
