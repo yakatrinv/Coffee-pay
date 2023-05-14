@@ -54,7 +54,7 @@ public class CustomerService implements ICustomerService {
             customer.getUser().setPassword(bCryptPasswordEncoder
                     .encode(customer.getUser().getPassword()));
         }
-        
+
         customerRepository.save(customer);
     }
 

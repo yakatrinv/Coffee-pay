@@ -73,10 +73,8 @@ public class AddressController {
     }
 
     @GetMapping(URL_NEW)
-    public String newAddress(Model model,
-                             @RequestHeader(HttpHeaders.REFERER) String prevURL) {
+    public String newAddress(Model model) {
         model.addAttribute(ATTR_ADDRESS, new AddressDto());
-        model.addAttribute(PAGE_PREV_URL, StringUtils.isBlank(prevURL) ? URL_MAIN : prevURL);
 
         return PAGE_ADD_ADDRESS;
     }
@@ -95,11 +93,9 @@ public class AddressController {
 
     @GetMapping(URL_EDIT)
     public String editAddress(Model model,
-                              @PathVariable(ATTR_ID) long id,
-                              @RequestHeader(HttpHeaders.REFERER) String prevURL) {
+                              @PathVariable(ATTR_ID) long id) {
 
         model.addAttribute(ATTR_ADDRESS, addressService.findById(id));
-        model.addAttribute(PAGE_PREV_URL, StringUtils.isBlank(prevURL) ? URL_MAIN : prevURL);
 
         return PAGE_EDIT_ADDRESS;
     }

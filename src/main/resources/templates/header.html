@@ -9,7 +9,6 @@
 <body>
 
     <nav th:fragment="header">
-        <input type="hidden" th:name="prevURL" th:value="${#request.getRequestURI()}">
         <ul class="topmenu">
             <li class="item">
                 <a class="item-point" th:href="@{/api}" data-th-text="#{panel.home}">

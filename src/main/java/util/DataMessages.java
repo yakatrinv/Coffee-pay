@@ -10,6 +10,7 @@ public class DataMessages {
     public static final String MESSAGE_ERROR_LENGTH_USERNAME = "{length.user.username}";
     public static final String MESSAGE_ERROR_START_USERNAME = "{start.user.username}";
     public static final String MESSAGE_ERROR_LENGTH_PASSWORD = "{length.user.password}";
+    public static final String MESSAGE_ERROR_LENGTH_ROLE_NAME = "{length.role.name}";
     public static final String MESSAGE_ERROR_LENGTH_CUSTOMER_NAME = "{length.customer.name}";
     public static final String MESSAGE_ERROR_LENGTH_CUSTOMER_SURNAME = "{length.customer.surname}";
     public static final String MESSAGE_ERROR_LENGTH_CREDIT_CARD = "{length.credit-card.number}";
@@ -18,6 +19,8 @@ public class DataMessages {
     public static final int MAX_USERNAME = 16;
     public static final int MIN_PASSWORD = 3;
     public static final int MAX_PASSWORD = 16;
+    public static final int MIN_ROLE_NAME = 3;
+    public static final int MAX_ROLE_NAME = 16;
     public static final int MAX_NAME_SURNAME = 30;
     public static final int LENGTH_CARD_NUMBER = 16;
     public static final int MAX_LENGTH_CITY = 30;

@@ -3,7 +3,26 @@
     display: flex;
 }
 
-li {
+.nav {
+    display: inline-flex;
+}
+
+.sel {
+    display: inline-block;
+    margin: auto;
+    padding: 8px 16px;
+    position: relative;
+    border: 2px solid #f1c40f;
+    color: #f1c40f;
+    font-family: 'Montserrat', sans-serif;
+    transition: .4s;
+    background: #252F48;
+
+    height: min-content;
+
+}
+
+.li {
     display: inline-block;
     color: #f1c40f;
 
@@ -11,7 +30,7 @@ li {
     padding: 8px 16px;
 }
 
-li a {
+.li a {
     display: inline-block;
     color: #f1c40f;
 
@@ -21,16 +40,44 @@ li a {
     transition: background-color .3s;
 }
 
-li a.active {
+.li a.active {
     background-color: #252F48;
     border: 1px solid #37B5A5;
-    color: #f1c40f;
+    color: #CAD4D6;
 }
 
-li a:hover:not(.active) {
+.li a:hover:not(.active) {
     border-color: #f1c40f;
     border: 1px solid #37B5A5;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
     background: linear-gradient(to bottom, #252F48C2, #252F48);
     color: #f1c40f;
+}
+
+/*button styles*/
+.double-border-button-page {
+    text-decoration: none;
+    display: inline-block;
+    margin: 5px;
+    padding: 5px 10px;
+    position: relative;
+    border: 2px solid #f1c40f;
+    color: #f1c40f;
+    font-family: 'Montserrat', sans-serif;
+    transition: .4s;
+    background: #252F48;
+}
+
+.double-border-button-page:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    border: 2px solid rgba(0, 0, 0, 0);
+    transition: .4s;
 }

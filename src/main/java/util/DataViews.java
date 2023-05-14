@@ -33,7 +33,6 @@ public class DataViews {
     public static final String ATTR_ID = "id";
     public static final String ATTR_CREDIT_CARDS = "creditCards";
     public static final String ATTR_CREDIT_CARD = "creditCard";
-    public static final String ATTR_CUSTOMER = "customer";
     //general
     public static final String URL_NEW = "/new";
     //pageable
@@ -50,10 +49,19 @@ public class DataViews {
     public static final String ATTR_SEARCH_ADDRESS_STREET = "searchStreet";
     public static final String ADD_AFTER_ADDRESS_PAGE = "/addresses";
     public static final String PAGE_LIST_ADDRESSES = "addresses/list";
-    public static final String PAGE_ADD_ADDRESS = "addresses/add";
     public static final String PAGE_REDIRECT_LIST_ADDRESSES = "redirect:/addresses";
-    public static final String URL_EDIT = "/{id}/edit";
+    public static final String PAGE_ADD_ADDRESS = "addresses/add";
     public static final String PAGE_EDIT_ADDRESS = "addresses/edit";
-    public static final String URL_UPDATE = "/";
+    public static final String URL_EDIT = "/{id}/edit";
+    public static final String URL_UPDATE = "/{id}";
     public static final String URL_DELETE = "/{id}";
+    //role model
+    public static final String ATTR_ROLE = "role";
+    public static final String ADD_AFTER_ROLES_PAGE = "/roles";
+    public static final String ATTR_ROLES_LIST = "roles";
+    public static final String ATTR_SEARCH_ROLE_NAME = "searchName";
+    public static final String PAGE_LIST_ROLES = "roles/list";
+    public static final String PAGE_REDIRECT_LIST_ROLES = "redirect:/roles";
+    public static final String PAGE_ADD_ROLE = "roles/add";
+    public static final String PAGE_EDIT_ROLE = "roles/edit";
 }
