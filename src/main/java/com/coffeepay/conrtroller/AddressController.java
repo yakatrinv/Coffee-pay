@@ -3,10 +3,8 @@ package com.coffeepay.conrtroller;
 import com.coffeepay.dto.AddressDto;
 import com.coffeepay.service.IAddressService;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -37,11 +34,9 @@ import static util.DataViews.DEFAULT_PAGE_SIZE;
 import static util.DataViews.PAGE_ADD_ADDRESS;
 import static util.DataViews.PAGE_EDIT_ADDRESS;
 import static util.DataViews.PAGE_LIST_ADDRESSES;
-import static util.DataViews.PAGE_PREV_URL;
 import static util.DataViews.PAGE_REDIRECT_LIST_ADDRESSES;
 import static util.DataViews.URL_DELETE;
 import static util.DataViews.URL_EDIT;
-import static util.DataViews.URL_MAIN;
 import static util.DataViews.URL_NEW;
 import static util.DataViews.URL_UPDATE;
 
@@ -65,7 +60,10 @@ public class AddressController {
         model.addAttribute(ATTR_ADDRESSES_LIST, pageable.getContent());
         model.addAttribute(ATTR_PAGE_SIZE, pageable.getSize());
         model.addAttribute(ATTR_PAGE_PAGE, pageable.getNumber() + 1);
-        model.addAttribute(ATTR_PAGE_TOTAL_PAGE, pageable.getTotalPages());
+        model.addAttribute(ATTR_PAGE_TOTAL_PAGE,
+                pageable.getTotalPages() == 0 ?
+                        pageable.getTotalPages() + 1 :
+                        pageable.getTotalPages());
         model.addAttribute(ATTR_SEARCH_ADDRESS_CITY, city);
         model.addAttribute(ATTR_SEARCH_ADDRESS_STREET, street);
 

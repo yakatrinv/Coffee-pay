@@ -1,25 +1,25 @@
 package com.coffeepay.specification;
 
-import com.coffeepay.model.Address;
-import com.coffeepay.model.Address_;
+import com.coffeepay.model.ModelMachine;
+import com.coffeepay.model.ModelMachine_;
 import org.springframework.data.jpa.domain.Specification;
 
 import static util.DataGeneral.PERCENT_STRING;
 
-public class AddressSpecification {
-    public static Specification<Address> likeCity(String city) {
+public class ModelMachineSpecification {
+    public static Specification<ModelMachine> likeBrand(String brand) {
         return ((root, criteriaQuery, criteriaBuilder) -> criteriaBuilder
-                .like(root.get(Address_.CITY),
+                .like(root.get(ModelMachine_.BRAND),
                         PERCENT_STRING +
-                                city +
+                                brand +
                                 PERCENT_STRING));
     }
 
-    public static Specification<Address> likeStreet(String street) {
+    public static Specification<ModelMachine> likeModel(String model) {
         return ((root, criteriaQuery, criteriaBuilder) -> criteriaBuilder
-                .like(root.get(Address_.STREET),
+                .like(root.get(ModelMachine_.nameModel),
                         PERCENT_STRING +
-                                street +
+                                model +
                                 PERCENT_STRING));
     }
 }

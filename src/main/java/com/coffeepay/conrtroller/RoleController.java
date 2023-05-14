@@ -58,7 +58,10 @@ public class RoleController {
         model.addAttribute(ATTR_ROLES_LIST, pageable.getContent());
         model.addAttribute(ATTR_PAGE_SIZE, pageable.getSize());
         model.addAttribute(ATTR_PAGE_PAGE, pageable.getNumber() + 1);
-        model.addAttribute(ATTR_PAGE_TOTAL_PAGE, pageable.getTotalPages());
+        model.addAttribute(ATTR_PAGE_TOTAL_PAGE,
+                pageable.getTotalPages() == 0 ?
+                        pageable.getTotalPages() + 1 :
+                        pageable.getTotalPages());
         model.addAttribute(ATTR_SEARCH_ROLE_NAME, name);
 
         return PAGE_LIST_ROLES;

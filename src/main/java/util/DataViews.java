@@ -14,6 +14,9 @@ public class DataViews {
     public static final String PAGE_REDIRECT_CUSTOMER_CREDIT_CARD = "redirect:/customer/{username}/creditCards";
     public static final String PAGE_EDIT_CUSTOMER_CREDIT_CARD = "/customer/editCreditCard";
     public static final String URL_MAIN = "/";
+    public static final String URL_EDIT = "/{id}/edit";
+    public static final String URL_UPDATE = "/{id}";
+    public static final String URL_DELETE = "/{id}";
     public static final String URL_SAVE_PASSWORD = "user/{username}";
     public static final String URL_EDIT_PASSWORD = "/user/{username}/editPass";
     public static final String URL_CUSTOMER = "/customer";
@@ -52,9 +55,6 @@ public class DataViews {
     public static final String PAGE_REDIRECT_LIST_ADDRESSES = "redirect:/addresses";
     public static final String PAGE_ADD_ADDRESS = "addresses/add";
     public static final String PAGE_EDIT_ADDRESS = "addresses/edit";
-    public static final String URL_EDIT = "/{id}/edit";
-    public static final String URL_UPDATE = "/{id}";
-    public static final String URL_DELETE = "/{id}";
     //role model
     public static final String ATTR_ROLE = "role";
     public static final String ADD_AFTER_ROLES_PAGE = "/roles";
@@ -64,4 +64,25 @@ public class DataViews {
     public static final String PAGE_REDIRECT_LIST_ROLES = "redirect:/roles";
     public static final String PAGE_ADD_ROLE = "roles/add";
     public static final String PAGE_EDIT_ROLE = "roles/edit";
+    //model machine model
+    public static final String ATTR_MODELS_MACHINE_LIST = "modelsMachine";
+    public static final String ATTR_MODEL_MACHINE = "modelMachine";
+    public static final String ATTR_SEARCH_MODEL_MACHINE_MODEL = "searchModel";
+    public static final String ATTR_SEARCH_MODEL_MACHINE_BRAND = "searchBrand";
+    public static final String ADD_AFTER_MODELS_MACHINE_PAGE = "/modelsMachine";
+    public static final String PAGE_LIST_MODELS_MACHINE = "modelsMachine/list";
+    public static final String PAGE_REDIRECT_LIST_MODELS_MACHINE = "redirect:/modelsMachine";
+    public static final String PAGE_ADD_MODEL_MACHINE = "modelsMachine/add";
+    public static final String PAGE_EDIT_MODEL_MACHINE = "modelsMachine/edit";
+    //product model
+    public static final String ATTR_PRODUCTS_LIST = "products";
+    public static final String ATTR_PRODUCT = "product";
+    public static final String ATTR_SEARCH_PRODUCT_NAME = "searchName";
+    public static final String ATTR_SEARCH_PRODUCT_MIN_PRICE = "searchMinPrice";
+    public static final String ATTR_SEARCH_PRODUCT_MAX_PRICE = "searchMaxPrice";
+    public static final String ADD_AFTER_PRODUCTS_PAGE = "/products";
+    public static final String PAGE_LIST_PRODUCTS = "products/list";
+    public static final String PAGE_REDIRECT_LIST_PRODUCTS = "redirect:/products";
+    public static final String PAGE_ADD_PRODUCT = "products/add";
+    public static final String PAGE_EDIT_PRODUCT = "products/edit";
 }
