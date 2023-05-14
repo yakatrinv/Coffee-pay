@@ -100,4 +100,12 @@ public class DataViews {
     public static final String PAGE_REDIRECT_LIST_MACHINES = "redirect:/machines";
     public static final String PAGE_ADD_MACHINE = "machines/add";
     public static final String PAGE_EDIT_MACHINES = "machines/edit";
+    //type payment model
+    public static final String ATTR_TYPE_PAYMENT = "typePayment";
+    public static final String ADD_AFTER_TYPE_PAYMENTS_PAGE = "/typePayments";
+    public static final String ATTR_TYPE_PAYMENTS_LIST = "typePayments";
+    public static final String PAGE_LIST_TYPE_PAYMENTS = "typePayments/list";
+    public static final String PAGE_REDIRECT_LIST_TYPE_PAYMENTS = "redirect:/typePayments";
+    public static final String PAGE_ADD_TYPE_PAYMENT = "typePayments/add";
+    public static final String PAGE_EDIT_TYPE_PAYMENT = "typePayments/edit";
 }
