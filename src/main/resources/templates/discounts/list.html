@@ -94,7 +94,7 @@
                                 </button>
                             </form>
                         </td>
-                        <td>
+                        <td sec:authorize="hasAuthority('Administrator')">
                             <form th:method="DELETE"
                                   th:action="@{/discounts/{id}(id=${discount.id},page=${page},size=${size},
                                   searchMinPercent=${searchMinPercent},searchMaxPercent=${searchMaxPercent},

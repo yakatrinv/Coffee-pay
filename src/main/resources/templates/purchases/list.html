@@ -20,7 +20,7 @@
     <div class="div-with-table">
         <h3 class="h1" data-th-text="#{purchases.list.label}">Список покупок</h3>
 
-        <form th:method="GET" th:action="@{/purchases/new}">
+        <form th:method="GET" th:action="@{/purchases/new}" sec:authorize="hasAuthority('Administrator')">
             <button class="double-border-button" type="submit" data-th-text="#{purchases.list.button.add}">
                 ДОБАВИТЬ ПОКУПКУ
             </button>
@@ -63,7 +63,8 @@
                         <th data-th-text="#{purchases.list.column.price}">ЦЕНА</th>
                         <th data-th-text="#{purchases.list.column.sum}">СУММА</th>
                         <th colspan="2" data-th-text="#{purchases.list.column.payment}">ОПЛАТА</th>
-                        <th colspan="2" data-th-text="#{machines.list.column.action}">ДЕЙСТВИЕ</th>
+                        <th colspan="2" data-th-text="#{machines.list.column.action}"
+                            sec:authorize="hasAuthority('Administrator')">ДЕЙСТВИЕ</th>
                     </tr>
 
 
@@ -103,7 +104,7 @@
                                  th:text="${purchase.creditCard.number.charAt(0)}+'***'+${purchase.creditCard.number.charAt(purchase.creditCard.number.length()-1)}"/>
                         </td>
 
-                        <td>
+                        <td sec:authorize="hasAuthority('Administrator')">
                             <form th:method="GET" th:action="@{/purchases/{id}/edit(id=${purchase.id})}">
                                 <button class="double-border-button" type="submit"
                                         data-th-text="#{button.edit}">
@@ -111,7 +112,7 @@
                                 </button>
                             </form>
                         </td>
-                        <td>
+                        <td sec:authorize="hasAuthority('Administrator')">
                             <form th:method="DELETE"
                                   th:action="@{/purchases/{id}(id=${purchase.id},page=${page},size=${size},
                                   searchDateFrom=${searchDateFrom},searchDateTo=${searchDateTo})}">
@@ -125,9 +126,8 @@
 
                 </table>
 
-                <div th:insert=" pagination :: pagination(${'&searchSerialNumber=' +searchSerialNumber
-                +'&searchBrand='+searchBrand+'&searchModel='+searchModel
-                +'&searchCity='+searchCity+'&searchStreet='+searchStreet})"></div>
+                <div th:insert=" pagination :: pagination(${
+                '&searchCity='+searchCity+'&searchStreet='+searchStreet})"></div>
 
             </div>
         </div>

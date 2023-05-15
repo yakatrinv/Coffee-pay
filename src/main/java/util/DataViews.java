@@ -137,4 +137,12 @@ public class DataViews {
     public static final String PAGE_EDIT_PURCHASE = "purchases/edit";
     public static final String ATTR_SEARCH_PURCHASE_DATE_FROM = "searchDateFrom";
     public static final String ATTR_SEARCH_PURCHASE_DATE_TO = "searchDateTo";
+    //make order
+    public static final String ADD_AFTER_ORDER_PAGE = "/orders";
+    public static final String URL_ORDER_MACHINES = "/machines";
+    public static final String URL_ORDER_PRODUCTS = "/machines/{id}/products";
+    public static final String PAGE_ORDERS_INDEX = "orders/firstPage";
+    public static final String PAGE_ORDERS_MACHINES = "orders/machines";
+    public static final String PAGE_ORDERS_PRODUCTS = "orders/products";
+    public static final String NAME_LIST_ORDERS_MACHINES = "/orders/machines";
 }

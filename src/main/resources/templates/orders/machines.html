@@ -20,34 +20,7 @@
     <div class="div-with-table">
         <h3 class="h1" data-th-text="#{machines.list.label}">Список аппаратов</h3>
 
-        <form th:method="GET" th:action="@{/machines/new}">
-            <button class="double-border-button" type="submit" data-th-text="#{machines.list.button.add}">
-                ДОБАВИТЬ АППАРАТ
-            </button>
-        </form>
-
-        <form class="searchForm" th:method="GET" th:action="@{/machines}">
-            <div class="field">
-                <label class="label" for="searchSerialNumber" data-th-text="#{machines.list.label.search.serial-number}">Серийный номер:</label>
-                <div class="input-div">
-                    <input class="input" th:name="searchSerialNumber" th:value="${searchSerialNumber}" id="searchSerialNumber">
-                </div>
-            </div>
-
-            <div class="field">
-                <label class="label" for="searchBrand" data-th-text="#{machines.list.label.search.brand}">Бренд:</label>
-                <div class="input-div">
-                    <input class="input" th:name="searchBrand" th:value="${searchBrand}" id="searchBrand">
-                </div>
-            </div>
-
-            <div class="field">
-                <label class="label" for="searchModel" data-th-text="#{machines.list.label.search.model}">Модель:</label>
-                <div class="input-div">
-                    <input class="input" th:name="searchModel" th:value="${searchModel}" id="searchModel">
-                </div>
-            </div>
-
+        <form class="searchForm" th:method="GET" th:action="@{/orders/machines}">
             <div class="field">
                 <label class="label" for="searchCity" data-th-text="#{machines.list.label.search.city}">Город:</label>
                 <div class="input-div">
@@ -56,13 +29,14 @@
             </div>
 
             <div class="field">
-                <label class="label" for="searchStreet" data-th-text="#{machines.list.label.search.street}">Улица:</label>
+                <label class="label" for="searchStreet"
+                       data-th-text="#{machines.list.label.search.street}">Улица:</label>
                 <div class="input-div">
                     <input class="input" th:name="searchStreet" th:value="${searchStreet}" id="searchStreet">
                 </div>
             </div>
 
-            <button class="double-border-button-search" type="submit" data-th-text="#{machines.list.button.search}">
+            <button class="double-border-button-search" type="submit" data-th-text="#{button.search}">
                 ПОИСК
             </button>
         </form>
@@ -79,7 +53,7 @@
                         <th data-th-text="#{machines.list.column.serial-number}">СЕРИЙНЫЙ НОМЕР</th>
                         <th data-th-text="#{machines.list.column.model}">МОДЕЛЬ</th>
                         <th data-th-text="#{machines.list.column.address}">АДРЕС</th>
-                        <th colspan="2" data-th-text="#{machines.list.column.action}">ДЕЙСТВИЕ</th>
+                        <th data-th-text="#{column.action}">ДЕЙСТВИЕ</th>
                     </tr>
 
 
@@ -100,19 +74,10 @@
                         <td th:if="${machine.address eq null}" th:text="'-'"></td>
 
                         <td>
-                            <form th:method="GET" th:action="@{/machines/{id}/edit(id=${machine.id})}">
-                                <button class="double-border-button" type="submit" data-th-text="#{machines.list.button.edit}">
-                                    РЕДАКТИРОВАТЬ
-                                </button>
-                            </form>
-                        </td>
-                        <td sec:authorize="hasAuthority('Administrator')">
-                            <form th:method="DELETE"
-                                  th:action="@{/machines/{id}(id=${machine.id},page=${page},size=${size},
-                                  searchSerialNumber=${searchSerialNumber},searchBrand=${searchBrand},searchModel=${searchModel},
-                                  searchCity=${searchCity},searchStreet=${searchStreet})}">
-                                <button class="double-border-button" type="submit" data-th-text="#{machines.list.button.delete}">
-                                    УДАЛИТЬ
+                            <form th:method="GET" th:action="@{/orders/machines/{id}/products(id=${machine.id})}">
+                                <button class="double-border-button" type="submit"
+                                        data-th-text="#{button.choose}">
+                                    ВЫБРАТЬ
                                 </button>
                             </form>
                         </td>
@@ -120,9 +85,7 @@
 
                 </table>
 
-                <div th:insert=" pagination :: pagination(${'&searchSerialNumber=' +searchSerialNumber
-                +'&searchBrand='+searchBrand+'&searchModel='+searchModel
-                +'&searchCity='+searchCity+'&searchStreet='+searchStreet})"></div>
+                <div th:insert=" pagination :: pagination(${'&searchCity='+searchCity+'&searchStreet='+searchStreet})"></div>
 
             </div>
         </div>

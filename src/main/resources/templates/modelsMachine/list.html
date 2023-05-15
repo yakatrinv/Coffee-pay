@@ -77,7 +77,7 @@
                                 </button>
                             </form>
                         </td>
-                        <td>
+                        <td sec:authorize="hasAuthority('Administrator')">
                             <form th:method="DELETE"
                                   th:action="@{/modelsMachine/{id}(id=${modelMachine.id},page=${page},size=${size},searchBrand=${searchBrand},searchModel=${searchModel})}">
                                 <button class="double-border-button" type="submit"

@@ -62,8 +62,8 @@
                 <table class="table-dark" th:if="${products.size() != 0}">
                     <tr>
                         <th>№</th>
-                        <th data-th-text="#{products.list.column.name}">ГОРОД</th>
-                        <th data-th-text="#{products.list.column.price}">УЛИЦА</th>
+                        <th data-th-text="#{products.list.column.name}">НАЗВАНИЕ</th>
+                        <th data-th-text="#{products.list.column.price}">ЦЕНА</th>
                         <th colspan="2" data-th-text="#{products.list.column.action}">ДЕЙСТВИЕ</th>
                     </tr>
 
@@ -79,7 +79,7 @@
                                 </button>
                             </form>
                         </td>
-                        <td>
+                        <td sec:authorize="hasAuthority('Administrator')">
                             <form th:method="DELETE"
                                   th:action="@{/products/{id}(id=${product.id},page=${page},size=${size},searchName=${searchName},searchMinPrice=${searchMinPrice},searchMaxPrice=${searchMaxPrice})}">
                                 <button class="double-border-button" type="submit" data-th-text="#{products.list.button.delete}">

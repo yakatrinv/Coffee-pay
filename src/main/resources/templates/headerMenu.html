@@ -14,29 +14,32 @@
                 <li>
                     <span class="item-point-v"></span>
                 </li>
-                <li>
+                <li sec:authorize="hasAuthority('Administrator')">
                     <a class="item-point-v" th:href="@{/roles}" data-th-text="#{panel.roles}"></a>
                 </li>
-                <li>
+                <li sec:authorize="hasAuthority('Administrator') or hasAuthority('Manager')">
                     <a class="item-point-v" th:href="@{/addresses}" data-th-text="#{panel.addresses}"></a>
                 </li>
-                <li>
+                <li sec:authorize="hasAuthority('Administrator') or hasAuthority('Manager')">
                     <a class="item-point-v" th:href="@{/modelsMachine}" data-th-text="#{panel.model-machine}"></a>
                 </li>
-                <li>
+                <li sec:authorize="hasAuthority('Administrator') or hasAuthority('Manager')">
                     <a class="item-point-v" th:href="@{/products}" data-th-text="#{panel.products}"></a>
                 </li>
-                <li>
+                <li sec:authorize="hasAuthority('Administrator') or hasAuthority('Manager')">
                     <a class="item-point-v" th:href="@{/machines}" data-th-text="#{panel.machines}"></a>
                 </li>
-                <li>
+                <li sec:authorize="hasAuthority('Administrator')">
                     <a class="item-point-v" th:href="@{/typePayments}" data-th-text="#{panel.type-payment}"></a>
                 </li>
-                <li>
+                <li sec:authorize="hasAuthority('Administrator') or hasAuthority('Manager')">
                     <a class="item-point-v" th:href="@{/discounts}" data-th-text="#{panel.discount}"></a>
                 </li>
-                <li>
+                <li sec:authorize="hasAuthority('Administrator') or hasAuthority('Manager')">
                     <a class="item-point-v" th:href="@{/purchases}" data-th-text="#{panel.purchases}"></a>
+                </li>
+                <li sec:authorize="hasAuthority('Customer')">
+                    <a class="item-point-v" th:href="@{/orders}" data-th-text="#{panel.customer.purchase}"></a>
                 </li>
             </ul>
         </div>

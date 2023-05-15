@@ -45,7 +45,8 @@
                             <th data-th-text="#{type-payment.list.column.name}">НАЗВАНИЕ</th>
                             <th data-th-text="#{type-payment.list.column.use-card}">ИСП КАРТУ</th>
                             <th data-th-text="#{type-payment.list.column.use-phone}">ИСП ТЕЛЕФОН</th>
-                            <th colspan="2" data-th-text="#{type-payment.list.column.action}">ДЕЙСТВИЕ</th>
+                            <th colspan="2" data-th-text="#{type-payment.list.column.action}"
+                                sec:authorize="hasAuthority('Administrator')">ДЕЙСТВИЕ</th>
                         </tr>
                         </thead>
                     </table>
@@ -59,7 +60,7 @@
                                 <td th:text="${typePayment.useCreditCard}"></td>
                                 <td th:text="${typePayment.usePhoneNumber}"></td>
 
-                                <td>
+                                <td sec:authorize="hasAuthority('Administrator')">
                                     <form th:method="GET" th:action="@{/typePayments/{id}/edit(id=${typePayment.id})}">
                                         <button class="double-border-button" type="submit"
                                                 data-th-text="#{type-payment.list.button.edit}">
@@ -67,7 +68,7 @@
                                         </button>
                                     </form>
                                 </td>
-                                <td>
+                                <td sec:authorize="hasAuthority('Administrator')">
                                     <form th:method="DELETE" th:action="@{/typePayments/{id}(id=${typePayment.id})}">
                                         <button class="double-border-button" type="submit"
                                                 data-th-text="#{type-payment.list.button.delete}">

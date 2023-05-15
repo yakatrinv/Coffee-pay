@@ -1,0 +1,43 @@
+.div-index {
+    margin: auto auto auto 270px;
+    width: 100%;
+}
+
+.h1 {
+    color: #252F48;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+    font-size: 18px;
+}
+
+/*button styles*/
+.double-border-button-index {
+    text-decoration: none;
+    display: inline-block;
+    margin: 20px 5px 15px;
+    padding: 5px 10px;
+    position: relative;
+    border: 2px solid #f1c40f;
+    color: #f1c40f;
+    font-family: 'Montserrat', sans-serif;
+    transition: .4s;
+    background: #252F48;
+}
+.double-border-button-index:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    border: 2px solid rgba(0, 0, 0, 0);
+    transition: .4s;
+}
+.double-border-button-index:hover:after {
+    border-color: #f1c40f;
+    width: calc(100% - 10px);
+    height: calc(100% + 10px);
+}
+

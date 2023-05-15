@@ -42,7 +42,7 @@
                     Hi
                 </a>
                 <ul class="submenu-right">
-                    <li>
+                    <li sec:authorize="hasAuthority('Customer')">
                         <a class="item-point"
                            th:href="@{/customer/{username}/edit(username=${#authentication.principal.username})}"
                            data-th-text="#{panel.profile}">
@@ -56,7 +56,7 @@
                             Сменить пароль
                         </a>
                     </li>
-                    <li>
+                    <li sec:authorize="hasAuthority('Customer')">
                         <a class="item-point"
                            th:href="@{/customer/{username}/creditCards(username=${#authentication.principal.username})}"
                            data-th-text="#{panel.bankCards}">

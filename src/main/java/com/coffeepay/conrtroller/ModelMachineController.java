@@ -54,7 +54,7 @@ public class ModelMachineController {
                                   @RequestParam(required = false, defaultValue = DEFAULT_PAGE_SIZE) int size) {
 
         PageRequest pageRequest = PageRequest.of(page - 1, size);
-        Page<ModelMachineDto> pageable = modelMachineService.findAllPage(modelMachine, brand, pageRequest);
+        Page<ModelMachineDto> pageable = modelMachineService.findAllPage(brand, modelMachine, pageRequest);
 
         model.addAttribute(ATTR_PAGE_NAME_LIST, ADD_AFTER_MODELS_MACHINE_PAGE);
         model.addAttribute(ATTR_MODELS_MACHINE_LIST, pageable.getContent());
