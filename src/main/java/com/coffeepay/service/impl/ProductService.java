@@ -28,8 +28,9 @@ public class ProductService implements IProductService {
 
     @Override
     public Page<ProductDto> findAll(String name, Float minPrice, Float maxPrice, Pageable pageable) {
-        Specification<Product> likeNameAndBetweenPrice = Specification.where(ProductSpecification.likeName(name)
-                .and(ProductSpecification.betweenPrice(minPrice, maxPrice)));
+        Specification<Product> likeNameAndBetweenPrice = Specification
+                .where(ProductSpecification.likeName(name))
+                .and(ProductSpecification.betweenPrice(minPrice, maxPrice));
 
         Page<Product> productPage = productRepository.findAll(likeNameAndBetweenPrice, pageable);
 

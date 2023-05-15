@@ -20,6 +20,8 @@ public class DataMessages {
     public static final String MESSAGE_ERROR_MIN_PRODUCT_PRICE = "{min.product.price}";
     public static final String MESSAGE_ERROR_LENGTH_SERIAl_NUMBER = "{length.machine.serial-number}";
     public static final String MESSAGE_ERROR_LENGTH_TYPE_PAYMENT_NAME = "{length.type-payment.name}";
+    public static final String MESSAGE_ERROR_MIN_DISCOUNT_SUM = "{min.discount.sum}";
+    public static final String MESSAGE_ERROR_MIN_DISCOUNT_PERCENT = "{min.discount.percent}";
     public static final String REG_SYMBOL = "^[a-zA-Z][a-zA-Z0-9_]*";
     public static final int MIN_NUMBER = 0;
     public static final int MIN_USERNAME = 3;

@@ -29,8 +29,9 @@ public class AddressService implements IAddressService {
 
     @Override
     public Page<AddressDto> findAllPage(String city, String street, Pageable pageable) {
-        Specification<Address> likeCityAndStreet = Specification.where(AddressSpecification.likeCity(city)
-                .and(AddressSpecification.likeStreet(street)));
+        Specification<Address> likeCityAndStreet = Specification
+                .where(AddressSpecification.likeCity(city))
+                .and(AddressSpecification.likeStreet(street));
 
         Page<Address> addressesPage = addressRepository.findAll(likeCityAndStreet, pageable);
 

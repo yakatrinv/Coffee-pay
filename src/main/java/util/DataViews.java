@@ -108,4 +108,16 @@ public class DataViews {
     public static final String PAGE_REDIRECT_LIST_TYPE_PAYMENTS = "redirect:/typePayments";
     public static final String PAGE_ADD_TYPE_PAYMENT = "typePayments/add";
     public static final String PAGE_EDIT_TYPE_PAYMENT = "typePayments/edit";
+    //discount model
+    public static final String ATTR_DISCOUNTS_LIST = "discounts";
+    public static final String ATTR_DISCOUNT = "discount";
+    public static final String ATTR_SEARCH_DISCOUNT_MIN_SUM = "searchMinSum";
+    public static final String ATTR_SEARCH_DISCOUNT_MAX_SUM = "searchMaxSum";
+    public static final String ATTR_SEARCH_DISCOUNT_MIN_PERCENT = "searchMinPercent";
+    public static final String ATTR_SEARCH_DISCOUNT_MAX_PERCENT = "searchMaxPercent";
+    public static final String ADD_AFTER_DISCOUNTS_PAGE = "/discounts";
+    public static final String PAGE_LIST_DISCOUNTS = "discounts/list";
+    public static final String PAGE_REDIRECT_LIST_DISCOUNTS = "redirect:/discounts";
+    public static final String PAGE_ADD_DISCOUNT = "discounts/add";
+    public static final String PAGE_EDIT_DISCOUNT = "discounts/edit";
 }

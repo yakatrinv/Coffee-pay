@@ -33,8 +33,8 @@ public class MachineService implements IMachineService {
                                     String city,
                                     String street,
                                     Pageable pageable) {
-        Specification<Machine> allFields = Specification.where(
-                        MachineSpecification.likeSerialNumber(serialNumber))
+        Specification<Machine> allFields = Specification.
+                where(MachineSpecification.likeSerialNumber(serialNumber))
                 .and(MachineSpecification.likeModel(nameModel))
                 .and(MachineSpecification.likeBrand(brand))
                 .and(MachineSpecification.likeCity(city))
