@@ -5,9 +5,11 @@ import com.coffeepay.dto.CreditCardDto;
 import java.util.List;
 
 public interface ICreditCardService {
+    List<CreditCardDto> getAllCreditCards();
+
     void save(CreditCardDto creditCardDto, String username);
 
-    CreditCardDto fidById(Long id);
+    CreditCardDto findById(Long id);
 
     void deleteById(long id);
 

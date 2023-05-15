@@ -15,9 +15,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import static util.DataGeneral.CREDIT_CARD_DTO_CLASS;
 import static util.DataGeneral.CUSTOMER;
 import static util.DataGeneral.CUSTOMER_CLASS;
 import static util.DataGeneral.CUSTOMER_DTO_CLASS;
@@ -31,6 +33,14 @@ public class CustomerService implements ICustomerService {
     private final RoleRepository roleRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final ModelMapper modelMapper;
+
+    @Override
+    public List<CustomerDto> getAllCustomers() {
+        return customerRepository.findAll()
+                .stream()
+                .map(address -> modelMapper.map(address, CUSTOMER_DTO_CLASS))
+                .toList();
+    }
 
     @Override
     public void save(CustomerDto customerDto) {
@@ -67,7 +77,10 @@ public class CustomerService implements ICustomerService {
 
     @Override
     public CustomerDto findById(Long id) {
-        return modelMapper.map(customerRepository.findById(id), CUSTOMER_DTO_CLASS);
+        return Optional.ofNullable(id)
+                .map(customerRepository::findById)
+                .map(customer -> modelMapper.map(customer, CUSTOMER_DTO_CLASS))
+                .orElse(null);
     }
 
     @Override

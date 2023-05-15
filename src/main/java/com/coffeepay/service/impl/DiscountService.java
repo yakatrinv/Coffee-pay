@@ -14,6 +14,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 import static util.DataGeneral.DISCOUNT_CLASS;
@@ -46,6 +47,14 @@ public class DiscountService implements IDiscountService {
                         .toList(),
                 pageable,
                 discountPage.getTotalElements());
+    }
+
+    @Override
+    public List<DiscountDto> getAllDiscounts() {
+        return discountRepository.findAll()
+                .stream()
+                .map(discount -> modelMapper.map(discount, DISCOUNT_DTO_CLASS))
+                .toList();
     }
 
     @Override

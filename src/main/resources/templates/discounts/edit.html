@@ -13,7 +13,7 @@
         </div>
 
         <div class="field">
-            <label class="label" for="sum" data-th-text="#{discounts.add.label.sum}">Сумма:</label>
+            <label class="label" for="sum" data-th-text="#{discounts.edit.label.sum}">Сумма:</label>
             <div class="input-div">
                 <input class="input" th:type="number" th:field="*{sum}" name="sum" id="sum">
                 <div class="error" th:if="${#fields.hasErrors('sum')}" th:errors="*{sum}">error</div>
@@ -21,7 +21,7 @@
         </div>
 
         <div class="field">
-            <label class="label" for="percent" data-th-text="#{discounts.add.label.percent}">Процент:</label>
+            <label class="label" for="percent" data-th-text="#{discounts.edit.label.percent}">Процент:</label>
             <div class="input-div">
                 <input class="input" th:type="number" th:field="*{percent}" name="percent" id="percent">
                 <div class="error" th:if="${#fields.hasErrors('percent')}" th:errors="*{percent}">Процент</div>

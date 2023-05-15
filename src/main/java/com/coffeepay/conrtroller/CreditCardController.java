@@ -76,7 +76,7 @@ public class CreditCardController {
                                  @PathVariable(ATTR_ID) long id,
                                  Model model,
                                  @RequestHeader(HttpHeaders.REFERER) String prevURL) {
-        model.addAttribute(ATTR_CREDIT_CARD, creditCardService.fidById(id));
+        model.addAttribute(ATTR_CREDIT_CARD, creditCardService.findById(id));
         model.addAttribute(PAGE_PREV_URL, StringUtils.isBlank(prevURL) ? URL_MAIN : prevURL);
 
         return PAGE_EDIT_CUSTOMER_CREDIT_CARD;

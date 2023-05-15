@@ -14,6 +14,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 import static util.DataGeneral.MACHINE_CLASS;
@@ -49,6 +50,14 @@ public class MachineService implements IMachineService {
                         .toList(),
                 pageable,
                 machinePage.getTotalElements());
+    }
+
+    @Override
+    public List<MachineDto> getAllMachines() {
+        return machineRepository.findAll()
+                .stream()
+                .map(machine -> modelMapper.map(machine, MACHINE_DTO_CLASS))
+                .toList();
     }
 
     @Override

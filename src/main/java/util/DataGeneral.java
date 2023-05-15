@@ -7,6 +7,7 @@ import com.coffeepay.dto.DiscountDto;
 import com.coffeepay.dto.MachineDto;
 import com.coffeepay.dto.ModelMachineDto;
 import com.coffeepay.dto.ProductDto;
+import com.coffeepay.dto.PurchaseDto;
 import com.coffeepay.dto.RoleDto;
 import com.coffeepay.dto.TypePaymentDto;
 import com.coffeepay.dto.UserDto;
@@ -17,6 +18,7 @@ import com.coffeepay.model.Discount;
 import com.coffeepay.model.Machine;
 import com.coffeepay.model.ModelMachine;
 import com.coffeepay.model.Product;
+import com.coffeepay.model.Purchase;
 import com.coffeepay.model.Role;
 import com.coffeepay.model.TypePayment;
 import com.coffeepay.model.User;
@@ -47,6 +49,8 @@ public class DataGeneral {
     public static final Class<TypePaymentDto> TYPE_PAYMENT_DTO_CLASS = TypePaymentDto.class;
     public static final Class<Discount> DISCOUNT_CLASS = Discount.class;
     public static final Class<DiscountDto> DISCOUNT_DTO_CLASS = DiscountDto.class;
+    public static final Class<Purchase> PURCHASE_CLASS = Purchase.class;
+    public static final Class<PurchaseDto> PURCHASE_DTO_CLASS = PurchaseDto.class;
     //specification
     public static final String PERCENT_STRING = "%";
     //locale

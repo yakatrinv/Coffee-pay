@@ -14,6 +14,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 import static util.DataGeneral.PRODUCT_CLASS;
@@ -41,6 +42,14 @@ public class ProductService implements IProductService {
                         .toList(),
                 pageable,
                 productPage.getTotalElements());
+    }
+
+    @Override
+    public List<ProductDto> getAllProducts() {
+        return productRepository.findAll()
+                .stream()
+                .map(product -> modelMapper.map(product, PRODUCT_DTO_CLASS))
+                .toList();
     }
 
     @Override
