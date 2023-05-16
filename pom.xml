@@ -113,7 +113,7 @@
 				<version>4.19.0</version>
 				<configuration>
 					<propertyFile>liquibase.properties</propertyFile>
-					<changeLogFile>changelog/changelog.xml</changeLogFile>
+					<changeLogFile>changelog.xml</changeLogFile>
 					<searchPath>${basedir}/src/main/resources/db-migrations</searchPath>
 					<goal>update</goal>
 				</configuration>
