@@ -19,7 +19,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-import static util.DataGeneral.CREDIT_CARD_DTO_CLASS;
 import static util.DataGeneral.CUSTOMER;
 import static util.DataGeneral.CUSTOMER_CLASS;
 import static util.DataGeneral.CUSTOMER_DTO_CLASS;

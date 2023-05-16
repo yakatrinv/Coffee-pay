@@ -85,7 +85,7 @@
 
                     <tr th:each="discount,discountStat : ${discounts}">
                         <td th:text="${discountStat.count}"></td>
-                        <td th:text="${discount.sum}"></td>
+                        <td th:text="${discount.summ}"></td>
                         <td th:text="${discount.percent}"></td>
                         <td>
                             <form th:method="GET" th:action="@{/discounts/{id}/edit(id=${discount.id})}">

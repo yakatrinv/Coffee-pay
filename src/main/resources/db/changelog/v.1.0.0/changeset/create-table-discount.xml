@@ -10,7 +10,7 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="percent" type="float"/>
-            <column name="sum" type="float"/>
+            <column name="summ" type="float"/>
             <column name="create_date" type="datetime"/>
             <column name="update_date" type="datetime"/>
         </createTable>

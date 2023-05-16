@@ -79,4 +79,12 @@ public class DiscountService implements IDiscountService {
     public void deleteById(Integer id) {
         discountRepository.deleteById(id);
     }
+
+    @Override
+    public DiscountDto findBySumAndByCustomer(Long id) {
+        return Optional.ofNullable(id)
+                .map(discountRepository::findBySumAndByCustomer)
+                .map(discount -> modelMapper.map(discount, DISCOUNT_DTO_CLASS))
+                .orElse(null);
+    }
 }

@@ -29,7 +29,7 @@ public class Discount extends DataEntity implements Serializable {
     private Integer id;
 
     @Column
-    private int sum;
+    private int summ;
 
     @Column
     private int percent;

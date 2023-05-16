@@ -1,5 +1,6 @@
 package com.coffeepay.service.impl;
 
+import com.coffeepay.dto.DiscountDto;
 import com.coffeepay.dto.ProductDto;
 import com.coffeepay.model.Product;
 import com.coffeepay.repository.ProductRepository;
@@ -73,5 +74,14 @@ public class ProductService implements IProductService {
     @Override
     public void deleteById(Long id) {
         productRepository.deleteById(id);
+    }
+
+    @Override
+    public Float getSumOrder(DiscountDto discountDto, ProductDto productDto) {
+        Integer percent = Optional.ofNullable(discountDto)
+                .map(DiscountDto::getPercent)
+                .orElse(0);
+        float sumDiscount = productDto.getPrice() / 100 * percent;
+        return (float) (Math.ceil(((productDto.getPrice() - sumDiscount) * 100)) / 100);
     }
 }

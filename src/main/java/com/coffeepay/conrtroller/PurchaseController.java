@@ -27,7 +27,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
-import java.time.LocalDate;
 
 import static util.DataMessages.MESSAGE_ERROR_NOT_NULL;
 import static util.DataMessages.VALID_CUSTOMER;
@@ -56,8 +55,6 @@ import static util.DataViews.ATTR_PRODUCTS_LIST;
 import static util.DataViews.ATTR_PRODUCT_ID;
 import static util.DataViews.ATTR_PURCHASE;
 import static util.DataViews.ATTR_PURCHASES_LIST;
-import static util.DataViews.ATTR_SEARCH_PURCHASE_DATE_FROM;
-import static util.DataViews.ATTR_SEARCH_PURCHASE_DATE_TO;
 import static util.DataViews.ATTR_TYPE_PAYMENTS_LIST;
 import static util.DataViews.ATTR_TYPE_PAYMENT_ID;
 import static util.DataViews.DEFAULT_PAGE;
@@ -87,17 +84,13 @@ public class PurchaseController {
     @GetMapping
     public String getPurchases(
             Model model,
-            @RequestParam(value = ATTR_SEARCH_PURCHASE_DATE_FROM,
-                    defaultValue = "") LocalDate dateFrom,
-            @RequestParam(value = ATTR_SEARCH_PURCHASE_DATE_TO,
-                    defaultValue = "") LocalDate dateTo,
             @RequestParam(required = false,
                     defaultValue = DEFAULT_PAGE) int page,
             @RequestParam(required = false,
                     defaultValue = DEFAULT_PAGE_SIZE) int size) {
 
         PageRequest pageRequest = PageRequest.of(page - 1, size);
-        Page<PurchaseDto> pageable = purchaseService.findAll(dateFrom, dateTo, pageRequest);
+        Page<PurchaseDto> pageable = purchaseService.findAll(pageRequest);
 
         model.addAttribute(ATTR_PAGE_NAME_LIST, ADD_AFTER_PURCHASES_PAGE);
         model.addAttribute(ATTR_PURCHASES_LIST, pageable.getContent());
@@ -107,14 +100,12 @@ public class PurchaseController {
                 pageable.getTotalPages() == 0 ?
                         pageable.getTotalPages() + 1 :
                         pageable.getTotalPages());
-        model.addAttribute(ATTR_SEARCH_PURCHASE_DATE_FROM, dateFrom);
-        model.addAttribute(ATTR_SEARCH_PURCHASE_DATE_TO, dateTo);
 
         return PAGE_LIST_PURCHASES;
     }
 
     @GetMapping(URL_NEW)
-    public String newMachine(Model model) {
+    public String newPurchase(Model model) {
         fillListAttr(model);
         model.addAttribute(ATTR_PURCHASE, new PurchaseDto());
 

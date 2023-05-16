@@ -19,6 +19,15 @@
     <div class="div-with-table">
         <h3 class="title" data-th-text="#{products.list.label}">Список продукции</h3>
 
+        <div th:if="${machine ne null}">
+            <div class="title" th:if="${machine.model ne null}" th:text="${machine.model.brand+', '+machine.model.nameModel}"></div>
+        </div>
+
+        <div th:if="${machine ne null}">
+            <div class="title" th:if="${machine.address ne null}" th:text="${machine.address.city+', '+machine.address.street}"></div>
+        </div>
+
+
         <div th:switch="${products}">
             <div th:case="null">
                 <h2 data-th-text="#{label.empty-list}">Список пуст</h2>
@@ -52,7 +61,7 @@
                                 <td th:text="${product.price}"></td>
 
                                 <td>
-                                    <form th:method="GET" th:action="@{/orders/machines{machine_id}/products/{id}/(id=${product.id})}">
+                                    <form th:method="GET" th:action="@{/orders/machines/{machine_id}/products/{id}/pay(machine_id=${machine.id},id=${product.id})}">
                                         <button class="double-border-button" type="submit"
                                                 data-th-text="#{button.choose}">
                                             ВЫБРАТЬ

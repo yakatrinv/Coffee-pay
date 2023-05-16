@@ -33,6 +33,7 @@ import static util.DataViews.URL_DELETE_CUSTOMER_CREDIT_CARDS;
 import static util.DataViews.URL_EDIT_CUSTOMER_CREDIT_CARDS;
 import static util.DataViews.URL_MAIN;
 import static util.DataViews.URL_NEW_CUSTOMER_CREDIT_CARDS;
+import static util.DataViews.URL_UPDATE_CUSTOMER_CREDIT_CARDS;
 
 @Controller
 @RequiredArgsConstructor
@@ -82,11 +83,11 @@ public class CreditCardController {
         return PAGE_EDIT_CUSTOMER_CREDIT_CARD;
     }
 
-    @PatchMapping(URL_CUSTOMER_CREDIT_CARDS)
+    @PatchMapping(URL_UPDATE_CUSTOMER_CREDIT_CARDS)
     public String updateCreditCard(@ModelAttribute(ATTR_CREDIT_CARD) @Valid CreditCardDto creditCardDto,
                                    BindingResult bindingResult,
-                                   @PathVariable String username
-    ) {
+                                   @PathVariable String username,
+                                   @PathVariable(ATTR_ID) long id) {
 
         if (bindingResult.hasErrors()) {
             return PAGE_EDIT_CUSTOMER_CREDIT_CARD;

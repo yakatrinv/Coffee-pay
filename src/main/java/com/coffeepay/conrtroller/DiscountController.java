@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.validation.Valid;
 
 import static util.DataViews.ADD_AFTER_DISCOUNTS_PAGE;
-import static util.DataViews.ADD_AFTER_PRODUCTS_PAGE;
 import static util.DataViews.ATTR_DISCOUNT;
 import static util.DataViews.ATTR_DISCOUNTS_LIST;
 import static util.DataViews.ATTR_ID;
@@ -28,7 +27,6 @@ import static util.DataViews.ATTR_PAGE_NAME_LIST;
 import static util.DataViews.ATTR_PAGE_PAGE;
 import static util.DataViews.ATTR_PAGE_SIZE;
 import static util.DataViews.ATTR_PAGE_TOTAL_PAGE;
-import static util.DataViews.ATTR_PRODUCT;
 import static util.DataViews.ATTR_SEARCH_DISCOUNT_MAX_PERCENT;
 import static util.DataViews.ATTR_SEARCH_DISCOUNT_MAX_SUM;
 import static util.DataViews.ATTR_SEARCH_DISCOUNT_MIN_PERCENT;

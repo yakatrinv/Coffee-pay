@@ -18,4 +18,6 @@ public interface IDiscountService {
     DiscountDto findById(Integer id);
 
     void deleteById(Integer id);
+
+    DiscountDto findBySumAndByCustomer(Long id);
 }

@@ -24,7 +24,7 @@ public class DiscountDto implements Serializable {
     private Integer id;
 
     @Min(value = MIN_NUMBER, message = MESSAGE_ERROR_MIN_DISCOUNT_SUM)
-    private int sum;
+    private int summ;
 
     @Min(value = MIN_NUMBER, message = MESSAGE_ERROR_MIN_DISCOUNT_PERCENT)
     private int percent;

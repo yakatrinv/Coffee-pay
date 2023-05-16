@@ -57,7 +57,7 @@ public class Purchase extends DataEntity implements Serializable {
     private Discount discount;
 
     @Column
-    private float sum;
+    private float summ;
 
     @ManyToOne
     @JoinColumn(name = ATTR_DB_CREDIT_CARD_ID)

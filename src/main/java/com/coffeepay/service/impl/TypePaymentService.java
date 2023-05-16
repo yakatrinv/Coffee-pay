@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-import static util.DataGeneral.CUSTOMER_DTO_CLASS;
 import static util.DataGeneral.TYPE_PAYMENT_CLASS;
 import static util.DataGeneral.TYPE_PAYMENT_DTO_CLASS;
 

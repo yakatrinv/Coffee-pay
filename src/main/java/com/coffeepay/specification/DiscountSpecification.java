@@ -10,13 +10,13 @@ public class DiscountSpecification {
             return null;
         } else if (maxSum == 0) {
             return ((root, criteriaQuery, criteriaBuilder) -> criteriaBuilder
-                    .ge(root.get(Discount_.SUM), minSum));
+                    .ge(root.get(Discount_.SUMM), minSum));
         } else if (minSum == 0) {
             return ((root, criteriaQuery, criteriaBuilder) -> criteriaBuilder
-                    .le(root.get(Discount_.SUM), maxSum));
+                    .le(root.get(Discount_.SUMM), maxSum));
         } else {
             return ((root, criteriaQuery, criteriaBuilder) -> criteriaBuilder
-                    .between(root.get(Discount_.SUM), minSum, maxSum));
+                    .between(root.get(Discount_.SUMM), minSum, maxSum));
         }
     }
 

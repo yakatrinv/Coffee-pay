@@ -1,6 +1,5 @@
 package com.coffeepay.repository;
 
-import com.coffeepay.model.Role;
 import com.coffeepay.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

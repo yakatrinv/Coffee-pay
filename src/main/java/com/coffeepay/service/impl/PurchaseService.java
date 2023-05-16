@@ -14,8 +14,6 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 import static util.DataGeneral.PURCHASE_CLASS;
@@ -29,11 +27,23 @@ public class PurchaseService implements IPurchaseService {
     private final ModelMapper modelMapper;
 
     @Override
-    public Page<PurchaseDto> findAll(LocalDate dateFrom,
-                                     LocalDate dateTo,
-                                     Pageable pageable) {
+    public Page<PurchaseDto> findAll(Pageable pageable) {
+        Page<Purchase> machinePage = purchaseRepository.findAll(pageable);
+
+        return new PageImpl<>(
+                machinePage
+                        .stream()
+                        .map(purchase -> modelMapper.map(purchase, PURCHASE_DTO_CLASS))
+                        .toList(),
+                pageable,
+                machinePage.getTotalElements());
+    }
+
+    @Override
+    public Page<PurchaseDto> findAllByCustomer(String username,
+                                               Pageable pageable) {
         Specification<Purchase> allFields = Specification.
-                where(PurchaseSpecification.betweenDate(dateFrom, dateTo));
+                where(PurchaseSpecification.equalsByCustomer(username));
 
         Page<Purchase> machinePage = purchaseRepository.findAll(allFields, pageable);
 

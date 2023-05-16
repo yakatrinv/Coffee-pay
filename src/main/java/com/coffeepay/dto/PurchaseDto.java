@@ -38,7 +38,7 @@ public class PurchaseDto implements Serializable {
     private DiscountDto discount;
 
     @Min(value = MIN_NUMBER,message = MESSAGE_ERROR_MIN_PURCHASE_SUM)
-    private float sum;
+    private float summ;
 
     private CreditCardDto creditCard;
 

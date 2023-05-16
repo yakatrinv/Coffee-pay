@@ -41,6 +41,9 @@
                 <li sec:authorize="hasAuthority('Customer')">
                     <a class="item-point-v" th:href="@{/orders}" data-th-text="#{panel.customer.purchase}"></a>
                 </li>
+                <li sec:authorize="hasAuthority('Customer')">
+                    <a class="item-point-v" th:href="@{/orders/history}" data-th-text="#{panel.order.history}"></a>
+                </li>
             </ul>
         </div>
     </nav>

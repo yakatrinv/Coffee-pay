@@ -15,8 +15,8 @@ public interface IMachineService {
                              Pageable pageable);
 
     Page<MachineDto> findAllByCityAndStreet(String city,
-                             String street,
-                             Pageable pageable);
+                                            String street,
+                                            Pageable pageable);
 
     List<MachineDto> getAllMachines();
 

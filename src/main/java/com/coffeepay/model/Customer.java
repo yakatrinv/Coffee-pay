@@ -22,7 +22,6 @@ import java.io.Serializable;
 import java.util.Set;
 
 import static util.DataModels.ATTR_DB_CUSTOMER;
-import static util.DataModels.ATTR_DB_CUSTOMER_ID;
 import static util.DataModels.ATTR_DB_USER_ID;
 
 @Builder

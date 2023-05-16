@@ -1,5 +1,6 @@
 package com.coffeepay.service;
 
+import com.coffeepay.dto.DiscountDto;
 import com.coffeepay.dto.ProductDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,4 +19,6 @@ public interface IProductService {
     ProductDto findById(Long id);
 
     void deleteById(Long id);
+
+    Float getSumOrder(DiscountDto discountDto, ProductDto productDto);
 }

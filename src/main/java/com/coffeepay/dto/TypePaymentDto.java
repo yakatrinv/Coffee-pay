@@ -12,7 +12,6 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 import static util.DataMessages.MAX_NAME_SURNAME;
-import static util.DataMessages.MESSAGE_ERROR_LENGTH_PRODUCT_NAME;
 import static util.DataMessages.MESSAGE_ERROR_LENGTH_TYPE_PAYMENT_NAME;
 
 @Builder

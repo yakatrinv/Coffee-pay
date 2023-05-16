@@ -26,6 +26,7 @@ public class DataViews {
     public static final String URL_CUSTOMER_CREDIT_CARDS = "/customer/{username}/creditCards";
     public static final String URL_NEW_CUSTOMER_CREDIT_CARDS = "/customer/{username}/creditCards/new";
     public static final String URL_EDIT_CUSTOMER_CREDIT_CARDS = "/customer/{username}/creditCards/{id}/edit";
+    public static final String URL_UPDATE_CUSTOMER_CREDIT_CARDS = "/customer/{username}/creditCards/{id}";
     public static final String URL_DELETE_CUSTOMER_CREDIT_CARDS = "/customer/{username}/creditCards/{id}";
     public static final String MODEL_CUSTOMER = "customer";
     public static final String MODEL_ERRORS = "errors";
@@ -135,14 +136,18 @@ public class DataViews {
     public static final String PAGE_REDIRECT_LIST_PURCHASES = "redirect:/purchases";
     public static final String PAGE_ADD_PURCHASE = "purchases/add";
     public static final String PAGE_EDIT_PURCHASE = "purchases/edit";
-    public static final String ATTR_SEARCH_PURCHASE_DATE_FROM = "searchDateFrom";
-    public static final String ATTR_SEARCH_PURCHASE_DATE_TO = "searchDateTo";
     //make order
     public static final String ADD_AFTER_ORDER_PAGE = "/orders";
     public static final String URL_ORDER_MACHINES = "/machines";
+    public static final String URL_ORDER_HISTORY = "/history";
     public static final String URL_ORDER_PRODUCTS = "/machines/{id}/products";
+    public static final String URL_ORDER_PAY = "/machines/{machine_id}/products/{id}/pay";
     public static final String PAGE_ORDERS_INDEX = "orders/firstPage";
     public static final String PAGE_ORDERS_MACHINES = "orders/machines";
     public static final String PAGE_ORDERS_PRODUCTS = "orders/products";
+    public static final String PAGE_ORDERS_PAY = "orders/pay";
+    public static final String PAGE_ORDERS_HISTORY = "orders/history";
     public static final String NAME_LIST_ORDERS_MACHINES = "/orders/machines";
+    public static final String NAME_LIST_ORDERS_HISTORY = "/orders/history";
+    public static final String ATTR_CUSTOMER = "customer";
 }
