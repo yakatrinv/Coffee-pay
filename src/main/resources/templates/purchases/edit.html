@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Coffee manage project</title>
+    <link rel="stylesheet" th:href="@{/css/input-form.css}"/>
+</head>
+<body>
+
+<div>
+    <form class="form" th:method="PATCH" th:action="@{/purchases/{id}(id=${purchase.id})}" th:object="${purchase}">
+        <div class="h2">
+            <h2 data-th-text="#{purchases.edit.label}">Изменение покупки</h2>
+        </div>
+
+        <div class="field">
+            <label class="label" for="customer" data-th-text="#{purchases.edit.label.customer}">Покупатель:</label>
+            <select class="input" th:name="customer_id" id="customer">
+                <option th:value="NULL" data-th-text="#{select.empty}">не выбрано</option>
+                <option th:each="customer: ${customers}"
+                        th:value="${customer.id}"
+                        th:selected="${purchase.customer ne null and purchase.customer.id eq customer.id}"
+                        th:text="${customer.name +','+ customer.surname}"></option>
+            </select>
+            <div class="error" th:if="${#fields.hasErrors('customer')}" th:errors="*{customer}">error</div>
+        </div>
+
+        <div class="field">
+            <label class="label" for="machine" data-th-text="#{purchases.edit.label.machine}">Аппарат:</label>
+            <select class="input" th:name="machine_id" id="machine">
+                <option th:value="NULL" data-th-text="#{select.empty}">не выбрано</option>
+                <option th:each="machine: ${machines}"
+                        th:value="${machine.id}"
+                        th:selected="${purchase.machine ne null and purchase.machine.id eq machine.id}"
+                        th:text="${machine.address ne null}?${machine.address.city +','+ machine.address.street}"></option>
+            </select>
+            <div class="error" th:if="${#fields.hasErrors('machine')}" th:errors="*{machine}">error</div>
+        </div>
+
+        <div class="field">
+            <label class="label" for="product" data-th-text="#{purchases.edit.label.product}">Продукция:</label>
+            <select class="input" th:name="product_id" id="product">
+                <option th:value="NULL" data-th-text="#{select.empty}">не выбрано</option>
+                <option th:each="product: ${products}"
+                        th:value="${product.id}"
+                        th:selected="${purchase.product ne null and purchase.product.id eq product.id}"
+                        th:text="${product.name +','+ product.price}"></option>
+            </select>
+            <div class="error" th:if="${#fields.hasErrors('product')}" th:errors="*{product}">error</div>
+        </div>
+
+        <div class="field">
+            <label class="label" for="price" data-th-text="#{purchases.edit.label.price}">Цена:</label>
+            <div class="input-div">
+                <input class="input" type="number" step="0.01" th:field="*{price}" name="price" id="price">
+                <div class="error" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">error</div>
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label" for="discount" data-th-text="#{purchases.edit.label.discount}">Скидка:</label>
+            <select class="input" th:name="discount_id" id="discount">
+                <option th:value="NULL" data-th-text="#{select.empty}">не выбрано</option>
+                <option th:each="discount: ${discounts}"
+                        th:value="${discount.id}"
+                        th:selected="${purchase.discount ne null and purchase.discount.id eq discount.id}"
+                        th:text="${discount ne null}?${discount.percent +','+ discount.summ}"></option>
+            </select>
+        </div>
+
+        <div class="field">
+            <label class="label" for="summ" data-th-text="#{purchases.edit.label.sum}">Сумма:</label>
+            <div class="input-div">
+                <input class="input" type="number" step="0.01" th:field="*{summ}" name="summ" id="summ">
+                <div class="error" th:if="${#fields.hasErrors('summ')}" th:errors="*{summ}">error</div>
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label" for="typePayment" data-th-text="#{purchases.edit.label.type-payment}">Тип
+                оплаты:</label>
+            <select class="input" th:name="type_payment_id" id="typePayment">
+                <option th:value="NULL" data-th-text="#{select.empty}">не выбрано</option>
+                <option th:each="typePayment: ${typePayments}"
+                        th:value="${typePayment.id}"
+                        th:selected="${purchase.typePayment ne null and purchase.typePayment.id eq typePayment.id}"
+                        th:text="${typePayment.name}"></option>
+            </select>
+            <div class="error" th:if="${#fields.hasErrors('typePayment')}" th:errors="*{typePayment}">error</div>
+        </div>
+
+        <div class="field">
+            <label class="label" for="creditCard" data-th-text="#{purchases.edit.label.card}">Карта:</label>
+            <select class="input" th:name="credit_card_id" id="creditCard">
+                <option th:value="NULL" data-th-text="#{select.empty}">не выбрано</option>
+                <option th:each="creditCard: ${creditCards}"
+                        th:value="${creditCard.id}"
+                        th:selected="${purchase.creditCard ne null and purchase.creditCard.id eq creditCard.id}"
+                        th:text="${creditCard ne null}?${creditCard.number +','+ creditCard.customer.surname}"></option>
+            </select>
+        </div>
+
+        <div class="submit-div">
+            <button th:class="double-border-button" type="submit" data-th-text="#{button.update}">
+                ОБНОВИТЬ
+            </button>
+            <a class="double-border-button" th:href="@{/purchases}"
+               data-th-text="#{button.cancel}">ОТМЕНА</a>
+        </div>
+
+    </form>
+
+</div>
+</body>
+
+</html>

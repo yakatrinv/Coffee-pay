@@ -106,7 +106,7 @@
                                 </button>
                             </form>
                         </td>
-                        <td>
+                        <td sec:authorize="hasAuthority('Administrator')">
                             <form th:method="DELETE"
                                   th:action="@{/machines/{id}(id=${machine.id},page=${page},size=${size},
                                   searchSerialNumber=${searchSerialNumber},searchBrand=${searchBrand},searchModel=${searchModel},

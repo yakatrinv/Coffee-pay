@@ -27,7 +27,8 @@ public class RoleService implements IRoleService {
 
     @Override
     public Page<RoleDto> findAll(String name, Pageable pageable) {
-        Page<Role> rolesPage = roleRepository.findAll(RoleSpecification.likeName(name), pageable);
+        Page<Role> rolesPage = roleRepository
+                .findAll(RoleSpecification.likeName(name), pageable);
 
         return new PageImpl<>(
                 rolesPage

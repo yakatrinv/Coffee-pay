@@ -26,6 +26,7 @@ public class DataViews {
     public static final String URL_CUSTOMER_CREDIT_CARDS = "/customer/{username}/creditCards";
     public static final String URL_NEW_CUSTOMER_CREDIT_CARDS = "/customer/{username}/creditCards/new";
     public static final String URL_EDIT_CUSTOMER_CREDIT_CARDS = "/customer/{username}/creditCards/{id}/edit";
+    public static final String URL_UPDATE_CUSTOMER_CREDIT_CARDS = "/customer/{username}/creditCards/{id}";
     public static final String URL_DELETE_CUSTOMER_CREDIT_CARDS = "/customer/{username}/creditCards/{id}";
     public static final String MODEL_CUSTOMER = "customer";
     public static final String MODEL_ERRORS = "errors";
@@ -67,6 +68,7 @@ public class DataViews {
     //model machine model
     public static final String ATTR_MODELS_MACHINE_LIST = "modelsMachine";
     public static final String ATTR_MODEL_MACHINE = "modelMachine";
+    public static final String ATTR_CUSTOMERS = "customers";
     public static final String ATTR_SEARCH_MODEL_MACHINE_MODEL = "searchModel";
     public static final String ATTR_SEARCH_MODEL_MACHINE_BRAND = "searchBrand";
     public static final String ADD_AFTER_MODELS_MACHINE_PAGE = "/modelsMachine";
@@ -108,4 +110,44 @@ public class DataViews {
     public static final String PAGE_REDIRECT_LIST_TYPE_PAYMENTS = "redirect:/typePayments";
     public static final String PAGE_ADD_TYPE_PAYMENT = "typePayments/add";
     public static final String PAGE_EDIT_TYPE_PAYMENT = "typePayments/edit";
+    //discount model
+    public static final String ATTR_DISCOUNTS_LIST = "discounts";
+    public static final String ATTR_DISCOUNT = "discount";
+    public static final String ATTR_SEARCH_DISCOUNT_MIN_SUM = "searchMinSum";
+    public static final String ATTR_SEARCH_DISCOUNT_MAX_SUM = "searchMaxSum";
+    public static final String ATTR_SEARCH_DISCOUNT_MIN_PERCENT = "searchMinPercent";
+    public static final String ATTR_SEARCH_DISCOUNT_MAX_PERCENT = "searchMaxPercent";
+    public static final String ADD_AFTER_DISCOUNTS_PAGE = "/discounts";
+    public static final String PAGE_LIST_DISCOUNTS = "discounts/list";
+    public static final String PAGE_REDIRECT_LIST_DISCOUNTS = "redirect:/discounts";
+    public static final String PAGE_ADD_DISCOUNT = "discounts/add";
+    public static final String PAGE_EDIT_DISCOUNT = "discounts/edit";
+    //purchase model
+    public static final String ATTR_PURCHASES_LIST = "purchases";
+    public static final String ATTR_PURCHASE = "purchase";
+    public static final String ATTR_CUSTOMER_ID = "customer_id";
+    public static final String ATTR_MACHINE_ID = "machine_id";
+    public static final String ATTR_TYPE_PAYMENT_ID = "type_payment_id";
+    public static final String ATTR_CREDIT_CARD_ID = "credit_card_id";
+    public static final String ATTR_DISCOUNT_ID = "discount_id";
+    public static final String ATTR_PRODUCT_ID = "product_id";
+    public static final String ADD_AFTER_PURCHASES_PAGE = "/purchases";
+    public static final String PAGE_LIST_PURCHASES = "purchases/list";
+    public static final String PAGE_REDIRECT_LIST_PURCHASES = "redirect:/purchases";
+    public static final String PAGE_ADD_PURCHASE = "purchases/add";
+    public static final String PAGE_EDIT_PURCHASE = "purchases/edit";
+    //make order
+    public static final String ADD_AFTER_ORDER_PAGE = "/orders";
+    public static final String URL_ORDER_MACHINES = "/machines";
+    public static final String URL_ORDER_HISTORY = "/history";
+    public static final String URL_ORDER_PRODUCTS = "/machines/{id}/products";
+    public static final String URL_ORDER_PAY = "/machines/{machine_id}/products/{id}/pay";
+    public static final String PAGE_ORDERS_INDEX = "orders/firstPage";
+    public static final String PAGE_ORDERS_MACHINES = "orders/machines";
+    public static final String PAGE_ORDERS_PRODUCTS = "orders/products";
+    public static final String PAGE_ORDERS_PAY = "orders/pay";
+    public static final String PAGE_ORDERS_HISTORY = "orders/history";
+    public static final String NAME_LIST_ORDERS_MACHINES = "/orders/machines";
+    public static final String NAME_LIST_ORDERS_HISTORY = "/orders/history";
+    public static final String ATTR_CUSTOMER = "customer";
 }

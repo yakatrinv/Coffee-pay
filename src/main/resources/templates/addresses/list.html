@@ -72,7 +72,7 @@
                                 </button>
                             </form>
                         </td>
-                        <td>
+                        <td sec:authorize="hasAuthority('Administrator')">
                             <form th:method="DELETE"
                                   th:action="@{/addresses/{id}(id=${address.id},page=${page},size=${size},searchCity=${searchStreet},searchStreet=${searchStreet})}">
                                 <button class="double-border-button" type="submit" data-th-text="#{addresses.list.button.delete}">

@@ -1,5 +1,6 @@
 package com.coffeepay.service.impl;
 
+import com.coffeepay.dto.DiscountDto;
 import com.coffeepay.dto.ProductDto;
 import com.coffeepay.model.Product;
 import com.coffeepay.repository.ProductRepository;
@@ -14,6 +15,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 import static util.DataGeneral.PRODUCT_CLASS;
@@ -28,8 +30,9 @@ public class ProductService implements IProductService {
 
     @Override
     public Page<ProductDto> findAll(String name, Float minPrice, Float maxPrice, Pageable pageable) {
-        Specification<Product> likeNameAndBetweenPrice = Specification.where(ProductSpecification.likeName(name)
-                .and(ProductSpecification.betweenPrice(minPrice, maxPrice)));
+        Specification<Product> likeNameAndBetweenPrice = Specification
+                .where(ProductSpecification.likeName(name))
+                .and(ProductSpecification.betweenPrice(minPrice, maxPrice));
 
         Page<Product> productPage = productRepository.findAll(likeNameAndBetweenPrice, pageable);
 
@@ -40,6 +43,14 @@ public class ProductService implements IProductService {
                         .toList(),
                 pageable,
                 productPage.getTotalElements());
+    }
+
+    @Override
+    public List<ProductDto> getAllProducts() {
+        return productRepository.findAll()
+                .stream()
+                .map(product -> modelMapper.map(product, PRODUCT_DTO_CLASS))
+                .toList();
     }
 
     @Override
@@ -63,5 +74,14 @@ public class ProductService implements IProductService {
     @Override
     public void deleteById(Long id) {
         productRepository.deleteById(id);
+    }
+
+    @Override
+    public Float getSumOrder(DiscountDto discountDto, ProductDto productDto) {
+        Integer percent = Optional.ofNullable(discountDto)
+                .map(DiscountDto::getPercent)
+                .orElse(0);
+        float sumDiscount = productDto.getPrice() / 100 * percent;
+        return (float) (Math.ceil(((productDto.getPrice() - sumDiscount) * 100)) / 100);
     }
 }

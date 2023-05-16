@@ -34,6 +34,35 @@
     background: #252F48;
 }
 
+.input-2 {
+    font: 14px Arial, Tahoma, sans-serif;
+    color: #CAD4D6;
+    width: 380px;
+    padding: 9px 13px;
+    border-radius: 3px;
+    outline: none;
+    background: #252F48;
+}
+
+.div-radio {
+    display: grid;
+    margin-top: 10px;
+}
+
+.input-radio {
+    display: none;
+}
+
+.label-radio {
+    display: inline-block;
+    cursor: pointer;
+    padding: 0px 15px;
+    line-height: 34px;
+    border: 1px solid #37B5A5;
+    border-radius: 6px;
+    user-select: none;
+}
+
 /*button styles*/
 .double-border-button {
     text-decoration: none;

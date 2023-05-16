@@ -14,6 +14,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 import static util.DataGeneral.MACHINE_CLASS;
@@ -33,8 +34,8 @@ public class MachineService implements IMachineService {
                                     String city,
                                     String street,
                                     Pageable pageable) {
-        Specification<Machine> allFields = Specification.where(
-                        MachineSpecification.likeSerialNumber(serialNumber))
+        Specification<Machine> allFields = Specification.
+                where(MachineSpecification.likeSerialNumber(serialNumber))
                 .and(MachineSpecification.likeModel(nameModel))
                 .and(MachineSpecification.likeBrand(brand))
                 .and(MachineSpecification.likeCity(city))
@@ -49,6 +50,33 @@ public class MachineService implements IMachineService {
                         .toList(),
                 pageable,
                 machinePage.getTotalElements());
+    }
+
+    @Override
+    public Page<MachineDto> findAllByCityAndStreet(String city,
+                                                   String street,
+                                                   Pageable pageable) {
+        Specification<Machine> allFields = Specification.
+                where(MachineSpecification.likeCity(city))
+                .and(MachineSpecification.likeStreet(street));
+
+        Page<Machine> machinePage = machineRepository.findAll(allFields, pageable);
+
+        return new PageImpl<>(
+                machinePage
+                        .stream()
+                        .map(machine -> modelMapper.map(machine, MACHINE_DTO_CLASS))
+                        .toList(),
+                pageable,
+                machinePage.getTotalElements());
+    }
+
+    @Override
+    public List<MachineDto> getAllMachines() {
+        return machineRepository.findAll()
+                .stream()
+                .map(machine -> modelMapper.map(machine, MACHINE_DTO_CLASS))
+                .toList();
     }
 
     @Override

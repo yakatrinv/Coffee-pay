@@ -9,17 +9,17 @@
     <changeSet id="insert-default-discounts" author="Katerina">
         <insert tableName="discount">
             <column name="percent">1</column>
-            <column name="sum">10</column>
+            <column name="summ">10</column>
             <column name="create_date" valueDate="${now}"/>
         </insert>
         <insert tableName="discount">
             <column name="percent">2</column>
-            <column name="sum">50</column>
+            <column name="summ">50</column>
             <column name="create_date" valueDate="${now}"/>
         </insert>
         <insert tableName="discount">
             <column name="percent">5</column>
-            <column name="sum">150</column>
+            <column name="summ">150</column>
             <column name="create_date" valueDate="${now}"/>
         </insert>
     </changeSet>

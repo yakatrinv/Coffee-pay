@@ -8,7 +8,7 @@
 <body>
 
 <div>
-    <form class="loginForm" th:method="PATCH" th:action="@{/customer/{username}/creditCards(username=${#authentication.principal.username})}"
+    <form class="loginForm" th:method="PATCH" th:action="@{/customer/{username}/creditCards/{id}(username=${#authentication.principal.username},id=${creditCard.id})}"
           th:object="${creditCard}">
         <div class="h2">
             <h2 data-th-text="#{credit-card.edit.label}">Изменение данных банковской карты</h2>
@@ -25,7 +25,6 @@
         <div class="submit-div">
             <button th:class="double-border-button" type="submit" data-th-text="#{credit-card.edit.button.update}">ОБНОВИТЬ</button>
             <a class="double-border-button" th:href="@{${prevURl}}" data-th-text="#{credit-card.edit.button.cancel}">ОТМЕНА</a>
-            <label th:text="${prevURl}"></label>
         </div>
 
     </form>

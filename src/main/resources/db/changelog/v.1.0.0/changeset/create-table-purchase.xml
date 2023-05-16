@@ -10,7 +10,7 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="price" type="float"/>
-            <column name="sum" type="float"/>
+            <column name="summ" type="float"/>
             <column name="customer_id" type="int">
                 <constraints foreignKeyName="purchase_customer_id_fk" references="customer(id)" nullable="false"/>
             </column>

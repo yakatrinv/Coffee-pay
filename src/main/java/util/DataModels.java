@@ -19,21 +19,21 @@ public class DataModels {
     public static final String ATTR_DB_CUSTOMER_ID = "customer_id";
 
 
-    public static final String ATTR_DB_SERIAL_NUMBER="serial_number";
+    public static final String ATTR_DB_SERIAL_NUMBER = "serial_number";
 
-    public static final String ATTR_DB_ADDRESS_ID ="address_id";
+    public static final String ATTR_DB_ADDRESS_ID = "address_id";
 
     public static final String TABLE_DB_MODEL_MACHINE = "model";
 
-    public static final String ATTR_DB_MODEL_ID ="model_id";
+    public static final String ATTR_DB_MODEL_ID = "model_id";
 
-    public static final String TABLE_DB_MACHINE_PRODUCT ="machine_product";
+    public static final String TABLE_DB_MACHINE_PRODUCT = "machine_product";
 
-    public static final String ATTR_DB_MACHINE_ID ="machine_id";
+    public static final String ATTR_DB_MACHINE_ID = "machine_id";
 
-    public static final String ATTR_DB_PRODUCT_ID ="product_id";
+    public static final String ATTR_DB_PRODUCT_ID = "product_id";
 
-    public static final String ATTR_DB_NAME_MODEL ="name_model";
+    public static final String ATTR_DB_NAME_MODEL = "name_model";
 
     public static final String TABLE_DB_TYPE_PAYMENT = "type_payment";
 

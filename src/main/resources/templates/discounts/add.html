@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Coffee manage project</title>
+    <link rel="stylesheet" th:href="@{/css/input-form.css}"/>
+</head>
+<body>
+
+<div>
+    <form class="form" th:method="POST" th:action="@{/discounts}" th:object="${discount}">
+        <div class="h2">
+            <h2 data-th-text="#{discounts.add.label}">Новая скидка</h2>
+        </div>
+
+        <div class="field">
+            <label class="label" for="summ" data-th-text="#{discounts.add.label.sum}">Сумма:</label>
+            <div class="input-div">
+                <input class="input" type="number" th:field="*{summ}" name="sum" id="summ">
+                <div class="error" th:if="${#fields.hasErrors('summ')}" th:errors="*{summ}">error</div>
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label" for="percent" data-th-text="#{discounts.add.label.percent}">Процент:</label>
+            <div class="input-div">
+                <input class="input" type="number" th:field="*{percent}" name="percent" id="percent">
+                <div class="error" th:if="${#fields.hasErrors('percent')}" th:errors="*{percent}">Процент</div>
+            </div>
+        </div>
+
+        <div class="submit-div">
+            <button th:class="double-border-button" type="submit" data-th-text="#{button.save}">
+                СОХРАНИТЬ
+            </button>
+            <a class="double-border-button" th:href="@{/discounts}"
+               data-th-text="#{button.cancel}">ОТМЕНА</a>
+        </div>
+
+    </form>
+
+</div>
+</body>
+
+</html>

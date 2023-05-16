@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.springframework.org/schema/security">
+<head>
+    <meta charset="UTF-8">
+    <title>Coffee manage project</title>
+    <link rel="stylesheet" th:href="@{/css/navbar.css}"/>
+    <link rel="stylesheet" th:href="@{/css/navbar-menu.css}"/>
+    <link rel="stylesheet" th:href="@{/css/page.css}"/>
+    <link rel="stylesheet" th:href="@{/css/table.css}"/>
+</head>
+<head>
+    <title>Coffee manage project</title>
+</head>
+<body>
+
+<div th:insert="header::header"></div>
+<div style="display:flex;" sec:authorize="isAuthenticated()">
+    <div th:insert="headerMenu::header-menu"></div>
+    <div class="div-with-table">
+        <h3 class="h1" data-th-text="#{purchases.list.label}">Список покупок</h3>
+
+        <form th:method="GET" th:action="@{/purchases/new}" sec:authorize="hasAuthority('Administrator')">
+            <button class="double-border-button" type="submit" data-th-text="#{purchases.list.button.add}">
+                ДОБАВИТЬ ПОКУПКУ
+            </button>
+        </form>
+
+        <div th:switch="${purchases}">
+            <h2 th:case="null" data-th-text="#{label.empty-list}">Список пуст</h2>
+
+            <div th:case="*">
+                <h2 th:if="${purchases.size() == 0}" data-th-text="#{label.empty-list}">Список пуст</h2>
+
+                <table class="table-dark" th:if="${purchases.size() != 0}">
+                    <tr>
+                        <th data-th-text="#{purchases.list.column.date}">ДАТА</th>
+                        <th data-th-text="#{purchases.list.column.customer}">ПОКУПАТЕЛЬ</th>
+                        <th colspan="2" data-th-text="#{purchases.list.column.machines}">АППАРАТ</th>
+                        <th data-th-text="#{purchases.list.column.product}">ПРОДУКЦИЯ</th>
+                        <th data-th-text="#{purchases.list.column.price}">ЦЕНА</th>
+                        <th data-th-text="#{purchases.list.column.sum}">СУММА</th>
+                        <th colspan="2" data-th-text="#{purchases.list.column.payment}">ОПЛАТА</th>
+                        <th colspan="2" data-th-text="#{machines.list.column.action}"
+                            sec:authorize="hasAuthority('Administrator')">ДЕЙСТВИЕ
+                        </th>
+                    </tr>
+
+
+                    <tr th:each="purchase,purchaseStat : ${purchases}">
+                        <td th:text="${purchase.createDate}"></td>
+
+                        <td th:if="${purchase.customer ne null}">
+                            <div th:text="${purchase.customer.name}"/>
+                            <div th:text="${purchase.customer.surname}"/>
+                        </td>
+                        <td th:if="${purchase.customer eq null}" th:text="'-'"></td>
+
+                        <td th:if="${purchase.machine ne null and purchase.machine.model ne null}">
+                            <div th:text="${purchase.machine.model.brand}"/>
+                            <div th:text="${purchase.machine.model.nameModel}"/>
+                        </td>
+                        <td th:if="${purchase.machine eq null or purchase.machine.model eq null}" th:text="'-'"></td>
+
+                        <td th:if="${purchase.machine ne null and purchase.machine.address ne null}">
+                            <div th:text="${purchase.machine.address.city}"/>
+                            <div th:text="${purchase.machine.address.street}"/>
+                        </td>
+                        <td th:if="${purchase.machine eq null or purchase.machine.address eq null}" th:text="'-'"></td>
+
+                        <td th:text="${purchase.product.name}"></td>
+
+                        <td>
+                            <div th:text="${purchase.price}"/>
+                            <div th:if="${purchase.discount ne null}" th:text="${purchase.discount.percent+'%'}"/>
+                        </td>
+
+                        <td th:text="${purchase.summ}"></td>
+
+                        <td>
+                            <div th:text="${purchase.typePayment.name}"/>
+                            <div th:if="${purchase.creditCard ne null and (not purchase.creditCard.number.isBlank())}"
+                                 th:text="${purchase.creditCard.number.charAt(0)}+'***'+${purchase.creditCard.number.charAt(purchase.creditCard.number.length()-1)}"/>
+                        </td>
+
+                        <td sec:authorize="hasAuthority('Administrator')">
+                            <form th:method="GET" th:action="@{/purchases/{id}/edit(id=${purchase.id})}">
+                                <button class="double-border-button" type="submit"
+                                        data-th-text="#{button.edit}">
+                                    РЕДАКТИРОВАТЬ
+                                </button>
+                            </form>
+                        </td>
+                        <td sec:authorize="hasAuthority('Administrator')">
+                            <form th:method="DELETE"
+                                  th:action="@{/purchases/{id}(id=${purchase.id},page=${page},size=${size})}">
+                                <button class="double-border-button" type="submit"
+                                        data-th-text="#{button.delete}">
+                                    УДАЛИТЬ
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+
+                </table>
+
+                <div th:insert=" pagination :: pagination('')"></div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

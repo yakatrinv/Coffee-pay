@@ -29,8 +29,9 @@ public class ModelMachineService implements IModelMachineService {
 
     @Override
     public Page<ModelMachineDto> findAllPage(String brand, String model, Pageable pageable) {
-        Specification<ModelMachine> likeBrandAndModel = Specification.where(ModelMachineSpecification.likeBrand(brand)
-                .and(ModelMachineSpecification.likeModel(model)));
+        Specification<ModelMachine> likeBrandAndModel = Specification
+                .where(ModelMachineSpecification.likeBrand(brand))
+                .and(ModelMachineSpecification.likeModel(model));
 
         Page<ModelMachine> modelMachinePage = modelMachineRepository.findAll(likeBrandAndModel, pageable);
 

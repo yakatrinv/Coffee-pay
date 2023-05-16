@@ -11,10 +11,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 import static util.DataGeneral.CREDIT_CARD_CLASS;
 import static util.DataGeneral.CREDIT_CARD_DTO_CLASS;
-import static util.DataGeneral.CUSTOMER_CLASS;
 
 @Service
 @Transactional
@@ -25,15 +25,26 @@ public class CreditCardService implements ICreditCardService {
     private final ModelMapper modelMapper;
 
     @Override
-    public void save(CreditCardDto creditCardDto,String username) {
+    public List<CreditCardDto> getAllCreditCards() {
+        return creditCardRepository.findAll()
+                .stream()
+                .map(creditCards -> modelMapper.map(creditCards, CREDIT_CARD_DTO_CLASS))
+                .toList();
+    }
+
+    @Override
+    public void save(CreditCardDto creditCardDto, String username) {
         CreditCard creditCard = modelMapper.map(creditCardDto, CREDIT_CARD_CLASS);
         creditCard.setCustomer(customerRepository.findByUsername(username).orElse(null));
         creditCardRepository.save(creditCard);
     }
 
     @Override
-    public CreditCardDto fidById(Long id) {
-        return modelMapper.map(creditCardRepository.findById(id), CREDIT_CARD_DTO_CLASS);
+    public CreditCardDto findById(Long id) {
+        return Optional.ofNullable(id)
+                .map(creditCardRepository::findById)
+                .map(creditCard -> modelMapper.map(creditCard, CREDIT_CARD_DTO_CLASS))
+                .orElse(null);
     }
 
     @Override

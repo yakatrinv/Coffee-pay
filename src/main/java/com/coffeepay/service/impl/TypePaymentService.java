@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 import static util.DataGeneral.TYPE_PAYMENT_CLASS;
 import static util.DataGeneral.TYPE_PAYMENT_DTO_CLASS;
@@ -27,7 +28,10 @@ public class TypePaymentService implements ITypePaymentService {
 
     @Override
     public TypePaymentDto findById(Integer id) {
-        return modelMapper.map(typePaymentRepository.findById(id), TYPE_PAYMENT_DTO_CLASS);
+        return Optional.ofNullable(id)
+                .map(typePaymentRepository::findById)
+                .map(typePayment -> modelMapper.map(typePayment, TYPE_PAYMENT_DTO_CLASS))
+                .orElse(null);
     }
 
     @Override

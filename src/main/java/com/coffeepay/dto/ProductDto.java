@@ -13,7 +13,6 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 import static util.DataMessages.MAX_NAME_SURNAME;
-import static util.DataMessages.MESSAGE_ERROR_LENGTH_CUSTOMER_NAME;
 import static util.DataMessages.MESSAGE_ERROR_LENGTH_PRODUCT_NAME;
 import static util.DataMessages.MESSAGE_ERROR_MIN_PRODUCT_PRICE;
 import static util.DataMessages.MIN_NUMBER;
@@ -22,15 +21,18 @@ import static util.DataMessages.MIN_NUMBER;
 @Getter
 @Setter
 @ToString
-@EqualsAndHashCode(of = {"id", "name", "price"}, callSuper = false)
+@EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductDto implements Serializable {
+    @EqualsAndHashCode.Include
     private Long id;
 
+    @EqualsAndHashCode.Include
     @Size(max = MAX_NAME_SURNAME, message = MESSAGE_ERROR_LENGTH_PRODUCT_NAME)
     private String name;
 
-    @Min(value = MIN_NUMBER,message = MESSAGE_ERROR_MIN_PRODUCT_PRICE)
+    @EqualsAndHashCode.Include
+    @Min(value = MIN_NUMBER, message = MESSAGE_ERROR_MIN_PRODUCT_PRICE)
     private float price;
 }

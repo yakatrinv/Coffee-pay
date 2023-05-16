@@ -11,10 +11,8 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 import static util.DataMessages.MAX_LENGTH_BRAND;
-import static util.DataMessages.MAX_LENGTH_CITY;
 import static util.DataMessages.MAX_LENGTH_MODEl;
 import static util.DataMessages.MESSAGE_ERROR_LENGTH_BRAND;
-import static util.DataMessages.MESSAGE_ERROR_LENGTH_CITY;
 import static util.DataMessages.MESSAGE_ERROR_LENGTH_MODEL;
 
 @Builder
