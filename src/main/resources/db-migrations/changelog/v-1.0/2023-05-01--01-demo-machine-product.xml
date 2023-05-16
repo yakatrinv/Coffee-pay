@@ -121,7 +121,6 @@
         <insert tableName="machine_product">
             <column name="machine_id">4</column>
             <column name="product_id">7</column>
-            <column name="create_date" valueDate="${now}"/>
         </insert>
 
         <insert tableName="machine_product">
