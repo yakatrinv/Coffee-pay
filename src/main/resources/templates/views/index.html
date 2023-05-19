@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.springframework.org/schema/security">
+<head>
+    <meta charset="UTF-8">
+    <title>Coffee manage project</title>
+    <link rel="stylesheet" th:href="@{css/navbar.css}"/>
+    <link rel="stylesheet" th:href="@{css/navbar-menu.css}"/>
+</head>
+<body>
+<div th:insert="header::header"></div>
+<div style="display:flex;" sec:authorize="isAuthenticated()">
+    <div th:insert="headerMenu::header-menu"></div>
+</div>
+
+</body>
+</html>

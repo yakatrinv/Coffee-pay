@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Coffee manage project</title>
+    <link rel="stylesheet" th:href="@{/css/input-form.css}"/>
+</head>
+<body>
+
+<div>
+    <form class="form" th:method="POST" th:action="@{/orders}" th:object="${purchase}">
+        <div class="h2">
+            <h2 data-th-text="#{order.check}">Подтверждение</h2>
+        </div>
+
+        <div class="field">
+            <label class="label" for="customerId" data-th-text="#{purchases.add.label.customer}">Покупатель:</label>
+            <input type="hidden" th:value="${customer.id}" th:name="customerId" id="customerId">
+
+            <div class="input-div">
+                <div class="input-2" th:text="${customer ne null}?${customer.surname+', '+customer.name}">
+                </div>
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label" for="machineId" data-th-text="#{purchases.add.label.machine}">Аппарат:</label>
+            <input type="hidden" th:value="${machine.id}" th:name="machineId" id="machineId">
+
+            <div class="input-div">
+                <div class="input-2"
+                     th:text="${machine.model ne null}?${machine.model.brand+', '+machine.model.nameModel}">
+                </div>
+            </div>
+
+            <div class="input-div">
+                <div class="input-2"
+                     th:text="${machine.address ne null}?${machine.address.city+', '+machine.address.street}">
+                </div>
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label" for="productId"
+                   data-th-text="#{purchases.add.label.product}">Продукция:</label>
+            <input type="hidden" th:value="${product.id}" th:name="productId" id="productId">
+
+            <div class="input-div">
+                <div class="input-2" th:text="${product ne null}?${product.name}">
+                </div>
+            </div>
+            <label class="label" data-th-text="#{purchases.add.label.price}">Цена:</label>
+            <div class="input-div">
+                <input type="hidden" th:field="*{price}" th:name="price" th:value="${product ne null}?${product.price}">
+                <div class="input-2" th:text="${product ne null}?${product.price}">
+                </div>
+            </div>
+        </div>
+
+        <div class="field">
+            <script th:inline="javascript">
+                function SelectedCreditCard(creditCard, phoneNumber) {
+                    document.getElementById("creditCard").style.display = 'none';
+                    document.getElementById("phoneNumber").style.display = 'none';
+
+
+                    if (creditCard.valueOf() === 'true') {
+                        document.getElementById("creditCard").style.display = 'block';
+                    } else {
+                        document.getElementById("creditCard").style.display = 'none';
+                    }
+
+                    if (phoneNumber.valueOf() === 'true') {
+                        document.getElementById("phoneNumber").style.display = 'block';
+                    } else {
+                        document.getElementById("phoneNumber").style.display = 'none';
+                    }
+                }
+            </script>
+
+            <label class="label" data-th-text="#{purchases.add.label.type-payment}">Тип
+                оплаты:</label>
+
+            <div th:each="typePayment:${typePayments}">
+                <input type="radio" required
+                       th:name="typePaymentId"
+                       th:value="${typePayment.id}" id="'typePayment'+${typePayment.id}"
+                       th:onchange="|SelectedCreditCard('${typePayment.useCreditCard}','${typePayment.usePhoneNumber}')|">
+                <label for="'typePayment'+${typePayment.id}"
+                       th:text="${typePayment.name}"></label>
+            </div>
+
+        </div>
+
+        <div class="field" id='creditCard' style='display: none;'>
+            <label class="label" for="creditCard" data-th-text="#{purchases.add.label.card}">Карта:</label>
+            <select class="input" th:name="creditCardId">
+                <option th:value="NULL" data-th-text="#{select.empty}">не выбрано</option>
+                <option th:each="creditCard: ${creditCards}"
+                        th:value="${creditCard.id}"
+                        th:text="${creditCard ne null}?${creditCard.number +','+ creditCard.customer.surname}"></option>
+            </select>
+        </div>
+
+        <div class="field" id='phoneNumber' style='display: none;'>
+            <label class="label" data-th-text="#{purchases.add.label.phone}">Телефон:</label>
+            <div class="input-div">
+                <div class="input-2" th:text="${customer ne null}?${customer.phone}">
+                </div>
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label" for="discountId" data-th-text="#{purchases.add.label.discount}">Скидка:</label>
+            <input type="hidden" th:value="${discount ne null}?${discount.id}" th:name="discountId" id="discountId">
+
+            <div class="input-div">
+                <div class="input-2" th:text="${discount ne null}?${discount.percent+' %'}">
+                </div>
+            </div>
+        </div>
+
+        <div class="field" id='summ'>
+            <label class="label" data-th-text="#{purchases.add.label.sum}">Сумма:</label>
+            <div class="input-div">
+                <input type="hidden" th:name="summ" th:value="${summ}">
+                <div class="input-2" th:text="${summ}">
+                </div>
+            </div>
+        </div>
+
+        <div class="submit-div">
+            <button th:class="double-border-button" type="submit" data-th-text="#{button.save}">
+                СОХРАНИТЬ
+            </button>
+            <a class="double-border-button" th:href="@{/orders}"
+               data-th-text="#{button.cancel}">ОТМЕНА</a>
+        </div>
+
+    </form>
+
+</div>
+</body>
+
+</html>

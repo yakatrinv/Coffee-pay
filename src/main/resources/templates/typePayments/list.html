@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.springframework.org/schema/security">
+<head>
+    <meta charset="UTF-8">
+    <title>Coffee manage project</title>
+    <link rel="stylesheet" th:href="@{/css/navbar.css}"/>
+    <link rel="stylesheet" th:href="@{/css/navbar-menu.css}"/>
+    <link rel="stylesheet" th:href="@{/css/scroll-table.css}"/>
+</head>
+<head>
+    <title>Coffee manage project</title>
+</head>
+<body>
+
+<div th:insert="header::header"></div>
+<div style="display:flex;" sec:authorize="isAuthenticated()">
+    <div th:insert="headerMenu::header-menu"></div>
+    <div class="div-with-table">
+        <h3 class="title" data-th-text="#{type-payment.list.label}">Список типов оплат</h3>
+
+        <form th:method="GET" th:action="@{/typePayments/new}">
+            <button class="double-border-button" type="submit" data-th-text="#{type-payment.list.button.add}">
+                ДОБАВИТЬ ТИП ОПЛАТЫ
+            </button>
+        </form>
+
+        <div th:switch="${typePayments}">
+            <div th:case="null">
+                <h2 data-th-text="#{type-payment.list.label.empty-list}">Список пуст</h2>
+            </div>
+
+            <div th:case="*">
+                <div th:if="${typePayments.size() == 0}">
+                    <h2 data-th-text="#{type-payment.list.label.empty-list}">Список пуст</h2>
+                </div>
+
+                <div
+                        th:if="${typePayments.size() != 0}">
+
+                    <table class="table-dark-fix">
+                        <thead>
+                        <tr>
+                            <th>№</th>
+                            <th data-th-text="#{type-payment.list.column.name}">НАЗВАНИЕ</th>
+                            <th data-th-text="#{type-payment.list.column.use-card}">ИСП КАРТУ</th>
+                            <th data-th-text="#{type-payment.list.column.use-phone}">ИСП ТЕЛЕФОН</th>
+                            <th colspan="2" data-th-text="#{type-payment.list.column.action}"
+                                sec:authorize="hasAuthority('Administrator')">ДЕЙСТВИЕ</th>
+                        </tr>
+                        </thead>
+                    </table>
+
+                    <div class="scroll-table-body">
+                        <table class="table-dark">
+                            <tbody>
+                            <tr th:each="typePayment,typePaymentStat : ${typePayments}">
+                                <td th:text="${typePaymentStat.count}"></td>
+                                <td th:text="${typePayment.name}"></td>
+                                <td th:text="${typePayment.useCreditCard}"></td>
+                                <td th:text="${typePayment.usePhoneNumber}"></td>
+
+                                <td sec:authorize="hasAuthority('Administrator')">
+                                    <form th:method="GET" th:action="@{/typePayments/{id}/edit(id=${typePayment.id})}">
+                                        <button class="double-border-button" type="submit"
+                                                data-th-text="#{type-payment.list.button.edit}">
+                                            РЕДАКТИРОВАТЬ
+                                        </button>
+                                    </form>
+                                </td>
+                                <td sec:authorize="hasAuthority('Administrator')">
+                                    <form th:method="DELETE" th:action="@{/typePayments/{id}(id=${typePayment.id})}">
+                                        <button class="double-border-button" type="submit"
+                                                data-th-text="#{type-payment.list.button.delete}">
+                                            УДАЛИТЬ
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

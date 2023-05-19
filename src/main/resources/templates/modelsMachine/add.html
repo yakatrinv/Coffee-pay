@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Coffee manage project</title>
+    <link rel="stylesheet" th:href="@{/css/input-form.css}"/>
+</head>
+<body>
+
+<div>
+    <form class="form" th:method="POST" th:action="@{/modelsMachine}" th:object="${modelMachine}">
+        <div class="h2">
+            <h2 data-th-text="#{model-machine.add.label}">Новый адрес</h2>
+        </div>
+
+        <div class="field">
+            <label class="label" for="brand" data-th-text="#{model-machine.add.label.brand}">Бренд:</label>
+            <div class="input-div">
+                <input class="input" th:field="*{brand}" name="brand" id="brand">
+                <div class="error" th:if="${#fields.hasErrors('brand')}" th:errors="*{brand}">error</div>
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label" for="model" data-th-text="#{model-machine.add.label.model}">Модель:</label>
+            <div class="input-div">
+                <input class="input" th:field="*{nameModel}" name="model" id="model">
+                <div class="error" th:if="${#fields.hasErrors('nameModel')}" th:errors="*{nameModel}">error</div>
+            </div>
+        </div>
+
+        <div class="submit-div">
+            <button th:class="double-border-button" type="submit" data-th-text="#{model-machine.add.button.save}">
+                СОХРАНИТЬ
+            </button>
+            <a class="double-border-button" th:href="@{/modelsMachine}"
+               data-th-text="#{model-machine.add.button.cancel}">ОТМЕНА</a>
+        </div>
+
+    </form>
+
+</div>
+</body>
+
+</html>

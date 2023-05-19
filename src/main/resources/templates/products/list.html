@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.springframework.org/schema/security">
+<head>
+    <meta charset="UTF-8">
+    <title>Coffee manage project</title>
+    <link rel="stylesheet" th:href="@{/css/navbar.css}"/>
+    <link rel="stylesheet" th:href="@{/css/navbar-menu.css}"/>
+    <link rel="stylesheet" th:href="@{/css/page.css}"/>
+    <link rel="stylesheet" th:href="@{/css/table.css}"/>
+</head>
+<head>
+    <title>Coffee manage project</title>
+</head>
+<body>
+
+<div th:insert="header::header"></div>
+<div style="display:flex;" sec:authorize="isAuthenticated()">
+    <div th:insert="headerMenu::header-menu"></div>
+    <div class="div-with-table">
+        <h3 class="h1" data-th-text="#{products.list.label}">Список адресов</h3>
+
+        <form th:method="GET" th:action="@{/products/new}">
+            <button class="double-border-button" type="submit" data-th-text="#{products.list.button.add}">
+                ДОБАВИТЬ ПРОДУКЦИЮ
+            </button>
+        </form>
+
+        <form class="searchForm" th:method="GET" th:action="@{/products}">
+            <div class="field">
+                <label class="label" for="searchName" data-th-text="#{products.list.label.searchName}">Название:</label>
+                <div class="input-div">
+                    <input class="input" th:name="searchName" th:value="${searchName}" id="searchName">
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label" for="searchMinPrice" data-th-text="#{products.list.label.search-min-price}">Мин цена:</label>
+                <div class="input-div">
+                    <input class="input" type="number" step="0.01" th:name="searchMinPrice" th:value="${searchMinPrice}" id="searchMinPrice">
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label" for="searchMaxPrice" data-th-text="#{products.list.label.search-max-price}">Макс цена:</label>
+                <div class="input-div">
+                    <input class="input" type="number" step="0.01" th:name="searchMaxPrice" th:value="${searchMaxPrice}" id="searchMaxPrice">
+                </div>
+            </div>
+
+            <button class="double-border-button-search" type="submit" data-th-text="#{products.list.button.search}">
+                ПОИСК
+            </button>
+        </form>
+
+        <div th:switch="${products}">
+            <h2 th:case="null" data-th-text="#{products.list.label.empty-list}">Список пуст</h2>
+
+            <div th:case="*">
+                <h2 th:if="${products.size() == 0}" data-th-text="#{products.list.label.empty-list}">Список пуст</h2>
+
+                <table class="table-dark" th:if="${products.size() != 0}">
+                    <tr>
+                        <th>№</th>
+                        <th data-th-text="#{products.list.column.name}">НАЗВАНИЕ</th>
+                        <th data-th-text="#{products.list.column.price}">ЦЕНА</th>
+                        <th colspan="2" data-th-text="#{products.list.column.action}">ДЕЙСТВИЕ</th>
+                    </tr>
+
+
+                    <tr th:each="product,productStat : ${products}">
+                        <td th:text="${productStat.count}"></td>
+                        <td th:text="${product.name}"></td>
+                        <td th:text="${product.price}"></td>
+                        <td>
+                            <form th:method="GET" th:action="@{/products/{id}/edit(id=${product.id})}">
+                                <button class="double-border-button" type="submit" data-th-text="#{products.list.button.edit}">
+                                    РЕДАКТИРОВАТЬ
+                                </button>
+                            </form>
+                        </td>
+                        <td sec:authorize="hasAuthority('Administrator')">
+                            <form th:method="DELETE"
+                                  th:action="@{/products/{id}(id=${product.id},page=${page},size=${size},searchName=${searchName},searchMinPrice=${searchMinPrice},searchMaxPrice=${searchMaxPrice})}">
+                                <button class="double-border-button" type="submit" data-th-text="#{products.list.button.delete}">
+                                    УДАЛИТЬ
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+
+                </table>
+
+                <div th:insert=" pagination :: pagination(${'&searchName=' +searchName+'&searchMinPrice='+searchMinPrice+'&searchMaxPrice='+searchMaxPrice})"></div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

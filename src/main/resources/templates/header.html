@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.springframework.org/schema/security">
+<head>
+    <meta charset="UTF-8">
+    <title data-th-text="#{title}">Coffee manage project</title>
+    <link rel="stylesheet" th:href="@{/css/navbar.css}"/>
+</head>
+<body>
+
+    <nav th:fragment="header">
+        <ul class="topmenu">
+            <li class="item">
+                <a class="item-point" th:href="@{/api}" data-th-text="#{panel.home}">
+                    Главная
+                </a>
+            </li>
+
+            <li class="item" sec:authorize="!isAuthenticated()">
+                <a class="item-point" th:href="@{/customer/new}"
+                   data-th-text="#{panel.registration}">
+                    Регистрация
+                </a>
+            </li>
+
+            <li class="item" sec:authorize="!isAuthenticated()">
+                <a class="item-point" th:href="@{/login}"
+                   data-th-text="#{panel.authorization}">
+                    Авторизация
+                </a>
+            </li>
+
+            <li class="item-right" sec:authorize="isAuthenticated()">
+                <a class="item-point" th:href="@{/logout}"
+                   data-th-text="#{panel.logout}">
+                    Выйти
+                </a>
+            </li>
+
+            <li class="item-right" sec:authorize="isAuthenticated()">
+                <a class="item-point" href="" th:text="${#authentication.principal.username}">
+                    Hi
+                </a>
+                <ul class="submenu-right">
+                    <li sec:authorize="hasAuthority('Customer')">
+                        <a class="item-point"
+                           th:href="@{/customer/{username}/edit(username=${#authentication.principal.username})}"
+                           data-th-text="#{panel.profile}">
+                            Профиль
+                        </a>
+                    </li>
+                    <li>
+                        <a class="item-point"
+                           th:href="@{/user/{username}/editPass(username=${#authentication.principal.username})}"
+                           data-th-text="#{panel.changePassword}">
+                            Сменить пароль
+                        </a>
+                    </li>
+                    <li sec:authorize="hasAuthority('Customer')">
+                        <a class="item-point"
+                           th:href="@{/customer/{username}/creditCards(username=${#authentication.principal.username})}"
+                           data-th-text="#{panel.bankCards}">
+                            Банковские карты
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="item-right">
+                <a class="item-point" th:href="@{'?lang=en'}" th:text="#{panel.lang.en}"></a>
+            </li>
+            <li class="item-right">
+                <a class="item-point" th:href="@{'?lang=ru'}" th:text="#{panel.lang.ru}"></a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+</body>
+</html>

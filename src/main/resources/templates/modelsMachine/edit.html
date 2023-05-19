@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Coffee manage project</title>
+    <link rel="stylesheet" th:href="@{/css/input-form.css}"/>
+</head>
+<body>
+
+<div>
+    <form class="form" th:method="PATCH" th:action="@{/modelsMachine/{id}(id=${modelMachine.id})}"
+          th:object="${modelMachine}">
+        <div class="h2">
+            <h2 data-th-text="#{model-machine.edit.label}">Обновление адреса</h2>
+        </div>
+
+        <div class="field">
+            <label class="label" for="brand" data-th-text="#{model-machine.edit.label.brand}">Бренд:</label>
+            <div class="input-div">
+                <input class="input" th:field="*{brand}" name="brand" id="brand">
+                <div class="error" th:if="${#fields.hasErrors('brand')}" th:errors="*{brand}">error</div>
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label" for="model" data-th-text="#{model-machine.edit.label.model}">Модель:</label>
+            <div class="input-div">
+                <input class="input" th:field="*{nameModel}" name="model" id="model">
+                <div class="error" th:if="${#fields.hasErrors('nameModel')}" th:errors="*{nameModel}">error</div>
+            </div>
+        </div>
+
+        <div class="submit-div">
+            <button th:class="double-border-button" type="submit" data-th-text="#{model-machine.edit.button.update}">
+                ОБНОВИТЬ
+            </button>
+            <a class="double-border-button" th:href="@{/modelsMachine}"
+               data-th-text="#{model-machine.edit.button.cancel}">ОТМЕНА</a>
+        </div>
+
+    </form>
+
+</div>
+</body>
+
+</html>

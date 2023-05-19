@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.springframework.org/schema/security">
+<head>
+    <meta charset="UTF-8">
+    <title data-th-text="#{title}">Coffee manage project</title>
+    <link rel="stylesheet" th:href="@{/css/page.css}"/>
+</head>
+<body>
+<nav class="nav" th:fragment="pagination(filterFileds)">
+    <select class="sel" th:name="size" th:onchange="'window.location.href=this.value'">
+        <option th:value="|@{${nameList}+'?page='+${page}+'&size=3'+${filterFileds}}|" th:text="3"
+                th:selected="${size eq 3}"
+                th:hidden="${size eq 3}">3
+        </option>
+        <option th:value="|@{${nameList}+'?page='+${page}+'&size=5'+${filterFileds}}|" th:text="5"
+                th:selected="${size eq 5}"
+                th:hidden="${size eq 5}">5
+        </option>
+        <option th:value="|@{${nameList}+'?page='+${page}+'&size=10'+${filterFileds}}|" th:text="10"
+                th:selected="${size eq 10}"
+                th:hidden="${size eq 10}">10
+        </option>
+    </select>
+
+    <ul class="page">
+
+        <li class="li" th:if="${page} ne 1">
+            <a class="double-border-button-page" th:href="@{${nameList}+'?page='+${page -1}+'&size='+${size}+${filterFileds}}"
+               data-th-text="#{page.previous}">предыдущая</a>
+        </li>
+
+        <li class="li" th:if="${totalPage} lt 10" th:each="i : ${#numbers.sequence( 1, totalPage)}">
+            <a th:text="${i}"
+               th:if="${page} eq ${i}"
+               class="active">
+                ${i}
+            </a>
+
+            <a class="double-border-button-page" th:href="@{${nameList}+'?page='+${i}+'&size='+${size}+${filterFileds}}"
+               th:text="${i}"
+               th:if="${page} ne ${i}">
+                ${i}
+            </a>
+        </li>
+
+        <li class="li" th:if="${totalPage} ge 10 and ${page} le 5" th:each="i : ${#numbers.sequence( 1, 5)}">
+            <a th:text="${i}"
+               th:if="${page} eq ${i}"
+               class="active">
+                ${i}
+            </a>
+
+            <a class="double-border-button-page" th:href="@{${nameList}+'?page='+${i}+'&size='+${size}+${filterFileds}}"
+               th:text="${i}"
+               th:if="${page} ne ${i}">
+                ${i}
+            </a>
+
+        </li>
+
+        <li class="li" th:if="${totalPage} ge 10 and ${page} le 5">
+            <a class="double-border-button-page" th:href="@{${nameList}+'?page=6&size='+${size}+${filterFileds}}"
+               th:text="...">
+                ...
+            </a>
+
+            <a class="double-border-button-page" th:href="@{${nameList}+'?page='+${totalPage}+'&size='+${size}+${filterFileds}}"
+               th:text="${totalPage}">
+                ${totalPage}
+            </a>
+
+        </li>
+
+        <li class="li" th:if="${totalPage} ge 10 and ${page} gt ${totalPage}-5">
+            <a class="double-border-button-page" th:href="@{${nameList}+'?page=1&size='+${size}+${filterFileds}}"
+               th:text="1">
+                ${i}
+            </a>
+
+            <a class="double-border-button-page" th:href="@{${nameList}+'?page='+${totalPage -6}+'&size='+${size}+${filterFileds}}"
+               th:text="...">
+                ...
+            </a>
+
+        </li>
+
+        <li class="li" th:if="${totalPage} ge 10 and ${page} gt ${totalPage}-5"
+            th:each="i : ${#numbers.sequence(totalPage -5, totalPage)}">
+            <a th:text="${i}"
+               th:if="${page} eq ${i}"
+               class="active">
+                ${i}
+            </a>
+
+            <a class="double-border-button-page" th:href="@{${nameList}+'?page='+${i}+'&size='+${size}+${filterFileds}}"
+               th:text="${i}"
+               th:if="${page} ne ${i}">
+                ${i}
+            </a>
+
+        </li>
+
+
+        <li class="li" th:if="${page} lt ${totalPage}">
+            <a class="double-border-button-page" th:href="@{${nameList}+'?page='+${page+1}+'&size='+${size}+${filterFileds}}"
+               data-th-text="#{page.next}">следующая</a>
+        </li>
+
+    </ul>
+
+
+</nav>
+
+</body>
+</html>

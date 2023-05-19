@@ -1,0 +1,40 @@
+.topmenu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid #37B5A5;
+    background-color: #252F48;
+}
+
+.item {
+    float: left;
+}
+
+.item-right {
+    float: right;
+}
+
+.item-point {
+    display: block;
+    color: #EDB749;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.item-point:hover:not(.active) {
+    background-color: #2B3754;
+}
+
+.submenu-right {
+    list-style: none;
+    visibility: hidden;
+    position: absolute;
+    padding: 0;
+    background-color: #252F48;
+}
+
+.item-right:hover .submenu-right {
+    visibility: visible;
+}

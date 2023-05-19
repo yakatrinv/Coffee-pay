@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.springframework.org/schema/security">
+<head>
+    <meta charset="UTF-8">
+    <title>Coffee manage project</title>
+    <link rel="stylesheet" th:href="@{css/navbar.css}"/>
+    <link rel="stylesheet" th:href="@{css/navbar-menu.css}"/>
+    <link rel="stylesheet" th:href="@{css/index.css}"/>
+</head>
+<body>
+<div th:insert="header::header"></div>
+<div style="display:flex;" sec:authorize="isAuthenticated()">
+    <div th:insert="headerMenu::header-menu"></div>
+
+    <div class="div-index">
+        <h3 class="h1" data-th-text="#{order.index}">Заказ</h3>
+
+        <div>
+            <img width="400" th:src="@{images/wallpaper.jpg}">
+        </div>
+        <div>
+            <a class="double-border-button-index" th:href="@{/orders/machines}" data-th-text="#{button.choose}"></a>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

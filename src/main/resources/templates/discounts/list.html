@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.springframework.org/schema/security">
+<head>
+    <meta charset="UTF-8">
+    <title>Coffee manage project</title>
+    <link rel="stylesheet" th:href="@{/css/navbar.css}"/>
+    <link rel="stylesheet" th:href="@{/css/navbar-menu.css}"/>
+    <link rel="stylesheet" th:href="@{/css/page.css}"/>
+    <link rel="stylesheet" th:href="@{/css/table.css}"/>
+</head>
+<head>
+    <title>Coffee manage project</title>
+</head>
+<body>
+
+<div th:insert="header::header"></div>
+<div style="display:flex;" sec:authorize="isAuthenticated()">
+    <div th:insert="headerMenu::header-menu"></div>
+    <div class="div-with-table">
+        <h3 class="h1" data-th-text="#{discounts.list.label}">Список адресов</h3>
+
+        <form th:method="GET" th:action="@{/discounts/new}">
+            <button class="double-border-button" type="submit" data-th-text="#{discounts.list.button.add}">
+                ДОБАВИТЬ СКИДКУ
+            </button>
+        </form>
+
+        <form class="searchForm" th:method="GET" th:action="@{/discounts}">
+            <div class="field">
+                <label class="label" for="searchMinSum" data-th-text="#{discounts.list.label.search-min-sum}">Мин
+                    сумма:</label>
+                <div class="input-div">
+                    <input class="input" type="number" th:name="searchMinSum" th:value="${searchMinSum}"
+                           id="searchMinSum">
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label" for="searchMaxSum" data-th-text="#{discounts.list.label.search-max-sum}">Макс
+                    сумма:</label>
+                <div class="input-div">
+                    <input class="input" type="number" th:name="searchMaxSum" th:value="${searchMaxSum}"
+                           id="searchMaxSum">
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label" for="searchMinPercent" data-th-text="#{discounts.list.label.search-min-percent}">Мин
+                    процент:</label>
+                <div class="input-div">
+                    <input class="input" type="number" th:name="searchMinPercent"
+                           th:value="${searchMinPercent}" id="searchMinPercent">
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label" for="searchMaxPercent" data-th-text="#{discounts.list.label.search-max-percent}">Макс
+                    процент:</label>
+                <div class="input-div">
+                    <input class="input" type="number" th:name="searchMaxPercent"
+                           th:value="${searchMaxPercent}" id="searchMaxPercent">
+                </div>
+            </div>
+
+            <button class="double-border-button-search" type="submit" data-th-text="#{button.search}">
+                ПОИСК
+            </button>
+        </form>
+
+        <div th:switch="${discounts}">
+            <h2 th:case="null" data-th-text="#{label.empty-list}">Список пуст</h2>
+
+            <div th:case="*">
+                <h2 th:if="${discounts.size() == 0}" data-th-text="#{label.empty-list}">Список пуст</h2>
+
+                <table class="table-dark" th:if="${discounts.size() != 0}">
+                    <tr>
+                        <th>№</th>
+                        <th data-th-text="#{discounts.list.column.sum}">СУММА</th>
+                        <th data-th-text="#{discounts.list.column.percent}">ПРОЦЕНТ</th>
+                        <th colspan="2" data-th-text="#{column.action}">ДЕЙСТВИЕ</th>
+                    </tr>
+
+
+                    <tr th:each="discount,discountStat : ${discounts}">
+                        <td th:text="${discountStat.count}"></td>
+                        <td th:text="${discount.summ}"></td>
+                        <td th:text="${discount.percent}"></td>
+                        <td>
+                            <form th:method="GET" th:action="@{/discounts/{id}/edit(id=${discount.id})}">
+                                <button class="double-border-button" type="submit" data-th-text="#{button.edit}">
+                                    РЕДАКТИРОВАТЬ
+                                </button>
+                            </form>
+                        </td>
+                        <td sec:authorize="hasAuthority('Administrator')">
+                            <form th:method="DELETE"
+                                  th:action="@{/discounts/{id}(id=${discount.id},page=${page},size=${size},
+                                  searchMinPercent=${searchMinPercent},searchMaxPercent=${searchMaxPercent},
+                                  searchMinSum=${searchMinSum},searchMaxSum=${searchMaxSum})}">
+                                <button class="double-border-button" type="submit" data-th-text="#{button.delete}">
+                                    УДАЛИТЬ
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+
+                </table>
+
+                <div th:insert=" pagination :: pagination(${'&searchMinSum='+searchMinSum+'&searchMaxSum='+searchMaxSum
+                +'&searchMinPercent='+searchMinPercent+'&searchMaxPercent='+searchMaxPercent})"></div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>
