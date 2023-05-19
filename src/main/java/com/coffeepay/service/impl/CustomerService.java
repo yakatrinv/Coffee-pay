@@ -7,6 +7,7 @@ import com.coffeepay.model.User;
 import com.coffeepay.repository.CustomerRepository;
 import com.coffeepay.repository.RoleRepository;
 import com.coffeepay.repository.UserRepository;
+import com.coffeepay.security.SecurityService;
 import com.coffeepay.service.ICustomerService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -31,6 +32,7 @@ public class CustomerService implements ICustomerService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final SecurityService securityService;
     private final ModelMapper modelMapper;
 
     @Override
@@ -65,6 +67,12 @@ public class CustomerService implements ICustomerService {
         }
 
         customerRepository.save(customer);
+
+        if (customerDto.getUser() != null) {
+            securityService.autoLogin(
+                    customerDto.getUser().getUsername(),
+                    customerDto.getUser().getConfirmPassword());
+        }
     }
 
     @Override

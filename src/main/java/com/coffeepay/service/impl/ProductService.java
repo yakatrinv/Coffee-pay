@@ -75,13 +75,4 @@ public class ProductService implements IProductService {
     public void deleteById(Long id) {
         productRepository.deleteById(id);
     }
-
-    @Override
-    public Float getSumOrder(DiscountDto discountDto, ProductDto productDto) {
-        Integer percent = Optional.ofNullable(discountDto)
-                .map(DiscountDto::getPercent)
-                .orElse(0);
-        float sumDiscount = productDto.getPrice() / 100 * percent;
-        return (float) (Math.ceil(((productDto.getPrice() - sumDiscount) * 100)) / 100);
-    }
 }

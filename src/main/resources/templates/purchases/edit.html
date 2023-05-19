@@ -14,7 +14,7 @@
 
         <div class="field">
             <label class="label" for="customer" data-th-text="#{purchases.edit.label.customer}">Покупатель:</label>
-            <select class="input" th:name="customer_id" id="customer">
+            <select class="input" th:name="customerId" id="customer">
                 <option th:value="NULL" data-th-text="#{select.empty}">не выбрано</option>
                 <option th:each="customer: ${customers}"
                         th:value="${customer.id}"
@@ -26,7 +26,7 @@
 
         <div class="field">
             <label class="label" for="machine" data-th-text="#{purchases.edit.label.machine}">Аппарат:</label>
-            <select class="input" th:name="machine_id" id="machine">
+            <select class="input" th:name="machineId" id="machine">
                 <option th:value="NULL" data-th-text="#{select.empty}">не выбрано</option>
                 <option th:each="machine: ${machines}"
                         th:value="${machine.id}"
@@ -38,7 +38,7 @@
 
         <div class="field">
             <label class="label" for="product" data-th-text="#{purchases.edit.label.product}">Продукция:</label>
-            <select class="input" th:name="product_id" id="product">
+            <select class="input" th:name="productId" id="product">
                 <option th:value="NULL" data-th-text="#{select.empty}">не выбрано</option>
                 <option th:each="product: ${products}"
                         th:value="${product.id}"
@@ -58,7 +58,7 @@
 
         <div class="field">
             <label class="label" for="discount" data-th-text="#{purchases.edit.label.discount}">Скидка:</label>
-            <select class="input" th:name="discount_id" id="discount">
+            <select class="input" th:name="discountId" id="discount">
                 <option th:value="NULL" data-th-text="#{select.empty}">не выбрано</option>
                 <option th:each="discount: ${discounts}"
                         th:value="${discount.id}"
@@ -78,7 +78,7 @@
         <div class="field">
             <label class="label" for="typePayment" data-th-text="#{purchases.edit.label.type-payment}">Тип
                 оплаты:</label>
-            <select class="input" th:name="type_payment_id" id="typePayment">
+            <select class="input" th:name="typePaymentId" id="typePayment">
                 <option th:value="NULL" data-th-text="#{select.empty}">не выбрано</option>
                 <option th:each="typePayment: ${typePayments}"
                         th:value="${typePayment.id}"
@@ -90,7 +90,7 @@
 
         <div class="field">
             <label class="label" for="creditCard" data-th-text="#{purchases.edit.label.card}">Карта:</label>
-            <select class="input" th:name="credit_card_id" id="creditCard">
+            <select class="input" th:name="creditCardId" id="creditCard">
                 <option th:value="NULL" data-th-text="#{select.empty}">не выбрано</option>
                 <option th:each="creditCard: ${creditCards}"
                         th:value="${creditCard.id}"

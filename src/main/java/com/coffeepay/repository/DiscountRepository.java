@@ -18,4 +18,10 @@ public interface DiscountRepository extends JpaRepository<Discount, Integer>, Jp
             "(select SUM(summ) FROM Purchase where customer.id=?1)" +
             "ORDER BY discount.percent asc nulls first")
     Optional<Discount> findBySumAndByCustomer(Long id);
+
+    @Query(value = "SELECT discount FROM Discount discount " +
+            "where discount.summ <= " +
+            "(select SUM(summ) FROM Purchase where customer.user.username=?1)" +
+            "ORDER BY discount.percent asc nulls first")
+    Optional<Discount> findBySumAndByCustomer(String username);
 }

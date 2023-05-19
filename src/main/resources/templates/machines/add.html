@@ -22,9 +22,10 @@
 
         <div class="field">
             <label class="label" for="model" data-th-text="#{machines.add.label.model}">Модель:</label>
-            <select class="input" th:name="model_id" id="model">
+            <select class="input" th:name="modelId" id="model">
                 <option th:value="NULL">не выбрано</option>
                 <option th:each="modelMachine: ${modelsMachine}"
+                        th:selected="${machine.model ne null and machine.model.id eq modelMachine.id}"
                         th:value="${modelMachine.id}"
                         th:text="${modelMachine.brand +','+ modelMachine.nameModel}"></option>
             </select>
@@ -32,10 +33,11 @@
 
         <div class="field">
             <label class="label" for="address" data-th-text="#{machines.add.label.address}">Адрес:</label>
-            <select class="input" th:name="address_id" id="address">
+            <select class="input" th:name="addressId" id="address">
                 <option th:value="NULL">не выбрано</option>
                 <option th:each="address: ${addresses}"
                         th:value="${address.id}"
+                        th:selected="${machine.address ne null and machine.address.id eq address.id}"
                         th:text="${address.city +','+ address.street}"></option>
             </select>
         </div>

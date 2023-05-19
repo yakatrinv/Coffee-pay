@@ -1,9 +1,7 @@
 package com.coffeepay.conrtroller;
 
 import com.coffeepay.dto.MachineDto;
-import com.coffeepay.service.IAddressService;
 import com.coffeepay.service.IMachineService;
-import com.coffeepay.service.IModelMachineService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -22,12 +20,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.validation.Valid;
 
 import static util.DataViews.ADD_AFTER_MACHINE_PAGE;
-import static util.DataViews.ATTR_ADDRESSES_LIST;
 import static util.DataViews.ATTR_ADDRESS_ID;
 import static util.DataViews.ATTR_ID;
 import static util.DataViews.ATTR_MACHINE;
 import static util.DataViews.ATTR_MACHINES_LIST;
-import static util.DataViews.ATTR_MODELS_MACHINE_LIST;
 import static util.DataViews.ATTR_MODEL_ID;
 import static util.DataViews.ATTR_PAGE_NAME_LIST;
 import static util.DataViews.ATTR_PAGE_PAGE;
@@ -54,8 +50,6 @@ import static util.DataViews.URL_UPDATE;
 @RequestMapping(ADD_AFTER_MACHINE_PAGE)
 public class MachineController {
     private final IMachineService machineService;
-    private final IModelMachineService modelMachineService;
-    private final IAddressService addressService;
 
     @GetMapping
     public String getMachines(
@@ -76,7 +70,12 @@ public class MachineController {
                     defaultValue = DEFAULT_PAGE_SIZE) int size) {
 
         PageRequest pageRequest = PageRequest.of(page - 1, size);
-        Page<MachineDto> pageable = machineService.findAll(serialNumber, nameModel, brand, city, street, pageRequest);
+        Page<MachineDto> pageable = machineService.findAll(
+                serialNumber,
+                nameModel,
+                brand, city,
+                street,
+                pageRequest);
 
         model.addAttribute(ATTR_PAGE_NAME_LIST, ADD_AFTER_MACHINE_PAGE);
         model.addAttribute(ATTR_MACHINES_LIST, pageable.getContent());
@@ -97,63 +96,60 @@ public class MachineController {
 
     @GetMapping(URL_NEW)
     public String newMachine(Model model) {
-        model.addAttribute(ATTR_MODELS_MACHINE_LIST, modelMachineService.getAllModels());
-        model.addAttribute(ATTR_ADDRESSES_LIST, addressService.getAllAddresses());
-        model.addAttribute(ATTR_MACHINE, new MachineDto());
+        model.addAllAttributes(machineService.
+                getMachineAttribute());
 
         return PAGE_ADD_MACHINE;
     }
 
     @PostMapping
-    public String createMachine(@ModelAttribute(ATTR_MACHINE) @Valid MachineDto machineDto,
+    public String createMachine(Model model,
+                                @ModelAttribute(ATTR_MACHINE) @Valid MachineDto machineDto,
                                 BindingResult bindingResult,
-                                @RequestParam(value = ATTR_ADDRESS_ID, required = false) Long address_id,
-                                @RequestParam(value = ATTR_MODEL_ID, required = false) Long model_id) {
+                                @RequestParam(value = ATTR_ADDRESS_ID, required = false) Long addressId,
+                                @RequestParam(value = ATTR_MODEL_ID, required = false) Long modelId) {
 
         if (bindingResult.hasErrors()) {
+            model.addAllAttributes(machineService.
+                    getMachineAttribute(machineDto,
+                            addressId,
+                            modelId));
             return PAGE_ADD_MACHINE;
         }
-
-        machineDto.setAddress(addressService.findById(address_id));
-        machineDto.setModel(modelMachineService.findById(model_id));
-        machineService.save(machineDto);
-
+        machineService.save(machineDto, addressId, modelId);
         return PAGE_REDIRECT_LIST_MACHINES;
     }
 
     @GetMapping(URL_EDIT)
     public String editMachine(Model model,
                               @PathVariable(ATTR_ID) long id) {
-        model.addAttribute(ATTR_MODELS_MACHINE_LIST, modelMachineService.getAllModels());
-        model.addAttribute(ATTR_ADDRESSES_LIST, addressService.getAllAddresses());
-        model.addAttribute(ATTR_MACHINE, machineService.findById(id));
-
+        model.addAllAttributes(machineService.
+                getMachineAttribute(id));
         return PAGE_EDIT_MACHINES;
     }
 
     @PatchMapping(URL_UPDATE)
-    public String updateMachine(@ModelAttribute(ATTR_MACHINE) @Valid MachineDto machineDto,
+    public String updateMachine(Model model,
+                                @ModelAttribute(ATTR_MACHINE) @Valid MachineDto machineDto,
                                 BindingResult bindingResult,
-                                @RequestParam(value = ATTR_ADDRESS_ID, required = false) Long address_id,
-                                @RequestParam(value = ATTR_MODEL_ID, required = false) Long model_id) {
+                                @RequestParam(value = ATTR_ADDRESS_ID, required = false) Long addressId,
+                                @RequestParam(value = ATTR_MODEL_ID, required = false) Long modelId) {
 
         if (bindingResult.hasErrors()) {
+            model.addAllAttributes(machineService.
+                    getMachineAttribute(machineDto,
+                            addressId,
+                            modelId));
             return PAGE_EDIT_MACHINES;
         }
 
-        machineDto.setAddress(addressService.findById(address_id));
-        machineDto.setModel(modelMachineService.findById(model_id));
-        machineService.save(machineDto);
-
+        machineService.save(machineDto, addressId, modelId);
         return PAGE_REDIRECT_LIST_MACHINES;
     }
 
     @DeleteMapping(URL_DELETE)
     public String deleteMachine(@PathVariable(ATTR_ID) long id) {
-
         machineService.deleteById(id);
-
         return PAGE_REDIRECT_LIST_MACHINES;
     }
-
 }

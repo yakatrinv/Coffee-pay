@@ -38,55 +38,45 @@ public class TypePaymentController {
     @GetMapping
     public String getTypePayments(Model model) {
         model.addAttribute(ATTR_TYPE_PAYMENTS_LIST, typePaymentService.getAll());
-
         return PAGE_LIST_TYPE_PAYMENTS;
     }
 
     @GetMapping(URL_NEW)
     public String newTypePayment(Model model) {
         model.addAttribute(ATTR_TYPE_PAYMENT, new TypePaymentDto());
-
         return PAGE_ADD_TYPE_PAYMENT;
     }
 
     @PostMapping
     public String createTypePayment(@ModelAttribute(ATTR_TYPE_PAYMENT) @Valid TypePaymentDto typePaymentDto,
                                     BindingResult bindingResult) {
-
         if (bindingResult.hasErrors()) {
             return PAGE_ADD_TYPE_PAYMENT;
         }
         typePaymentService.save(typePaymentDto);
-
         return PAGE_REDIRECT_LIST_TYPE_PAYMENTS;
     }
 
     @GetMapping(URL_EDIT)
     public String editTypePayment(Model model,
                                   @PathVariable(ATTR_ID) Integer id) {
-
         model.addAttribute(ATTR_TYPE_PAYMENT, typePaymentService.findById(id));
-
         return PAGE_EDIT_TYPE_PAYMENT;
     }
 
     @PatchMapping(URL_UPDATE)
     public String updateTypePayment(@ModelAttribute(ATTR_TYPE_PAYMENT) @Valid TypePaymentDto typePaymentDto,
                                     BindingResult bindingResult) {
-
         if (bindingResult.hasErrors()) {
             return PAGE_EDIT_TYPE_PAYMENT;
         }
-
         typePaymentService.save(typePaymentDto);
-
         return PAGE_REDIRECT_LIST_TYPE_PAYMENTS;
     }
 
     @DeleteMapping(URL_DELETE)
     public String deleteTypePayment(@PathVariable(ATTR_ID) Integer id) {
         typePaymentService.deleteById(id);
-
         return PAGE_REDIRECT_LIST_TYPE_PAYMENTS;
     }
 }
