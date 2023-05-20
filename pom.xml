@@ -98,7 +98,17 @@
 			<scope>provided</scope>
 		</dependency>
 
-	</dependencies>
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>2.1.214</version>
+		</dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
 	<build>
 		<plugins>
@@ -113,7 +123,7 @@
 				<version>4.19.0</version>
 				<configuration>
 					<propertyFile>liquibase.properties</propertyFile>
-					<changeLogFile>changelog/changelog.xml</changeLogFile>
+					<changeLogFile>changelog.xml</changeLogFile>
 					<searchPath>${basedir}/src/main/resources/db-migrations</searchPath>
 					<goal>update</goal>
 				</configuration>
