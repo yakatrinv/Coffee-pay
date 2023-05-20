@@ -61,7 +61,7 @@
                                 <td th:text="${product.price}"></td>
 
                                 <td>
-                                    <form th:method="GET" th:action="@{/orders/machines/{machine_id}/products/{id}/pay(machine_id=${machine.id},id=${product.id})}">
+                                    <form th:method="GET" th:action="@{/orders/machines/{machineId}/products/{id}/pay(machineId=${machine.id},id=${product.id})}">
                                         <button class="double-border-button" type="submit"
                                                 data-th-text="#{button.choose}">
                                             ВЫБРАТЬ

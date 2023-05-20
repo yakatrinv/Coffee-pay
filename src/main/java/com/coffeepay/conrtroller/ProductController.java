@@ -76,50 +76,39 @@ public class ProductController {
     @GetMapping(URL_NEW)
     public String newProduct(Model model) {
         model.addAttribute(ATTR_PRODUCT, new ProductDto());
-
         return PAGE_ADD_PRODUCT;
     }
 
     @PostMapping
     public String createProduct(@ModelAttribute(ATTR_PRODUCT) @Valid ProductDto productDto,
                                 BindingResult bindingResult) {
-
         if (bindingResult.hasErrors()) {
             return PAGE_ADD_PRODUCT;
         }
         productService.save(productDto);
-
         return PAGE_REDIRECT_LIST_PRODUCTS;
     }
 
     @GetMapping(URL_EDIT)
     public String editProduct(Model model,
                               @PathVariable(ATTR_ID) long id) {
-
         model.addAttribute(ATTR_PRODUCT, productService.findById(id));
-
         return PAGE_EDIT_PRODUCT;
     }
 
     @PatchMapping(URL_UPDATE)
     public String updateProduct(@ModelAttribute(ATTR_PRODUCT) @Valid ProductDto productDto,
                                 BindingResult bindingResult) {
-
         if (bindingResult.hasErrors()) {
             return PAGE_EDIT_PRODUCT;
         }
-
         productService.save(productDto);
-
         return PAGE_REDIRECT_LIST_PRODUCTS;
     }
 
     @DeleteMapping(URL_DELETE)
     public String deleteProduct(@PathVariable(ATTR_ID) long id) {
-
         productService.deleteById(id);
-
         return PAGE_REDIRECT_LIST_PRODUCTS;
     }
-
 }

@@ -1,13 +1,7 @@
 package com.coffeepay.conrtroller;
 
 import com.coffeepay.dto.PurchaseDto;
-import com.coffeepay.service.ICreditCardService;
-import com.coffeepay.service.ICustomerService;
-import com.coffeepay.service.IDiscountService;
-import com.coffeepay.service.IMachineService;
-import com.coffeepay.service.IProductService;
 import com.coffeepay.service.IPurchaseService;
-import com.coffeepay.service.ITypePaymentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -38,24 +32,18 @@ import static util.DataMessages.VALID_NULL_TYPE_PAYMENT;
 import static util.DataMessages.VALID_PRODUCT;
 import static util.DataMessages.VALID_TYPE_PAYMENT;
 import static util.DataViews.ADD_AFTER_PURCHASES_PAGE;
-import static util.DataViews.ATTR_CREDIT_CARDS;
 import static util.DataViews.ATTR_CREDIT_CARD_ID;
-import static util.DataViews.ATTR_CUSTOMERS;
 import static util.DataViews.ATTR_CUSTOMER_ID;
-import static util.DataViews.ATTR_DISCOUNTS_LIST;
 import static util.DataViews.ATTR_DISCOUNT_ID;
 import static util.DataViews.ATTR_ID;
-import static util.DataViews.ATTR_MACHINES_LIST;
 import static util.DataViews.ATTR_MACHINE_ID;
 import static util.DataViews.ATTR_PAGE_NAME_LIST;
 import static util.DataViews.ATTR_PAGE_PAGE;
 import static util.DataViews.ATTR_PAGE_SIZE;
 import static util.DataViews.ATTR_PAGE_TOTAL_PAGE;
-import static util.DataViews.ATTR_PRODUCTS_LIST;
 import static util.DataViews.ATTR_PRODUCT_ID;
 import static util.DataViews.ATTR_PURCHASE;
 import static util.DataViews.ATTR_PURCHASES_LIST;
-import static util.DataViews.ATTR_TYPE_PAYMENTS_LIST;
 import static util.DataViews.ATTR_TYPE_PAYMENT_ID;
 import static util.DataViews.DEFAULT_PAGE;
 import static util.DataViews.DEFAULT_PAGE_SIZE;
@@ -73,12 +61,6 @@ import static util.DataViews.URL_UPDATE;
 @RequestMapping(ADD_AFTER_PURCHASES_PAGE)
 public class PurchaseController {
     private final IPurchaseService purchaseService;
-    private final ICustomerService customerService;
-    private final IMachineService machineService;
-    private final IProductService productService;
-    private final IDiscountService discountService;
-    private final ITypePaymentService typePaymentService;
-    private final ICreditCardService creditCardService;
     private final MessageSource messageSource;
 
     @GetMapping
@@ -106,37 +88,37 @@ public class PurchaseController {
 
     @GetMapping(URL_NEW)
     public String newPurchase(Model model) {
-        fillListAttr(model);
-        model.addAttribute(ATTR_PURCHASE, new PurchaseDto());
-
+        model.addAllAttributes(purchaseService.getOrdersAttr(null));
         return PAGE_ADD_PURCHASE;
     }
 
     @PostMapping
     public String createPurchase(@ModelAttribute(ATTR_PURCHASE) @Valid PurchaseDto purchaseDto,
                                  BindingResult bindingResult,
-                                 @RequestParam(value = ATTR_CUSTOMER_ID, required = false) Long customer_id,
-                                 @RequestParam(value = ATTR_MACHINE_ID, required = false) Long machine_id,
-                                 @RequestParam(value = ATTR_PRODUCT_ID, required = false) Long product_id,
-                                 @RequestParam(value = ATTR_TYPE_PAYMENT_ID, required = false) Integer type_payment_id,
-                                 @RequestParam(value = ATTR_CREDIT_CARD_ID, required = false) Long credit_card_id,
-                                 @RequestParam(value = ATTR_DISCOUNT_ID, required = false) Integer discount_id,
+                                 @RequestParam(value = ATTR_CUSTOMER_ID, required = false) Long customerId,
+                                 @RequestParam(value = ATTR_MACHINE_ID, required = false) Long machineId,
+                                 @RequestParam(value = ATTR_PRODUCT_ID, required = false) Long productId,
+                                 @RequestParam(value = ATTR_TYPE_PAYMENT_ID, required = false) Integer typePaymentId,
+                                 @RequestParam(value = ATTR_CREDIT_CARD_ID, required = false) Long creditCardId,
+                                 @RequestParam(value = ATTR_DISCOUNT_ID, required = false) Integer discountId,
                                  Model model) {
 
-        valid(bindingResult, customer_id, machine_id, product_id, type_payment_id);
+        valid(bindingResult, customerId, machineId, productId, typePaymentId);
 
         if (bindingResult.hasErrors()) {
-            fillListAttr(model);
+            model.addAllAttributes(purchaseService.getOrdersAttr(purchaseDto,
+                    customerId,
+                    machineId,
+                    productId,
+                    typePaymentId,
+                    creditCardId,
+                    discountId));
             return PAGE_ADD_PURCHASE;
         }
 
-        purchaseDto.setCustomer(customerService.findById(customer_id));
-        purchaseDto.setMachine(machineService.findById(machine_id));
-        purchaseDto.setProduct(productService.findById(product_id));
-        purchaseDto.setTypePayment(typePaymentService.findById(type_payment_id));
-        purchaseDto.setCreditCard(creditCardService.findById(credit_card_id));
-        purchaseDto.setDiscount(discountService.findById(discount_id));
-        purchaseService.save(purchaseDto);
+        purchaseService.save(purchaseDto,
+                customerId, machineId, productId, typePaymentId, creditCardId,
+                discountId, purchaseDto.getSumm());
 
         return PAGE_REDIRECT_LIST_PURCHASES;
     }
@@ -144,59 +126,50 @@ public class PurchaseController {
     @GetMapping(URL_EDIT)
     public String editPurchase(Model model,
                                @PathVariable(ATTR_ID) Long id) {
-        fillListAttr(model);
-        model.addAttribute(ATTR_PURCHASE, purchaseService.findById(id));
-
+        model.addAllAttributes(purchaseService.getOrdersAttr(id));
         return PAGE_EDIT_PURCHASE;
     }
 
     @PatchMapping(URL_UPDATE)
     public String updatePurchase(@ModelAttribute(ATTR_PURCHASE) @Valid PurchaseDto purchaseDto,
                                  BindingResult bindingResult,
-                                 @RequestParam(value = ATTR_CUSTOMER_ID, required = false) Long customer_id,
-                                 @RequestParam(value = ATTR_MACHINE_ID, required = false) Long machine_id,
-                                 @RequestParam(value = ATTR_PRODUCT_ID, required = false) Long product_id,
-                                 @RequestParam(value = ATTR_TYPE_PAYMENT_ID, required = false) Integer type_payment_id,
-                                 @RequestParam(value = ATTR_CREDIT_CARD_ID, required = false) Long credit_card_id,
-                                 @RequestParam(value = ATTR_DISCOUNT_ID, required = false) Integer discount_id,
+                                 @RequestParam(value = ATTR_CUSTOMER_ID, required = false) Long customerId,
+                                 @RequestParam(value = ATTR_MACHINE_ID, required = false) Long machineId,
+                                 @RequestParam(value = ATTR_PRODUCT_ID, required = false) Long productId,
+                                 @RequestParam(value = ATTR_TYPE_PAYMENT_ID, required = false) Integer typePaymentId,
+                                 @RequestParam(value = ATTR_CREDIT_CARD_ID, required = false) Long creditCardId,
+                                 @RequestParam(value = ATTR_DISCOUNT_ID, required = false) Integer discountId,
                                  Model model) {
 
-        valid(bindingResult, customer_id, machine_id, product_id, type_payment_id);
-
+        valid(bindingResult, customerId, machineId, productId, typePaymentId);
         if (bindingResult.hasErrors()) {
-            fillListAttr(model);
+            model.addAllAttributes(purchaseService.getOrdersAttr(purchaseDto,
+                    customerId,
+                    machineId,
+                    productId,
+                    typePaymentId,
+                    creditCardId,
+                    discountId));
             return PAGE_EDIT_PURCHASE;
         }
 
-        purchaseDto.setCustomer(customerService.findById(customer_id));
-        purchaseDto.setMachine(machineService.findById(machine_id));
-        purchaseDto.setProduct(productService.findById(product_id));
-        purchaseDto.setTypePayment(typePaymentService.findById(type_payment_id));
-        purchaseDto.setCreditCard(creditCardService.findById(credit_card_id));
-        purchaseDto.setDiscount(discountService.findById(discount_id));
-        purchaseService.save(purchaseDto);
+        purchaseService.save(purchaseDto,
+                customerId, machineId, productId, typePaymentId, creditCardId,
+                discountId, purchaseDto.getSumm());
 
         return PAGE_REDIRECT_LIST_PURCHASES;
     }
 
     @DeleteMapping(URL_DELETE)
     public String deletePurchase(@PathVariable(ATTR_ID) Long id) {
-
         purchaseService.deleteById(id);
-
         return PAGE_REDIRECT_LIST_PURCHASES;
     }
 
-    private void fillListAttr(Model model) {
-        model.addAttribute(ATTR_CUSTOMERS, customerService.getAllCustomers());
-        model.addAttribute(ATTR_MACHINES_LIST, machineService.getAllMachines());
-        model.addAttribute(ATTR_PRODUCTS_LIST, productService.getAllProducts());
-        model.addAttribute(ATTR_DISCOUNTS_LIST, discountService.getAllDiscounts());
-        model.addAttribute(ATTR_TYPE_PAYMENTS_LIST, typePaymentService.getAll());
-        model.addAttribute(ATTR_CREDIT_CARDS, creditCardService.getAllCreditCards());
-    }
 
-    private void valid(BindingResult bindingResult, Long customer_id, Long machine_id, Long product_id, Integer type_payment_id) {
+    private void valid(BindingResult bindingResult, Long customer_id,
+                       Long machine_id, Long product_id,
+                       Integer type_payment_id) {
         if (customer_id == null) {
             String errorMessage = messageSource
                     .getMessage(MESSAGE_ERROR_NOT_NULL,

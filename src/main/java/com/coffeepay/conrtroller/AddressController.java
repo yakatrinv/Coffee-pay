@@ -54,7 +54,10 @@ public class AddressController {
                                @RequestParam(required = false, defaultValue = DEFAULT_PAGE_SIZE) int size) {
 
         PageRequest pageRequest = PageRequest.of(page - 1, size);
-        Page<AddressDto> pageable = addressService.findAllPage(city, street, pageRequest);
+        Page<AddressDto> pageable = addressService.findAllPage(
+                city,
+                street,
+                pageRequest);
 
         model.addAttribute(ATTR_PAGE_NAME_LIST, ADD_AFTER_ADDRESS_PAGE);
         model.addAttribute(ATTR_ADDRESSES_LIST, pageable.getContent());
@@ -73,49 +76,39 @@ public class AddressController {
     @GetMapping(URL_NEW)
     public String newAddress(Model model) {
         model.addAttribute(ATTR_ADDRESS, new AddressDto());
-
         return PAGE_ADD_ADDRESS;
     }
 
     @PostMapping
     public String createAddress(@ModelAttribute(ATTR_ADDRESS) @Valid AddressDto addressDto,
                                 BindingResult bindingResult) {
-
         if (bindingResult.hasErrors()) {
             return PAGE_ADD_ADDRESS;
         }
         addressService.save(addressDto);
-
         return PAGE_REDIRECT_LIST_ADDRESSES;
     }
 
     @GetMapping(URL_EDIT)
     public String editAddress(Model model,
                               @PathVariable(ATTR_ID) long id) {
-
         model.addAttribute(ATTR_ADDRESS, addressService.findById(id));
-
         return PAGE_EDIT_ADDRESS;
     }
 
     @PatchMapping(URL_UPDATE)
     public String updateAddress(@ModelAttribute(ATTR_ADDRESS) @Valid AddressDto addressDto,
                                 BindingResult bindingResult) {
-
         if (bindingResult.hasErrors()) {
             return PAGE_EDIT_ADDRESS;
         }
-
         addressService.save(addressDto);
-
         return PAGE_REDIRECT_LIST_ADDRESSES;
     }
 
     @DeleteMapping(URL_DELETE)
     public String deleteAddress(@PathVariable(ATTR_ID) long id) {
-
         addressService.deleteById(id);
-
         return PAGE_REDIRECT_LIST_ADDRESSES;
     }
 

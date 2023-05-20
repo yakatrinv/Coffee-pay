@@ -70,50 +70,39 @@ public class RoleController {
     @GetMapping(URL_NEW)
     public String newRole(Model model) {
         model.addAttribute(ATTR_ROLE, new RoleDto());
-
         return PAGE_ADD_ROLE;
     }
 
     @PostMapping
     public String createRole(@ModelAttribute(ATTR_ROLE) @Valid RoleDto roleDto,
                              BindingResult bindingResult) {
-
         if (bindingResult.hasErrors()) {
             return PAGE_ADD_ROLE;
         }
         roleService.save(roleDto);
-
         return PAGE_REDIRECT_LIST_ROLES;
     }
 
     @GetMapping(URL_EDIT)
     public String editRole(Model model,
                            @PathVariable(ATTR_ID) Integer id) {
-
         model.addAttribute(ATTR_ROLE, roleService.findById(id));
-
         return PAGE_EDIT_ROLE;
     }
 
     @PatchMapping(URL_UPDATE)
     public String updateRole(@ModelAttribute(ATTR_ROLE) @Valid RoleDto roleDto,
                              BindingResult bindingResult) {
-
         if (bindingResult.hasErrors()) {
             return PAGE_EDIT_ROLE;
         }
-
         roleService.save(roleDto);
-
         return PAGE_REDIRECT_LIST_ROLES;
     }
 
     @DeleteMapping(URL_DELETE)
     public String deleteRole(@PathVariable(ATTR_ID) Integer id) {
-
         roleService.deleteById(id);
-
         return PAGE_REDIRECT_LIST_ROLES;
     }
-
 }

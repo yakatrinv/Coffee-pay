@@ -61,14 +61,12 @@ public class CreditCardController {
     @PostMapping(URL_CUSTOMER_CREDIT_CARDS)
     public String saveCreditCard(@ModelAttribute(ATTR_CREDIT_CARD) @Valid CreditCardDto creditCardDto,
                                  BindingResult bindingResult,
-                                 @PathVariable String username
-    ) {
+                                 @PathVariable String username) {
 
         if (bindingResult.hasErrors()) {
             return PAGE_ADD_CUSTOMER_CREDIT_CARD;
         }
         creditCardService.save(creditCardDto, username);
-
         return PAGE_REDIRECT_CUSTOMER_CREDIT_CARD;
     }
 
@@ -88,19 +86,16 @@ public class CreditCardController {
                                    BindingResult bindingResult,
                                    @PathVariable String username,
                                    @PathVariable(ATTR_ID) long id) {
-
         if (bindingResult.hasErrors()) {
             return PAGE_EDIT_CUSTOMER_CREDIT_CARD;
         }
         creditCardService.save(creditCardDto, username);
-
         return PAGE_REDIRECT_CUSTOMER_CREDIT_CARD;
     }
 
     @DeleteMapping(URL_DELETE_CUSTOMER_CREDIT_CARDS)
     public String deleteAddress(@PathVariable(ATTR_USERNAME) String username,
                                 @PathVariable(ATTR_ID) long id) {
-
         creditCardService.deleteById(id);
         return PAGE_REDIRECT_CUSTOMER_CREDIT_CARD;
     }

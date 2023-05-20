@@ -84,49 +84,39 @@ public class DiscountController {
     @GetMapping(URL_NEW)
     public String newDiscount(Model model) {
         model.addAttribute(ATTR_DISCOUNT, new DiscountDto());
-
         return PAGE_ADD_DISCOUNT;
     }
 
     @PostMapping
     public String createDiscount(@ModelAttribute(ATTR_DISCOUNT) @Valid DiscountDto discountDto,
                                  BindingResult bindingResult) {
-
         if (bindingResult.hasErrors()) {
             return PAGE_ADD_DISCOUNT;
         }
         discountService.save(discountDto);
-
         return PAGE_REDIRECT_LIST_DISCOUNTS;
     }
 
     @GetMapping(URL_EDIT)
     public String editDiscount(Model model,
                                @PathVariable(ATTR_ID) Integer id) {
-
         model.addAttribute(ATTR_DISCOUNT, discountService.findById(id));
-
         return PAGE_EDIT_DISCOUNT;
     }
 
     @PatchMapping(URL_UPDATE)
     public String updateDiscount(@ModelAttribute(ATTR_DISCOUNT) @Valid DiscountDto discountDto,
                                  BindingResult bindingResult) {
-
         if (bindingResult.hasErrors()) {
             return PAGE_EDIT_DISCOUNT;
         }
-
         discountService.save(discountDto);
-
         return PAGE_REDIRECT_LIST_DISCOUNTS;
     }
 
     @DeleteMapping(URL_DELETE)
     public String deleteDiscount(@PathVariable(ATTR_ID) Integer id) {
-
         discountService.deleteById(id);
-
         return PAGE_REDIRECT_LIST_DISCOUNTS;
     }
 

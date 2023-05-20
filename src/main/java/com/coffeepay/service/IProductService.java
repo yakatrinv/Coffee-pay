@@ -19,6 +19,4 @@ public interface IProductService {
     ProductDto findById(Long id);
 
     void deleteById(Long id);
-
-    Float getSumOrder(DiscountDto discountDto, ProductDto productDto);
 }

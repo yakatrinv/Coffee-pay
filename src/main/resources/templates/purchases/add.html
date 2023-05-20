@@ -14,10 +14,11 @@
 
         <div class="field">
             <label class="label" for="customer" data-th-text="#{purchases.add.label.customer}">Покупатель:</label>
-            <select class="input" th:name="customer_id" id="customer">
+            <select class="input" th:name="customerId" id="customer">
                 <option th:value="NULL" data-th-text="#{select.empty}">не выбрано</option>
                 <option th:each="customer: ${customers}"
                         th:value="${customer.id}"
+                        th:selected="${purchase.customer ne null and purchase.customer.id eq customer.id}"
                         th:text="${customer.name +','+ customer.surname}"></option>
             </select>
             <div class="error" th:if="${#fields.hasErrors('customer')}" th:errors="*{customer}">error</div>
@@ -25,10 +26,11 @@
 
         <div class="field">
             <label class="label" for="machine" data-th-text="#{purchases.add.label.machine}">Аппарат:</label>
-            <select class="input" th:name="machine_id" id="machine">
+            <select class="input" th:name="machineId" id="machine">
                 <option th:value="NULL" data-th-text="#{select.empty}">не выбрано</option>
                 <option th:each="machine: ${machines}"
                         th:value="${machine.id}"
+                        th:selected="${purchase.machine ne null and purchase.machine.id eq machine.id}"
                         th:text="${machine.address ne null}?${machine.address.city +','+ machine.address.street}"></option>
             </select>
             <div class="error" th:if="${#fields.hasErrors('machine')}" th:errors="*{machine}">error</div>
@@ -36,10 +38,11 @@
 
         <div class="field">
             <label class="label" for="product" data-th-text="#{purchases.add.label.product}">Продукция:</label>
-            <select class="input" th:name="product_id" id="product">
+            <select class="input" th:name="productId" id="product">
                 <option th:value="NULL" data-th-text="#{select.empty}">не выбрано</option>
                 <option th:each="product: ${products}"
                         th:value="${product.id}"
+                        th:selected="${purchase.product ne null and purchase.product.id eq product.id}"
                         th:text="${product.name +','+ product.price}"></option>
             </select>
             <div class="error" th:if="${#fields.hasErrors('product')}" th:errors="*{product}">error</div>
@@ -55,10 +58,11 @@
 
         <div class="field">
             <label class="label" for="discount" data-th-text="#{purchases.add.label.discount}">Скидка:</label>
-            <select class="input" th:name="discount_id" id="discount">
+            <select class="input" th:name="discountId" id="discount">
                 <option th:value="NULL" data-th-text="#{select.empty}">не выбрано</option>
                 <option th:each="discount: ${discounts}"
                         th:value="${discount.id}"
+                        th:selected="${purchase.discount ne null and purchase.discount.id eq discount.id}"
                         th:text="${discount ne null}?${discount.percent +','+ discount.summ}"></option>
             </select>
         </div>
@@ -74,10 +78,11 @@
         <div class="field">
             <label class="label" for="typePayment" data-th-text="#{purchases.add.label.type-payment}">Тип
                 оплаты:</label>
-            <select class="input" th:name="type_payment_id" id="typePayment">
+            <select class="input" th:name="typePaymentId" id="typePayment">
                 <option th:value="NULL" data-th-text="#{select.empty}">не выбрано</option>
                 <option th:each="typePayment: ${typePayments}"
                         th:value="${typePayment.id}"
+                        th:selected="${purchase.typePayment ne null and purchase.typePayment.id eq typePayment.id}"
                         th:text="${typePayment.name}"></option>
             </select>
             <div class="error" th:if="${#fields.hasErrors('typePayment')}" th:errors="*{typePayment}">error</div>
@@ -85,10 +90,11 @@
 
         <div class="field">
             <label class="label" for="creditCard" data-th-text="#{purchases.add.label.card}">Карта:</label>
-            <select class="input" th:name="credit_card_id" id="creditCard">
+            <select class="input" th:name="creditCardId" id="creditCard">
                 <option th:value="NULL" data-th-text="#{select.empty}">не выбрано</option>
                 <option th:each="creditCard: ${creditCards}"
                         th:value="${creditCard.id}"
+                        th:selected="${purchase.creditCard ne null and purchase.creditCard.id eq creditCard.id}"
                         th:text="${creditCard ne null}?${creditCard.number +','+ creditCard.customer.surname}"></option>
             </select>
         </div>

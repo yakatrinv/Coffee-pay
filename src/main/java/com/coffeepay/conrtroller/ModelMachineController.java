@@ -73,49 +73,39 @@ public class ModelMachineController {
     @GetMapping(URL_NEW)
     public String newModelMachine(Model model) {
         model.addAttribute(ATTR_MODEL_MACHINE, new ModelMachineDto());
-
         return PAGE_ADD_MODEL_MACHINE;
     }
 
     @PostMapping
     public String createModelMachine(@ModelAttribute(ATTR_MODEL_MACHINE) @Valid ModelMachineDto modelMachineDto,
                                      BindingResult bindingResult) {
-
         if (bindingResult.hasErrors()) {
             return PAGE_ADD_MODEL_MACHINE;
         }
         modelMachineService.save(modelMachineDto);
-
         return PAGE_REDIRECT_LIST_MODELS_MACHINE;
     }
 
     @GetMapping(URL_EDIT)
     public String editModelMachine(Model model,
                                    @PathVariable(ATTR_ID) long id) {
-
         model.addAttribute(ATTR_MODEL_MACHINE, modelMachineService.findById(id));
-
         return PAGE_EDIT_MODEL_MACHINE;
     }
 
     @PatchMapping(URL_UPDATE)
     public String updateModelMachine(@ModelAttribute(ATTR_MODEL_MACHINE) @Valid ModelMachineDto modelMachineDto,
                                      BindingResult bindingResult) {
-
         if (bindingResult.hasErrors()) {
             return PAGE_EDIT_MODEL_MACHINE;
         }
-
         modelMachineService.save(modelMachineDto);
-
         return PAGE_REDIRECT_LIST_MODELS_MACHINE;
     }
 
     @DeleteMapping(URL_DELETE)
     public String deleteModelMachine(@PathVariable(ATTR_ID) long id) {
-
         modelMachineService.deleteById(id);
-
         return PAGE_REDIRECT_LIST_MODELS_MACHINE;
     }
 

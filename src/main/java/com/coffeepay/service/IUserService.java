@@ -2,6 +2,8 @@ package com.coffeepay.service;
 
 import com.coffeepay.dto.UserDto;
 
+import java.util.List;
+
 public interface IUserService {
     void save(UserDto user);
 
@@ -11,5 +13,8 @@ public interface IUserService {
 
     boolean isPasswordValid(UserDto userDto, String currentPassword);
 
-    void update(UserDto userDto);
+    List<String> updatePassword(String username,
+                                String password,
+                                String newPassword,
+                                String confirmPassword);
 }

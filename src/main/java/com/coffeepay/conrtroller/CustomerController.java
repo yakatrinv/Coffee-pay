@@ -51,7 +51,6 @@ public class CustomerController {
     @GetMapping(URL_NEW_CUSTOMER)
     public String getRegistrationPage(Model model,
                                       @RequestParam(value = PAGE_PREV_URL, defaultValue = "") String prevURL) {
-
         model.addAttribute(MODEL_CUSTOMER, CustomerDto.builder()
                 .user(new UserDto())
                 .build());
@@ -74,11 +73,6 @@ public class CustomerController {
         }
 
         customerService.save(customerDto);
-        if (customerDto.getUser() != null) {
-            securityService.autoLogin(
-                    customerDto.getUser().getUsername(),
-                    customerDto.getUser().getConfirmPassword());
-        }
         return PAGE_REDIRECT_APP;
     }
 
@@ -103,9 +97,7 @@ public class CustomerController {
             return PAGE_PROFILE;
         }
         customerService.update(customerDto);
-
         return PAGE_REDIRECT_APP;
-
     }
 
     private void validateCustomer(CustomerDto customerDto, BindingResult bindingResult) {

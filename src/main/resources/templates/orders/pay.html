@@ -13,8 +13,8 @@
         </div>
 
         <div class="field">
-            <label class="label" for="customer_id" data-th-text="#{purchases.add.label.customer}">Покупатель:</label>
-            <input type="hidden" th:value="${customer.id}" th:name="customer_id" id="customer_id">
+            <label class="label" for="customerId" data-th-text="#{purchases.add.label.customer}">Покупатель:</label>
+            <input type="hidden" th:value="${customer.id}" th:name="customerId" id="customerId">
 
             <div class="input-div">
                 <div class="input-2" th:text="${customer ne null}?${customer.surname+', '+customer.name}">
@@ -23,8 +23,8 @@
         </div>
 
         <div class="field">
-            <label class="label" for="machine_id" data-th-text="#{purchases.add.label.machine}">Аппарат:</label>
-            <input type="hidden" th:value="${machine.id}" th:name="machine_id" id="machine_id">
+            <label class="label" for="machineId" data-th-text="#{purchases.add.label.machine}">Аппарат:</label>
+            <input type="hidden" th:value="${machine.id}" th:name="machineId" id="machineId">
 
             <div class="input-div">
                 <div class="input-2"
@@ -40,9 +40,9 @@
         </div>
 
         <div class="field">
-            <label class="label" for="product_id"
+            <label class="label" for="productId"
                    data-th-text="#{purchases.add.label.product}">Продукция:</label>
-            <input type="hidden" th:value="${product.id}" th:name="product_id" id="product_id">
+            <input type="hidden" th:value="${product.id}" th:name="productId" id="productId">
 
             <div class="input-div">
                 <div class="input-2" th:text="${product ne null}?${product.name}">
@@ -50,7 +50,7 @@
             </div>
             <label class="label" data-th-text="#{purchases.add.label.price}">Цена:</label>
             <div class="input-div">
-                <input type="hidden" th:field="*{price}" name="price" th:value="${price}">
+                <input type="hidden" th:field="*{price}" th:name="price" th:value="${product ne null}?${product.price}">
                 <div class="input-2" th:text="${product ne null}?${product.price}">
                 </div>
             </div>
@@ -81,8 +81,8 @@
                 оплаты:</label>
 
             <div th:each="typePayment:${typePayments}">
-                <input type="radio"
-                       th:name="type_payment_id"
+                <input type="radio" required
+                       th:name="typePaymentId"
                        th:value="${typePayment.id}" id="'typePayment'+${typePayment.id}"
                        th:onchange="|SelectedCreditCard('${typePayment.useCreditCard}','${typePayment.usePhoneNumber}')|">
                 <label for="'typePayment'+${typePayment.id}"
@@ -93,7 +93,7 @@
 
         <div class="field" id='creditCard' style='display: none;'>
             <label class="label" for="creditCard" data-th-text="#{purchases.add.label.card}">Карта:</label>
-            <select class="input" th:name="credit_card_id">
+            <select class="input" th:name="creditCardId">
                 <option th:value="NULL" data-th-text="#{select.empty}">не выбрано</option>
                 <option th:each="creditCard: ${creditCards}"
                         th:value="${creditCard.id}"
@@ -110,8 +110,8 @@
         </div>
 
         <div class="field">
-            <label class="label" for="discount_id" data-th-text="#{purchases.add.label.discount}">Скидка:</label>
-            <input type="hidden" th:value="${discount ne null}?${discount.id}" th:name="discount_id" id="discount_id">
+            <label class="label" for="discountId" data-th-text="#{purchases.add.label.discount}">Скидка:</label>
+            <input type="hidden" th:value="${discount ne null}?${discount.id}" th:name="discountId" id="discountId">
 
             <div class="input-div">
                 <div class="input-2" th:text="${discount ne null}?${discount.percent+' %'}">
@@ -119,19 +119,11 @@
             </div>
         </div>
 
-        <!--        <div class="field">-->
-        <!--            <label class="label" for="summ" data-th-text="#{purchases.edit.label.sum}">Сумма:</label>-->
-        <!--            <div class="input-div">-->
-        <!--                <input class="input" type="number" step="0.01" th:field="*{summ}" name="summ" id="summ" th:value="${summ}">-->
-        <!--                <div class="error" th:if="${#fields.hasErrors('summ')}" th:errors="*{summ}">error</div>-->
-        <!--            </div>-->
-        <!--        </div>-->
-
         <div class="field" id='summ'>
             <label class="label" data-th-text="#{purchases.add.label.sum}">Сумма:</label>
             <div class="input-div">
-                <input type="hidden" th:field="*{summ}" name="summ" th:value="${purchase.summ}">
-                <div class="input-2" th:text="${purchase.summ}">
+                <input type="hidden" th:name="summ" th:value="${summ}">
+                <div class="input-2" th:text="${summ}">
                 </div>
             </div>
         </div>

@@ -95,8 +95,8 @@ public class DataViews {
     public static final String ATTR_SEARCH_MACHINE_STREET = "searchStreet";
     public static final String ATTR_SEARCH_MACHINE_MODEL = "searchModel";
     public static final String ATTR_SEARCH_MACHINE_BRAND = "searchBrand";
-    public static final String ATTR_ADDRESS_ID = "address_id";
-    public static final String ATTR_MODEL_ID = "model_id";
+    public static final String ATTR_ADDRESS_ID = "addressId";
+    public static final String ATTR_MODEL_ID = "modelId";
     public static final String ADD_AFTER_MACHINE_PAGE = "/machines";
     public static final String PAGE_LIST_MACHINES = "machines/list";
     public static final String PAGE_REDIRECT_LIST_MACHINES = "redirect:/machines";
@@ -125,23 +125,24 @@ public class DataViews {
     //purchase model
     public static final String ATTR_PURCHASES_LIST = "purchases";
     public static final String ATTR_PURCHASE = "purchase";
-    public static final String ATTR_CUSTOMER_ID = "customer_id";
-    public static final String ATTR_MACHINE_ID = "machine_id";
-    public static final String ATTR_TYPE_PAYMENT_ID = "type_payment_id";
-    public static final String ATTR_CREDIT_CARD_ID = "credit_card_id";
-    public static final String ATTR_DISCOUNT_ID = "discount_id";
-    public static final String ATTR_PRODUCT_ID = "product_id";
+    public static final String ATTR_CUSTOMER_ID = "customerId";
+    public static final String ATTR_MACHINE_ID = "machineId";
+    public static final String ATTR_TYPE_PAYMENT_ID = "typePaymentId";
+    public static final String ATTR_CREDIT_CARD_ID = "creditCardId";
+    public static final String ATTR_DISCOUNT_ID = "discountId";
+    public static final String ATTR_PRODUCT_ID = "productId";
     public static final String ADD_AFTER_PURCHASES_PAGE = "/purchases";
     public static final String PAGE_LIST_PURCHASES = "purchases/list";
     public static final String PAGE_REDIRECT_LIST_PURCHASES = "redirect:/purchases";
     public static final String PAGE_ADD_PURCHASE = "purchases/add";
     public static final String PAGE_EDIT_PURCHASE = "purchases/edit";
     //make order
+    public static final String ATTR_SUM = "summ";
     public static final String ADD_AFTER_ORDER_PAGE = "/orders";
     public static final String URL_ORDER_MACHINES = "/machines";
     public static final String URL_ORDER_HISTORY = "/history";
     public static final String URL_ORDER_PRODUCTS = "/machines/{id}/products";
-    public static final String URL_ORDER_PAY = "/machines/{machine_id}/products/{id}/pay";
+    public static final String URL_ORDER_PAY = "/machines/{machineId}/products/{id}/pay";
     public static final String PAGE_ORDERS_INDEX = "orders/firstPage";
     public static final String PAGE_ORDERS_MACHINES = "orders/machines";
     public static final String PAGE_ORDERS_PRODUCTS = "orders/products";
